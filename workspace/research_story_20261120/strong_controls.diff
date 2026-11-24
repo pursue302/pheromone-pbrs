@@ -1,0 +1,25 @@
+--- study.py
++++ study_strong_controls.py
+@@ -204,17 +204,17 @@
+                     if agent.heuristic_activate and (anchor is None or method in ('raw_dynamic','raw_mix')):
+                         agent.handle_trajectory(result=success,t=max(t,1),trajectory=trajectory)
+                         agent.reinforce_heuristic_model()
+-                    memory.add(state_list,reward_list,env.gamma,success,method!='mc_dynamic')
+-                    if anchor is not None:online.add(state_list,reward_list,env.gamma,success,method!='mc_dynamic')
++                    memory.add(state_list,reward_list,env.gamma,success,method not in ('mc_dynamic','mc_dynamic_all'))
++                    if anchor is not None:online.add(state_list,reward_list,env.gamma,success,method not in ('mc_dynamic','mc_dynamic_all'))
+                     if anchor is None and step>=warmup:
+                         anchor=copy.deepcopy(memory);anchor_tau=agent.pheromone_trace.copy()
+                         anchor_phi=cfg.scale*anchor.mean(default);phi=anchor_phi.copy()
+                         # Pure dynamic starts without an offline memory.
+                         if method in ('return_dynamic','mc_dynamic'):phi=cfg.scale*online.mean(default)
+                         lastpub=ep
+-                    elif anchor is not None and ep-lastpub>=cfg.publish and method in ('return_dynamic','return_mix','return_gate','return_gate_unbounded','mc_dynamic'):
+-                        live=cfg.scale*online.mean(default)
+-                        if method in ('return_dynamic','mc_dynamic'):candidate=live
++                    elif anchor is not None and ep-lastpub>=cfg.publish and method in ('return_dynamic','return_mix','return_gate','return_gate_unbounded','mc_dynamic','return_dynamic_all','mc_dynamic_all'):
++                        live=cfg.scale*(memory if method in ('return_dynamic_all','mc_dynamic_all') else online).mean(default)
++                        if method in ('return_dynamic','mc_dynamic','return_dynamic_all','mc_dynamic_all'):candidate=live
+                         elif method=='return_mix':candidate=(1-cfg.beta)*anchor_phi+cfg.beta*live
+                         else:
+                             beta=cfg.beta*online.count/(online.count+cfg.kappa)

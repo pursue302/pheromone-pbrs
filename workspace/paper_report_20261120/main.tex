@@ -1,0 +1,333 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+\usepackage[top=0.72in,bottom=0.76in,left=0.70in,right=0.70in,columnsep=0.24in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,graphicx,booktabs,array,microtype}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{placeins}
+\usepackage{balance}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,citecolor=blue!45!black,linkcolor=blue!45!black,urlcolor=blue!45!black,pdftitle={Pheromone-Inspired Reward Shaping: Return Calibration, Representation, and Memory Retention}}
+\setlist[itemize]{leftmargin=*,itemsep=2pt,topsep=3pt}
+\setlength{\parindent}{1em}
+\setlength{\parskip}{0pt}
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+\setlength{\floatsep}{9pt plus 2pt minus 2pt}
+\setlength{\intextsep}{9pt plus 2pt minus 2pt}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\textfraction}{0.08}
+\renewcommand{\floatpagefraction}{0.75}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\gate}{\textsc{Return-Gate}}
+\newcommand{\raws}{\textsc{Raw-S}}
+\newcommand{\rawd}{\textsc{Raw-D}}
+\newcommand{\states}{\textsc{State-S}}
+\newcommand{\matched}{\textsc{Matched-S}}
+\makeatletter
+\newcommand{\tableinput}[1]{\@@input #1 }
+\makeatother
+\title{\vspace{-1.0em}\Large\bfseries Pheromone-Inspired Reward Shaping:\\Return Calibration, Representation, and Memory Retention\vspace{-0.3em}}
+% Author information intentionally left blank at the team's request.
+\author{}
+\date{\small CS4620J Reinforcement Learning -- Final Research Project\vspace{-1.0em}}
+\begin{document}
+\raggedbottom
+\maketitle
+\begin{abstract}
+We study how trajectory experience should be converted into potential-based reward shaping while evaluating the original task objective. Inspired by pheromone-based heuristics, we construct state potentials from quality-weighted trajectory returns, normalize their accumulation, and combine frozen early experience with online memory through a local evidence gate. A source-code control first identifies cross-episode eligibility traces as a major cause of unreliable final policies: resetting traces alone raises MountainCar evaluation success from 13.8\% to 99.8\% across 100 seeds. We then separate this implementation repair from the shaping contribution. In a fresh, prespecified validation with 20 training seeds per navigation task, the proposed mechanism improves original returns over raw pheromone baselines in U-detour and four-room navigation; all four comparisons survive Holm correction. The advantage does not replicate in stochastic navigation. Simple state-only pheromone controls achieve comparable performance, while stronger dynamic and Monte Carlo controls provide no evidence of an additional mixing benefit. An exact tempting-reward diagnostic separately verifies the role of the potential-difference safeguard. Our contribution is a reproducible shaping construction and a controlled account of when representation, experience retention, and implementation details can dominate apparent algorithmic gains.
+\end{abstract}
+
+\section{Introduction}
+Reward shaping offers additional feedback during reinforcement learning (RL), but its practical purpose is to improve performance on the original task. A high shaped return can instead reflect repeated collection of an auxiliary bonus. Potential-based reward shaping (PBRS) addresses objective preservation through a discounted potential difference \citep{ng1999}; it does not make an arbitrary heuristic informative or guarantee faster finite-budget learning.
+
+Automatically constructing potentials from experience is therefore an important design problem. Pheromone-inspired methods summarize trajectories through deposition and evaporation. Bromuri's released framework combines such heuristics with approximated SARSA and also examines their use for reward shaping \citep{bromuri2019,authorcode}. A concentration score, however, is not an estimate of remaining task return. Its magnitude can reflect visitation, repeated reinforcement of earlier paths, and the representation used to compare actions.
+
+We investigate a focused question: \emph{under a matched interaction budget and learner, can a state potential constructed from empirical trajectory returns improve original-task performance relative to directly using pheromone concentration?} A secondary question asks whether adaptive static--dynamic mixing adds value after history retention and potential representation are controlled.
+
+We implement a return-calibrated construction, termed \gate: successful trajectories contribute quality-weighted remaining returns; repeated visits within a trajectory contribute only once per state bin; an early memory is retained while an online memory is introduced through a local count gate. This is a concrete combination of established ideas, not a new PBRS invariance theorem or a claim that Monte Carlo estimation or pheromone learning is new.
+
+The experimental sequence is deliberately diagnostic. We first check the released learning loop, then evaluate shaping on the repaired common learner. An initial study motivates a fresh navigation validation and representation controls, with protocol and comparisons fixed before the fresh outcomes. The initial hypothesis that mixing consistently outperforms its components is not supported. The later validation confirms improvements over source-style raw scores in two deterministic tasks, but also finds that a simpler state-only score is sufficient to obtain similar performance.
+
+Our contributions are:
+\begin{itemize}
+ \item A fully specified trajectory-return potential and memory-update mechanism, using real interactions without shortest-path labels or optimal-value supervision.
+ \item A minimal-change source-code control that separates a large implementation effect from the smaller shaping effects.
+ \item Independent-seed validation, representation controls, and matched-history baselines that bound the evidence for calibration and dynamic mixing, including non-replicating and negative results.
+\end{itemize}
+
+\section{Background and Related Work}
+\subsection{Original return and PBRS}
+For a capped episode of length $T$, define
+\begin{equation}
+ G_r=\sum_{t=0}^{T-1}\gamma^t r_t,\qquad
+ F_t=\gamma\Phi(s_{t+1})-\Phi(s_t).
+ \label{eq:pbrs}
+\end{equation}
+The learner receives $r_t+F_t$; evaluation uses $r_t$ alone. For a fixed state potential during the episode,
+\begin{equation}
+ \sum_{t=0}^{T-1}\gamma^tF_t=-\Phi(s_0)+\gamma^T\Phi(s_T).
+ \label{eq:telescope}
+\end{equation}
+Setting the episode's terminal potential to zero removes the endpoint term. This boundary includes the time limit in our explicitly capped objective. It is different from treating a time limit as a continuation of an infinite-horizon task. Episodic boundary handling is consequential \citep{grzes2017}.
+
+We publish potentials between episodes and freeze them inside an episode. Equation~\ref{eq:telescope} then describes the episode conditional on its published potential. It is not a convergence proof for adaptive potentials, fixed learning rates, or linear function approximation. Dynamic PBRS has its own time-indexed formulation \citep{devlin2012}; dynamic change alone is not a reason that shaping must fail.
+
+\subsection{Relationship to existing methods}
+Fixed state PBRS is closely related to suitable Q-value initialization under the conditions analyzed by \citet{wiewiora2003}. Consequently, a useful effect need not reflect additional task information at every step. The baseline's initialization, representation, and information access all matter. State--action advice requires additional care in action-value interpretation \citep{advice2003}; an action-dependent score cannot automatically inherit the argument for a state-only offset.
+
+\citet{bromuri2019} reports earlier discovery of the best training trajectory with a static pheromone potential, while its dynamic shaping extension is less beneficial. We examine the released implementation and regenerate the unavailable static prior. We do not reproduce an original pretrained artifact. Our source-style raw controls preserve the deposition formulas on a common repaired learner; they are distinct from the exact-source audit and from all possible principled state--action advice algorithms.
+
+\citet{muller2025} studies how potential scale and shift interact with rewards and initial Q-values. Its MountainCar experiments use DQN, $\gamma=.99$, a 200-step cap, and exponential velocity potentials. We transfer only simple velocity heuristics into our SARSA setting. In particular, adding one to a linear velocity potential is not that paper's reward-bias parameter, whose potential shift is $b/(\gamma-1)$. Cross-paper raw scores are not a common-protocol ranking.
+
+\section{Trajectory-Return Potentials}
+\subsection{A trajectory-level memory}
+A successful real trajectory $k$ contains rewards $r_{k,t}$ and length $T_k$. Its remaining discounted return is
+\begin{equation}
+ G_{k,t}=\sum_{j=t}^{T_k-1}\gamma^{j-t}r_{k,j},
+ \qquad q_k=T_k^{-1}.
+\end{equation}
+For state bin $s$, let $t_k(s)$ be its last visit in that trajectory. At each successful episode, both memory arrays evaporate by $\rho=.99$. For every distinct visited bin, we then add
+\begin{align}
+ W(s)&\leftarrow W(s)+q_k,\nonumber\\
+ M(s)&\leftarrow M(s)+q_k G_{k,t_k(s)}.
+ \label{eq:memory}
+\end{align}
+The value hint is $\widehat V(s)=M(s)/W(s)$ when $W(s)>0$; an unseen bin receives the fixed reference value $-200$. Repeated visits in one trajectory do not create multiple evidence counts. Failed trajectories still update SARSA through their real rewards, but do not reinforce this success-conditioned memory. In the unweighted Monte Carlo (MC) control, $q_k=1$.
+
+The ratio gives the hint an empirical return scale, rather than making its magnitude grow directly with the number of deposits. It does not remove behavior-policy selection bias. Last visits, success conditioning, quality weighting, and state aggregation also prevent interpreting it as an unbiased $V^\pi$ or an already-known $V^*$. The reference value is a design choice, not a theoretically derived bound.
+
+\subsection{Retained and online experience}
+All methods first use unshaped rewards for 25\% of the interaction budget, rounded up to a complete episode. We retain the learned Q-values. A frozen memory $A$ is copied at that boundary, and a separate online memory $D$ receives subsequent successful trajectories. Their state potentials are
+\begin{equation}
+ \Phi_A(s)=c\widehat V_A(s),\qquad
+ \Phi_D(s)=c\widehat V_D(s),\qquad c=.1.
+\end{equation}
+If $n_D(s)$ counts distinct new successful trajectories visiting $s$, the selected mixture is
+\begin{align}
+ b(s)&=b_{\max}\frac{n_D(s)}{n_D(s)+\kappa},\nonumber\\
+ \Phi(s)&=(1-b(s))\Phi_A(s)+b(s)\Phi_D(s),
+ \label{eq:gate}
+\end{align}
+with $b_{\max}=.5$ and $\kappa=5$. A state without new evidence retains its anchor. These are heuristic gates, not statistical confidence bounds: trajectories are policy-dependent and their counts need not represent independent, identically distributed samples.
+
+After initialization, a new potential is published every ten completed episodes. The selected version does not clip publication amplitude. The initial study also tests a unit-change limit and a fixed 50/50 mixture. Parameters were fixed before fresh validation; the validation additionally tests $c\in\{.03,.1,.3\}$ without selecting a winner afterward.
+
+\begin{figure*}[t]
+ \centering\includegraphics[width=.89\textwidth]{figures/navigation_maps.pdf}
+ \caption{Navigation conditions. S is the fixed start and G the goal. U-detour requires moving away from the goal before escaping the obstacle. Four rooms requires crossing narrow doorways. Slippery rooms uses the same layout with transition slip probability .15. Each condition uses one fixed layout; new seeds test reproducibility, not transfer to unseen maps.}
+ \label{fig:maps}
+\end{figure*}
+
+\subsection{Interaction and publication}
+At an episode's start we reset eligibility traces and obtain its actual initial potential. At each transition, we compute Equation~\ref{eq:pbrs}, take the on-policy True Online SARSA update \citep{seijen2014}, and retain the potential used at arrival. True termination or the specified horizon uses zero future Q and zero terminal potential. At completion, real rewards update the appropriate memory, and publication may occur for the next episode. Every completed episode is checked against Equation~\ref{eq:telescope}.
+
+All episodes, including the warm-up, count against the interaction budget. The memory does not use evaluation trajectories, transition-model planning, or hidden shortest-route information. MountainCar uses $30\times30$ bins; navigation uses grid cells. Q approximation retains the released action-specific tile geometry, ten tilings, and its bias feature.
+
+\section{Experimental Design}
+\subsection{Tasks and budgets}
+Figure~\ref{fig:maps} shows the three navigation conditions. Every non-goal transition returns $-1$ and entering the goal returns zero; the episode cap is 200 and $\gamma=.99$. A timeout returns $-200$. Each navigation run receives 30,000 real interactions.
+
+MountainCar uses the historical Gym dynamics \citep{gymcode}, goal position $x\geq .5$, reward $-1$ on every transition, a 1,000-step cap, and $\gamma=1$. Each matched-budget run receives 60,000 interactions. This task tests momentum-dependent behavior with continuous observations; the goal and reward differ from some textual descriptions of the original paper, so we do not claim an exact match to every reported condition.
+
+The common learner has $\lambda=.9$, constant $\epsilon=.025$, and step size $.1/10$ in navigation or $.5/10$ in MountainCar. The exact-source audit instead retains the released exploration schedule, multiplying $\epsilon$ by $.99$ at every step, and runs 200 complete episodes. These protocols answer different questions and are not pooled.
+
+\subsection{Cohorts and baseline definitions}
+\textbf{Source audit.} We use 100 paired seeds, 20000--20099. The minimal intervention clears traces immediately before calling the released, complete \texttt{learn()} method. The static prior is regenerated by an independent teacher with 1,000 episodes and 111,259 interactions; the same fixed prior is reused across students. Its cost is disclosed separately. These are conditional transfer comparisons, not equal-total-budget demonstrations against cold-start SARSA.
+
+\textbf{Initial controlled study.} Eight discovery seeds, 30000--30007, select the existing unbounded \gate\ configuration. Independent confirmation uses 80 MountainCar seeds and 30 seeds per navigation condition, starting at 31000. Further controls retain all early experience and match update amplitudes. These additional controls and comparisons are labeled supplementary; they do not replace the original failed mixing-superiority hypothesis.
+
+\textbf{Fresh validation.} Based on the preceding diagnostic findings, we freeze ten methods and a new protocol before running seeds 40000--40019, 20 per navigation condition. This adds 600 runs and 18 million interactions. The method and hyperparameters are not retuned on this cohort. Identical warm-up trajectory hashes are verified across all methods and strengths.
+
+The principal methods are:
+\begin{itemize}
+ \item \textbf{SARSA}: no shaping, same learner and total budget.
+ \item \textbf{Raw-S / Raw-D}: released-style action-dependent pheromone scores, frozen after warm-up or updated using the original local/global rules.
+ \item \textbf{Return-S}: the calibrated early state potential, frozen after warm-up.
+ \item \textbf{Return-Gate}: Equation~\ref{eq:gate}, our selected combination.
+ \item \textbf{Return-D (all)}: a calibrated dynamic memory retaining \emph{all} early and later samples. \textbf{MC (all)} uses the same full-history construction without quality weights. Both have unrestricted publication amplitude.
+\end{itemize}
+The initial online-only dynamic control intentionally starts its potential memory from post-warm-up trajectories; Q is retained. It is weaker than a dynamic estimator retaining all data, and is never presented as the only dynamic baseline.
+
+Fresh representation controls add \states, the action-average of frozen raw scores, and \matched, an affine transformation of that state score. The latter matches the mean and standard deviation of the calibrated anchor on successfully observed warm-up states only. It does not fit each state's return target. Both freeze after warm-up. They test whether eliminating action dependence or a simple scale/offset adjustment is already sufficient to explain the observed improvement.
+
+\subsection{Evaluation and statistical protocol}
+We freeze Q and use greedy actions with deterministic first-index tie breaking. MountainCar is evaluated at 20 fixed starts uniformly spaced over $[-.6,-.4]$ with zero initial velocity. Slippery rooms uses 20 evaluation episodes per trained seed; deterministic navigation uses its single fixed start. Success means reaching the goal, including on the final permitted transition. Evaluations do not update any memory.
+
+Tables report mean original undiscounted capped return and between-training-seed standard deviation. We also retain original discounted return and learning-curve area under the curve (AUC), defined as the trapezoidal integral of original evaluation return over interactions divided by the budget. Theory and the exact goal diagnostic refer to $G_r$ in Equation~\ref{eq:pbrs}; undiscounted and discounted metrics are not conflated. Larger values are better for both return metrics.
+
+The unit of analysis is a trained seed, not an evaluation episode. We use 20,000 paired bootstrap resamples for descriptive 95\% intervals and 20,000 random sign flips for two-sided paired tests. The fresh primary family contains six comparisons of \gate\ against Raw-S/Raw-D across three conditions, adjusted jointly by Holm at $.05$. A 15-test secondary family compares state-score, static-return, MC and SARSA controls; a six-test family examines the two alternative strengths. The earlier study's 20 primary tests, its post-hoc comparisons, and these new families are distinguished throughout.
+
+\section{Results}
+\subsection{A goal-preservation diagnostic}
+We first isolate objective alignment from learning. A fully known $5\times7$ grid has a sparse $+1$ goal reward, a 40-step horizon, and $\gamma=.99$. A deliberately tempting feature is $h(s)=1$ at bonus cell B and zero elsewhere. Exact finite-horizon dynamic programming optimizes either a naive arrival bonus $\beta h(s')$ or the PBRS difference $\beta(\gamma h(s')-h(s))$, using zero potential at the goal and horizon.
+
+\begin{figure*}[t]
+ \centering\includegraphics[width=.96\textwidth]{figures/goal_preservation.pdf}
+ \caption{Exact goal-preservation diagnostic, not a sampled learning experiment. (a) A repeatable feature at B creates a tempting reward. Blue shows a shortest goal route. (b) An agent optimizing naive bonus rewards delays the goal at $\beta=.01$--$.1$, reducing original discounted return from .914 to .676; at $\beta\geq .3$ it never reaches the goal within the horizon. Correctly bounded PBRS preserves the original optimum at every tested strength.}
+ \label{fig:goal}
+\end{figure*}
+
+Without shaping, the optimal goal route takes ten steps and returns $\gamma^9=.9135$. Naive shaping makes prolonged bonus collection optimal, and eventually makes abandoning the goal optimal. PBRS preserves the original optimal return at all nine tested strengths, including zero (Figure~\ref{fig:goal}). The maximum full-value identity error is $1.22\times10^{-15}$. This checks the safeguard's objective accounting. It neither demonstrates our learned potential's accuracy nor establishes a sample-efficiency advantage.
+
+\subsection{Implementation repair}
+The released TrueOnline branch carries eligibility traces between episodes, while resetting other episode-level variables. Calling the same released learning method after clearing traces raises final MountainCar success from 13.8\% to 99.8\% and mean original return from $-885.86$ to $-136.91$. The paired improvement is $748.95$, with bootstrap interval $[700.61,793.28]$ and six-test adjusted $p<.001$. Ninety-nine of 100 seeds improve.
+
+Our equivalent reset implementation matches the direct-source training outcomes; final weights differ by at most $1.20\times10^{-12}$. A standard Dutch-trace update with reset obtains $-138.46$, not a further supported gain over reset alone. Thus the large improvement is not credited to a new shaping rule. The combined repaired static learner obtains $-139.82$ and 99.9\% success, also close to repaired plain SARSA (Figure~\ref{fig:controls}a).
+
+\begin{table}[t]
+ \centering\small
+ \caption{Comparison with the published static-shaping result. ABS and AIBS are smaller-is-better training-record statistics, not final-policy return.}
+ \label{tab:paper}
+ \begin{tabular}{@{}lrr@{}}\toprule
+ Static shaping version & ABS & AIBS\\\midrule
+ Published Table 7 \citep{bromuri2019} &101.40&75.00\\
+ Released-code attempt &103.04&90.95\\
+ Our repaired implementation &100.33&115.30\\\bottomrule
+ \end{tabular}
+\end{table}
+
+Table~\ref{tab:paper} separates paper-level context from local evidence. The public metric code records an index $t=T-1$, so our static ABS of 100.33 corresponds to 101.33 physical steps. AIBS is the zero-based index of the earliest best record, not time to a shared success threshold. A better record found later can increase AIBS. The nominal ABS difference is not evidence of superiority over the published experiment; AIBS is later, original artifacts are missing, and comparable final frozen-policy returns were not reported there.
+
+\begin{figure*}[t]
+ \centering\includegraphics[width=.97\textwidth]{figures/source_and_mountaincar.pdf}
+ \caption{Two distinct protocols. (a) Minimal source audit: 200 episodes, 100 seeds, mean final original return with approximate 95\% mean intervals; only the SARSA trace-reset comparison is a single-change intervention. (b) Matched-budget MountainCar, 80 seeds: original evaluation learning curves, with the initial 25\% warm-up shaded and a 95\% normal mean band for Return-Gate. Neither repaired-source gains nor a favorable last checkpoint establish a shaping acceleration advantage.}
+ \label{fig:controls}
+\end{figure*}
+
+\subsection{Initial study and memory controls}
+Table~\ref{tab:initial} summarizes the independent initial cohort, retaining full-history supplementary baselines. Its post-hoc comparisons of \gate\ against raw concentrations support improvements in all three navigation conditions. However, none of the original 20 Holm-adjusted primary comparisons establishes an additional mixing advantage over calibrated components, SARSA, or MC. This distinction remains part of the report after the new validation.
+
+\begin{table*}[t]
+ \centering\footnotesize\setlength{\tabcolsep}{4pt}
+ \caption{Initial independent cohort: mean original return $\pm$ between-seed SD. Navigation uses 30 seeds; MountainCar uses 80. Return-D (all) and MC (all) are supplementary matched-history, unrestricted-amplitude controls. These data motivated the fresh protocol; they are not pooled with it.}
+ \label{tab:initial}
+ \begin{tabular}{@{}lrrrr@{}}\toprule
+ Method & U-detour & Four rooms & Slippery rooms & MountainCar\\\midrule
+ \tableinput{tables/previous_results.tex}
+ \bottomrule\end{tabular}
+\end{table*}
+
+The MountainCar comparison is especially informative. \gate\ averages $-202.74$, versus $-303.62$ for an online-only calibrated potential. Retaining all early experience gives $-208.01$ with the same unit-change bound, and $-209.75$ without it. MC with all data and unrestricted updates gives $-195.59$. The apparent gap is therefore sensitive to whether early potential evidence is discarded. No additional benefit over these stronger controls is detected. Figure~\ref{fig:controls}b and the AUC comparisons also provide no supported claim of stable acceleration.
+
+\subsection{Fresh navigation validation}
+Table~\ref{tab:validation} and Figure~\ref{fig:validation} show the full fresh cohort. In U-detour, \gate\ averages $-17.10$, versus $-46.45$ for Raw-S and $-63.85$ for Raw-D. In four rooms, it averages $-15.80$, versus $-71.60$ and $-80.75$. All four primary deterministic-task comparisons survive the prespecified six-test Holm adjustment (Table~\ref{tab:tests}). \gate\ reaches the goal for every trained policy in these two conditions.
+
+\begin{figure*}[t]
+ \centering\includegraphics[width=.98\textwidth]{figures/fresh_validation.pdf}
+ \caption{Fresh validation on 20 previously unused seeds per condition. Bars show mean final original return; error bars are bootstrap 95\% intervals across training seeds. Raw action-dependent scores exhibit large failure variability. State-only and moment-matched static controls already approach SARSA in deterministic navigation and have better stochastic-task means than Return-Gate. This limits attribution to return calibration or adaptive mixing.}
+ \label{fig:validation}
+\end{figure*}
+
+\begin{table*}[t]
+ \centering\small\setlength{\tabcolsep}{6pt}
+ \caption{Fresh validation: all ten prespecified methods, original return $\pm$ SD, 20 seeds each. Every arm uses 30,000 real interactions. Alternative strengths are reported without selecting a new preferred method.}
+ \label{tab:validation}
+ \begin{tabular}{@{}lrrr@{}}\toprule
+ Method & U-detour & Four rooms & Slippery rooms\\\midrule
+ \tableinput{tables/validation_results.tex}
+ \bottomrule\end{tabular}
+\end{table*}
+
+The stochastic result does not replicate the initial advantage. \gate\ averages $-27.45$, compared with Raw-S at $-27.27$ and Raw-D at $-44.07$; neither adjusted comparison rejects the null. Its success rate is 96.25\%, below SARSA's 100\% and Raw-S's 99.25\%, although above Raw-D's 89.5\%. Thus the earlier 100\% stochastic evaluation success was a cohort-specific finding, not a robustness guarantee.
+
+\begin{table}[tb]
+ \centering\small
+ \setlength{\tabcolsep}{2.5pt}
+ \caption{Fresh primary comparisons: Return-Gate minus raw control, paired 95\% intervals. $p_H$ corrects six tests. U/F/S denote U-detour/four/slippery rooms.}
+ \label{tab:tests}
+ \begin{tabular}{@{}llrrr@{}}\toprule
+ Task & Control & $\Delta R$ & 95\% interval & $p_H$\\\midrule
+ \tableinput{tables/primary_tests_compact.tex}
+ \bottomrule\end{tabular}
+\end{table}
+
+\subsection{Representation and sensitivity}
+Both simple state controls succeed in all fresh navigation evaluations, including the stochastic condition. In U-detour, \states\ and \matched\ average $-16.90$ and $-16.80$; in four rooms, $-15.60$ and $-15.40$; in slippery rooms, $-20.58$ and $-20.68$. The selected method does not show an advantage over these controls in the 15-test secondary family. State aggregation and a simple affine adjustment are therefore plausible contributors to the raw-versus-calibrated gap. These controls do not prove that any one representation change is the unique cause, and non-rejection is not an equivalence test.
+
+The return scale check also argues for bounded claims. Changing $c$ from $.1$ to $.03$ or $.3$ leaves deterministic means near $-17$ and $-16$, respectively. In slippery rooms, the three means are $-29.36$, $-27.45$, and $-21.79$, with substantial variance. None of the six adjusted strength comparisons rejects the null. The favorable $.3$ stochastic mean is not used to replace the selected configuration. We have checked a small sensitivity range, not established parameter-insensitive robustness.
+
+\section{Discussion}
+The evidence supports a concrete automatic potential constructor and a useful diagnosis of pheromone shaping. It also narrows the initial mechanistic explanation. Across fresh seeds, the complete return-based mechanism improves source-style raw baselines in deterministic navigation, but the simpler state-only alternatives achieve similar or better means. Accordingly, the experiment does not identify return calibration, quality weighting, or the local gate as individually necessary components.
+
+The three levels of evidence should remain separate. First, the trace-reset intervention has strong direct causal support in the released learning loop. Second, the fresh raw-baseline comparisons establish a finite-budget performance difference for the complete method in two conditions. Third, the attribution of that difference to any particular potential or memory component remains incomplete. Repair gains are not shaping gains, and improved final returns are not by themselves faster learning.
+
+The published theory also has a precise role. Equation~\ref{eq:telescope} explains objective accounting under the specified boundaries. It does not ensure that a misleading potential guides useful exploration. Our exact bonus-cell diagnostic makes this distinction visible without relying on one successful training trajectory. The original return, discounted return, success rate, and learning curve each answer different practical questions.
+
+Several limitations remain. Each navigation condition has one layout. A new seed is not a new map or a transfer test. Success-conditioned last-visit memories can be optimistic; the unobserved-state reference, count gate, evaporation and 25\% split have not all been swept. A monotone count gate may retain stale confidence. MountainCar discretization can alias states. Fixed step sizes, small exploration, and capped budgets do not establish convergence. The moment-matched control matches only two moments, and no fully matched correction of the released state--action advice learner is tested.
+
+Related work provides interpretation rather than an algorithm leaderboard. Dynamic PBRS can retain policy guarantees with a correct formulation \citep{devlin2012}; potential shifts can affect learning despite encoding similar preferences \citep{muller2025}. Our simple velocity and Manhattan controls are heuristic transfers, not full replications of those papers. The limited published-metric comparison in Table~\ref{tab:paper} is insufficient to claim that we outperform the original study.
+
+\FloatBarrier
+\section{Conclusion}
+We designed and evaluated a pheromone-inspired, trajectory-return state potential with retained early experience and online updates. A minimal released-code intervention first removed a large confounder in final-policy reliability. Independent fresh validation then confirmed gains over raw pheromone controls in deterministic U-detour and four-room navigation, while exposing a non-replicating stochastic advantage. Representation and full-history baselines sharply restrict the evidence for a unique calibration or mixing benefit. The resulting contribution is an executable shaping design and an empirically grounded boundary: potential representation, episode handling, and comparable experience retention must be checked before attributing gains to a more elaborate adaptive mechanism.
+
+\paragraph{Reproducibility and tool use.}
+The accompanying source package contains frozen protocols, seeds, run records, models, generator diffs, statistical scripts, and Python code producing all figures and tables. It identifies the released source commit and retains its attribution. The original 3,660-run series and the 600 fresh runs remain separate. AI-assisted tools were used for implementation, analysis and drafting; the numerical claims are linked to executable scripts and saved records.
+
+\clearpage
+\balance
+\begin{thebibliography}{10}
+\bibitem[Ng et~al.(1999)]{ng1999}
+Andrew Y. Ng, Daishi Harada, and Stuart Russell.
+Policy invariance under reward transformations: Theory and application to reward shaping.
+In \emph{Proceedings of ICML}, pp.~278--287, 1999.
+\url{https://people.eecs.berkeley.edu/~russell/papers/icml99-shaping.pdf}.
+
+\bibitem[Wiewiora(2003)]{wiewiora2003}
+Eric Wiewiora.
+Potential-based shaping and Q-value initialization are equivalent.
+\emph{Journal of Artificial Intelligence Research}, 19:205--208, 2003.
+\url{https://doi.org/10.1613/jair.1190}.
+
+\bibitem[Wiewiora et~al.(2003)]{advice2003}
+Eric Wiewiora, Garrison Cottrell, and Charles Elkan.
+Principled methods for advising reinforcement learning agents.
+In \emph{Proceedings of ICML}, 2003.
+\url{https://cdn.aaai.org/ICML/2003/ICML03-103.pdf}.
+
+\bibitem[Devlin and Kudenko(2012)]{devlin2012}
+Sam Devlin and Daniel Kudenko.
+Dynamic potential-based reward shaping.
+In \emph{Proceedings of AAMAS}, pp.~433--440, 2012.
+\url{https://eprints.whiterose.ac.uk/id/eprint/75121/2/p433_devlin.pdf}.
+
+\bibitem[van Seijen and Sutton(2014)]{seijen2014}
+Harm van Seijen and Richard S. Sutton.
+True online TD($\lambda$).
+In \emph{Proceedings of ICML}, PMLR 32(1):692--700, 2014.
+\url{https://proceedings.mlr.press/v32/seijen14.html}.
+
+\bibitem[Grze\'s(2017)]{grzes2017}
+Marek Grze\'s.
+Reward shaping in episodic reinforcement learning.
+In \emph{Proceedings of AAMAS}, pp.~565--573, 2017.
+\url{https://www.ifaamas.org/Proceedings/aamas2017/pdfs/p565.pdf}.
+
+\bibitem[Bromuri(2019)]{bromuri2019}
+Stefano Bromuri.
+Dynamic heuristic acceleration of linearly approximated SARSA($\lambda$): Using ant colony optimization to learn heuristics dynamically.
+\emph{Journal of Heuristics}, 25:901--932, 2019.
+\url{https://doi.org/10.1007/s10732-019-09408-x}.
+
+\bibitem[M\"uller and Kudenko(2025)]{muller2025}
+Henrik M\"uller and Daniel Kudenko.
+Improving the effectiveness of potential-based reward shaping in reinforcement learning.
+\emph{arXiv:2502.01307}, 2025.
+\url{https://arxiv.org/abs/2502.01307}.
+
+\bibitem[SB-BISS(2019)]{authorcode}
+SB-BISS / Stefano Bromuri.
+RLACOSarsaLambda: Released implementation.
+Fixed commit \texttt{95786b39b9ee8c5e004e71ccfa790304cbb3f684}, 2019.
+\href{https://github.com/SB-BISS/RLACOSarsaLambda/tree/95786b39b9ee8c5e004e71ccfa790304cbb3f684}{\texttt{github.com/SB-BISS/RLACOSarsaLambda}}.
+
+\bibitem[OpenAI(2018)]{gymcode}
+OpenAI.
+Gym MountainCar environment, version 0.10.5.
+\href{https://github.com/openai/gym/blob/v0.10.5/gym/envs/classic_control/mountain_car.py}{\texttt{github.com/openai/gym}}, 2018.
+\end{thebibliography}
+\end{document}

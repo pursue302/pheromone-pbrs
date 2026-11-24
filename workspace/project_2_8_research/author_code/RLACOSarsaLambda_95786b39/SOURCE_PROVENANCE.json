@@ -1,0 +1,49 @@
+{
+  "repository": "https://github.com/SB-BISS/RLACOSarsaLambda",
+  "commit": "95786b39b9ee8c5e004e71ccfa790304cbb3f684",
+  "paper_doi": "10.1007/s10732-019-09408-x",
+  "retrieved_date": "2026-11-18",
+  "snapshot": "Selected author source files, not a complete runnable checkout",
+  "files": [
+    {
+      "path": "agents/PAApproximatedSarsaLambdaAgent.py",
+      "url": "https://github.com/SB-BISS/RLACOSarsaLambda/blob/95786b39b9ee8c5e004e71ccfa790304cbb3f684/agents/PAApproximatedSarsaLambdaAgent.py"
+    },
+    {
+      "path": "agents/HAApproximatedSarsaLambdaAgent.py",
+      "url": "https://github.com/SB-BISS/RLACOSarsaLambda/blob/95786b39b9ee8c5e004e71ccfa790304cbb3f684/agents/HAApproximatedSarsaLambdaAgent.py"
+    },
+    {
+      "path": "agents/ApproximatedSarsaLambdaAgent.py",
+      "url": "https://github.com/SB-BISS/RLACOSarsaLambda/blob/95786b39b9ee8c5e004e71ccfa790304cbb3f684/agents/ApproximatedSarsaLambdaAgent.py"
+    },
+    {
+      "path": "Mountain_Car_Simulation.py",
+      "url": "https://github.com/SB-BISS/RLACOSarsaLambda/blob/95786b39b9ee8c5e004e71ccfa790304cbb3f684/Mountain_Car_Simulation.py"
+    },
+    {
+      "path": "static_heuristics/LoadableHeuristic.py",
+      "url": "https://github.com/SB-BISS/RLACOSarsaLambda/blob/95786b39b9ee8c5e004e71ccfa790304cbb3f684/static_heuristics/LoadableHeuristic.py"
+    },
+    {
+      "path": ".gitmodules",
+      "url": "https://github.com/SB-BISS/RLACOSarsaLambda/blob/95786b39b9ee8c5e004e71ccfa790304cbb3f684/.gitmodules"
+    },
+    {
+      "path": "LICENSE",
+      "url": "https://github.com/SB-BISS/RLACOSarsaLambda/blob/95786b39b9ee8c5e004e71ccfa790304cbb3f684/LICENSE"
+    },
+    {
+      "path": "README.md",
+      "url": "https://github.com/SB-BISS/RLACOSarsaLambda/blob/95786b39b9ee8c5e004e71ccfa790304cbb3f684/README.md"
+    },
+    {
+      "path": "Mountain_Car_Grid_Search.py",
+      "url": "https://github.com/SB-BISS/RLACOSarsaLambda/blob/95786b39b9ee8c5e004e71ccfa790304cbb3f684/Mountain_Car_Grid_Search.py"
+    },
+    {
+      "path": "Dyna_Simulation_TracesTest.py",
+      "url": "https://github.com/SB-BISS/RLACOSarsaLambda/blob/95786b39b9ee8c5e004e71ccfa790304cbb3f684/Dyna_Simulation_TracesTest.py"
+    }
+  ]
+}

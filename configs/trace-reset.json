@@ -1,0 +1,6 @@
+{
+  "driver": "direct_reset",
+  "seeds": 100,
+  "start": 20000,
+  "description": "直接调用作者学习循环，仅在每回合开始清空资格迹"
+}

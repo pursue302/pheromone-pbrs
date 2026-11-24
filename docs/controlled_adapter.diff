@@ -1,0 +1,51 @@
+--- frozen/analyze.py
++++ tools/recompute_controlled.py
+@@ -4,7 +4,11 @@
+ import matplotlib
+ matplotlib.use('Agg')
+ import matplotlib.pyplot as plt
+-HERE=Path(__file__).resolve().parent;ROOT=HERE.parent
++import sys
++BASE=Path(__file__).resolve().parents[1]
++HERE=BASE/'workspace/research_story_20261120';ROOT=BASE/'workspace'
++REPORT_OUT=Path(sys.argv[1]).resolve();REPORT_OUT.mkdir(parents=True,exist_ok=True)
++
+ 
+ def read(folder):
+     return [json.loads(p.read_text(encoding='utf8')) for p in sorted((folder/'runs').glob('*.json'))]
+@@ -61,7 +65,7 @@
+         axes[1].bar(x,np.mean(ys),color=c);axes[1].errorbar(x,np.mean(ys),yerr=1.96*np.std(ys,ddof=1)/np.sqrt(len(ys)),color='black',capsize=4)
+     axes[0].set(xlabel='Completed training episodes',ylabel='Original training return (rolling 10)');axes[0].legend(fontsize=7)
+     axes[1].set_xticks(range(len(show)),show,rotation=25,ha='right',fontsize=7);axes[1].set_ylabel('Final greedy policy: original return')
+-    fig.tight_layout();fig.savefig(HERE/'repair_evidence.png',dpi=180);plt.close(fig)
++    fig.tight_layout();fig.savefig(REPORT_OUT/'repair_evidence.png',dpi=180);plt.close(fig)
+     return dict(summary=summary,tests=tests)
+ 
+ def phase(folder):
+@@ -95,7 +99,7 @@
+     holm(tests)
+     if len(summary)==1:fig,axes=plt.subplots(1,1,figsize=(11,5.8));panels=[axes]
+     else:fig,axes=plt.subplots(2,2,figsize=(12,8));panels=list(axes.ravel())
+-    show=['plain','raw_static','raw_dynamic','raw_mix','return_static','return_dynamic','return_mix','return_gate','return_gate_unbounded','mc_dynamic','velocity_shift','manhattan']
++    show=['plain','raw_static','raw_dynamic','raw_mix','return_static','return_dynamic','return_mix','return_gate','return_gate_unbounded','mc_dynamic','velocity_shift','manhattan','return_dynamic_all','mc_dynamic_all','return_dynamic_all_unbounded','mc_dynamic_all_unbounded','return_mix_unbounded']
+     for ax,k in zip(panels,sorted(summary)):
+         for m in show:
+             if (k,m) not in groups:continue
+@@ -103,7 +107,7 @@
+         ax.set(title=k,xlabel='Total training interactions (warm-up included)',ylabel='Original evaluation return')
+     for ax in panels[len(summary):]:ax.set_visible(False)
+     handles,labels=panels[0].get_legend_handles_labels();fig.legend(handles,labels,loc='lower center',ncol=4,fontsize=8)
+-    fig.tight_layout(rect=(0,.14 if len(summary)==1 else .10,1,1));fig.savefig(folder/'learning_curves.png',dpi=180);plt.close(fig)
++    fig.tight_layout(rect=(0,.14 if len(summary)==1 else .10,1,1));(REPORT_OUT/folder.name).mkdir(exist_ok=True);fig.savefig(REPORT_OUT/folder.name/'learning_curves.png',dpi=180);plt.close(fig)
+     secondary=[]
+     for k in sorted(summary):
+         for b in ('raw_static','raw_dynamic'):
+@@ -157,7 +161,7 @@
+                     {r['seed']:r['final']['original_return'] for r in rr})))
+             holm(supp);output['confirmation_joint']['strong_control_tests']=supp
+             output['confirmation_joint']['supplementary_runs']=len(extra)
+-    (HERE/'analysis.json').write_text(json.dumps(output,indent=2),encoding='utf8')
++    (REPORT_OUT/'analysis.json').write_text(json.dumps(output,indent=2),encoding='utf8')
+     print(json.dumps({k:{'runs':v.get('runs'),'prefixes_identical':v.get('prefixes_identical'),'summary':v['summary']} for k,v in output.items()},indent=2))
+ 
+ if __name__=='__main__':main()

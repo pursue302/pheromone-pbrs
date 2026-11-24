@@ -1,0 +1,121 @@
+--- upstream/agents/ApproximatedSarsaLambdaAgent.py
++++ author_port/ApproximatedSarsaLambdaAgent.py
+@@ -1,9 +1,7 @@
+-from gym.spaces import discrete
+-import gym
+ from collections import defaultdict
+ import numpy as np
+ from scipy.spatial.distance import pdist, squareform
+-from tilecoding.representation import TileCoding
++from .representation import TileCoding
+ 
+ 
+ 
+@@ -82,14 +80,14 @@
+                         ntilings = num_tilings_l, 
+                         hashing = None,
+                         state_range = state_range,
+-                        rnd_stream = np.random.RandomState())
++                        rnd_stream = np.random.RandomState(self.config.get("tile_seed", 0) + 17*i))
+             
+             size_tc = self.tile_coder[i].size
+             
+             self.tile_coder_traces[i]=TileCoding(input_indices = [np.arange(len(observation_space_mins))], 
+                         ntiles = num_tiles_l, ntilings = num_tilings_l, hashing = None,
+                         state_range = state_range,
+-                        rnd_stream = np.random.RandomState())
++                        rnd_stream = np.random.RandomState(self.config.get("tile_seed", 0) + 17*i))
+             
+             size_tct = self.tile_coder_traces[i].size
+         
+--- upstream/agents/PAApproximatedSarsaLambdaAgent.py
++++ author_port/PAApproximatedSarsaLambdaAgent.py
+@@ -1,10 +1,8 @@
+-from gym.spaces import discrete
+-import gym
+ from collections import defaultdict
+ import numpy as np
+ from scipy.spatial.distance import pdist, squareform
+-from tilecoding.representation import TileCoding
+-from ApproximatedSarsaLambdaAgent import ApproximatedSarsaLambdaAgent
++from .representation import TileCoding
++from .ApproximatedSarsaLambdaAgent import ApproximatedSarsaLambdaAgent
+ import sys
+ import time
+ import pickle
+@@ -53,7 +51,7 @@
+         self.psi = self.config["psi"]
+         self.heuristic_activate = False
+         self.strategy = self.config["Strategy"]
+-        print self.strategy    
++        print(self.strategy)    
+         # a trajectory contains state,action values history., plus the cost to pass back
+         self.best_trajectory = {"trajectory" : [], "quality" : 0, "success" : False} # only succesfull trajectories should be enforced
+         self.pheromone_trace = np.zeros((actions.n,self.tile_code_trace_weights[0].size)) +0.1 # this trace will include a pheromone value, initialized negative so that it cannot be chosen by mistake
+--- upstream_tilecoding/representation.py
++++ author_port/representation.py
+@@ -2,7 +2,8 @@
+ import scipy.sparse as sp
+ 
+ from scipy.sparse import csr_matrix
+-from itertools import chain, izip
++from itertools import chain
++izip = zip
+ 
+ """
+ authors: Clement Gehring
+@@ -375,7 +376,7 @@
+         self.offset = offset
+         if offset is None:
+             self.offset = np.empty((ntiles.shape[1], ntilings))
+-            for i in xrange(ntiles.shape[1]):
++            for i in range(ntiles.shape[1]):
+                 self.offset[i,:] = -rnd_stream.random_sample(ntilings)/ntiles[0,i]
+ 
+         if self.hashing == None:
+@@ -397,7 +398,7 @@
+             state = state[:,:,None]
+ 
+         nstate = (state[:, self.input_index, :] - self.state_range[0])/(self.state_range[1]-self.state_range[0])
+-        indicies =((self.offset[None,:,:] + nstate)*self.ntiles).astype(np.int)
++        indicies =((self.offset[None,:,:] + nstate)*self.ntiles).astype(int)
+         return self.hashing(indicies) + self.index_offset[None,:]
+ 
+     @property
+@@ -491,7 +492,7 @@
+         self.__size = sum(map(lambda x: x.size, self.tilings))
+         self.bias_term = bias_term
+         self.index_offset = np.zeros(len(ntilings), dtype = 'int')
+-        self.index_offset[1:] = np.cumsum(map(lambda x: x.size, self.tilings[:-1]))
++        self.index_offset[1:] = np.cumsum(list(map(lambda x: x.size, self.tilings[:-1])))
+         self.index_offset = np.hstack( [np.array([off]*t, dtype='int')
+                                             for off, t in zip(self.index_offset, ntilings)])
+ 
+@@ -511,11 +512,11 @@
+         # add bias term if needed, concatenate set of indices of all
+         # the sets of tilings.
+         if self.bias_term:
+-            indices = np.hstack(chain((t(state) for t in self.tilings),
+-                                      [np.zeros((state.shape[0], 1), dtype='int')])) \
++            indices = np.hstack(tuple(chain((t(state) for t in self.tilings),
++                                      [np.zeros((state.shape[0], 1), dtype='int')]))) \
+                             + self.index_offset
+         else:
+-            indices = np.hstack((t(state) for t in self.tilings)) \
++            indices = np.hstack(tuple(t(state) for t in self.tilings)) \
+                             + self.index_offset
+ 
+         return indices.squeeze()
+@@ -545,9 +546,9 @@
+         rnd_seq = self.rndseq
+         a = self.increment*np.arange(indices.shape[1])
+         index = indices + a[None,:,None]
+-        index = index - (index.astype(np.int)/rnd_seq.size)*rnd_seq.size
+-        hashed_index = (np.sum(rnd_seq[index], axis=1)).astype(np.int)
+-        return (hashed_index - (hashed_index/self.memory).astype(np.int)*self.memory).astype('int')
++        index = index - (index.astype(int)/rnd_seq.size)*rnd_seq.size
++        hashed_index = (np.sum(rnd_seq[index], axis=1)).astype(int)
++        return (hashed_index - (hashed_index/self.memory).astype(int)*self.memory).astype('int')
+ 
+ class IdentityHash(Hashing):
+     def __init__(self, dims, wrap = False):

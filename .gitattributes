@@ -1,0 +1,2 @@
+# Preserve the frozen source bytes and their SHA256 values on every platform.
+* -text

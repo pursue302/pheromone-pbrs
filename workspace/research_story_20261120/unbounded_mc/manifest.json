@@ -1,0 +1,34 @@
+{
+  "status": "complete",
+  "args": {
+    "phase": "confirm",
+    "seeds": 80,
+    "start": 31000,
+    "workers": 4,
+    "out": "unbounded_mc",
+    "methods": "return_dynamic_all_unbounded,mc_dynamic_all_unbounded,return_mix_unbounded",
+    "scenarios": "mountain_car",
+    "scale": 0.1,
+    "beta": 0.5,
+    "limit": 1.0
+  },
+  "config": {
+    "mc_steps": 60000,
+    "grid_steps": 30000,
+    "mc_cap": 1000,
+    "grid_cap": 200,
+    "evaluation_episodes": 20,
+    "epsilon": 0.025,
+    "rho": 0.99,
+    "warmup": 0.25,
+    "publish": 10,
+    "scale": 0.1,
+    "beta": 0.5,
+    "limit": 1.0,
+    "kappa": 5.0
+  },
+  "source_sha256": "e7f9f27911576c0cbae1f23a9b6cc0bb5c2673b0e67a9af270e50b34a9a46e08",
+  "jobs": 80,
+  "physical_steps": 14400000,
+  "elapsed_seconds": 344.4090504000196
+}

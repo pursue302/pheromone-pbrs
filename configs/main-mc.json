@@ -1,0 +1,29 @@
+{
+  "driver": "study",
+  "phase": "confirm",
+  "seeds": 80,
+  "start": 31000,
+  "scenarios": [
+    "mountain_car"
+  ],
+  "methods": [
+    "plain",
+    "raw_static",
+    "raw_dynamic",
+    "raw_mix",
+    "return_static",
+    "return_dynamic",
+    "return_mix",
+    "return_gate",
+    "return_gate_unbounded",
+    "mc_dynamic",
+    "velocity",
+    "velocity_shift"
+  ],
+  "description": "MountainCar主确认：80种子、12方法、每方法60000交互",
+  "parameters": {
+    "scale": 0.1,
+    "beta": 0.5,
+    "limit": 1.0
+  }
+}

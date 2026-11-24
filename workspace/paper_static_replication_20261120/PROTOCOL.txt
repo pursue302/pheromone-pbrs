@@ -1,0 +1,68 @@
+Paper Table7 static pheromone attempt, fixed before new training outcomes.
+
+Purpose: reproduce static-pheromone benefit as closely as available artifacts
+allow, without our mixture, adaptive controller, or rewritten learning loop.
+Run the author's full SARSA, HA and PA learn() classes. Keep source TrueOnline
+trace carry, initial potential0, nonzero terminal potential and success test.
+Expose the source static-switch bug separately; true static changes only its
+one missing local dynamic guard. Preserve all algorithm patches for review.
+
+Historical-environment primary: literal Gymv0.10.5 MountainCar step/reset/seed
+methods, float64 observations, float32 observation bounds, RandomState/hash
+seeding and separate old spaces RNG. Goalx=.5, all rewards-1, cap1000. Exact Gym
+version is unreported in the paper; v0.10.5 is a documented historical proxy.
+Secondary paper-text environment sets goalx=.6 and goal reward+1, while keeping
+the repository's velocity-first dynamics. Paper Eq33/34 and script disagree on
+some details; do not silently designate a convenient variant as exact truth.
+
+Shared parameters: TrueOnline, alpha=.5 divided by10 tilings, gamma1, lambda.9,
+10x10 tiles and10 tilings, eps.025 decayed*.99 PER ENVIRONMENT STEP for EVERY
+method, rho.99, model_based=False. HA uses psi.3,nu10,hard as Table3.
+Two formulas: source TrueOnline(gamma*Pnext-Pold)/10; separately paper Eq38
+rho*Pnext-Pold with raw source scores. No scale sweep or reward tuning.
+
+Static prior generation: independent author HA, predefined teacher seed, save
+200-episode checkpoint and mature file. At least1000 episodes, thereafter
+check every200 up to2000: >=99% success over last200, no improvement to historical
+best over last200, adjacent100-episode mean lengths differ<=5%. Save all checks;
+if unmet at cap, label budget-limited rather than converged. Do not pick teacher
+by student results. Primary teacher120001, sensitivity banks120002/120003 for
+historical environment, paper-text teacher120004. Match each exported tau to
+its ORIGINAL tile coder. Static students call actual set_pheromone_trace and
+set_tilecoder, Q0, constructor traces/history/inactive flag; no donor-Q/history
+transfer. The SAME exported prior is reused across repetitions, like script.
+All donor collection steps/time separately charged; reuse is not called free.
+
+Main historical/source-formula cohort:100 new student seeds20000--20099, each
+200 COMPLETE episodes,7 methods: sarsa,dynamic,static_source_flag,static_frozen,
+static_frozen_200,sarsa_same_tiles,dynamic_same_tiles. First two reconstruct
+ordinary independently initialized coders; latter two use teacher coders but
+no trained tau, isolating feature-layout advantage of a single static file.
+No fixed environment-step cutoff. Every complete reward trajectory contributes.
+Prior robustness: banks1/2, each30 seeds22000--22029, true static source formula;
+report separately as conditional on each file, never pretend300 independent priors.
+
+Ambiguity sensitivity:20 independent seeds21000--21019,3 paired cells:
+historical+Eq38,paper-text+source,paper-text+Eq38; each SARSA/dynamic/frozen-static.
+The paper-text SARSA records are shared across its two formula cells, giving
+160 unique sensitivity trainings. No selecting only a favourable cell. Use
+mature file for corresponding env.
+Any follow-up prompted by these outcomes must be labelled exploratory or use
+new confirmation seeds. Current planned920 student runs +4 donor processes.
+
+Primary metrics EXACT author find_best_results from PlotResultsM3D.py: mean
+minimum last_steps(ABS), argmin zero-based episode(AIBS), sum of per-episode
+times BEFORE best episode(ATBS), full simulation time(ATST). Also actual lengths,
+original rewards, all curves, first/final greedy policy, sample efficiency and
+donor cost. No use of best trajectory as a substitute for deployment policy.
+Report raw source last_steps, which differ from actual length between HA/PA.
+Primary source-frozen contrasts against SARSA and dynamic: ABS and AIBS,4 tests
+Holm, paired bootstrap20000/sign-flip50000. Lower is better. All variants shown.
+Qualitative effect requires lower mean AIBS than BOTH baselines without worse
+mean ABS; statistical support is additionally judged by the paired tests. Numeric
+closeness to Table7 is separate. Do not optimize to hit the published numbers.
+
+Training uses actual NumPy author learn(), with an equivalence-tested faster tile
+projection only.8 workers, random method order, no claim absolute runtime matches
+the paper's old4-core hardware. Preserve source hashes, donor files,200 episode
+records, final models, and sampled full trajectories. Never overwrite old studies.

@@ -1,0 +1,11 @@
+--- author_PA.py
++++ pa_source_eq38.py
+@@ -268,7 +268,7 @@
+                 index_future = self.tile_coder[ap].__call__(sp)
+              
+                 #if the concentration of pheromone is bigger ?
+-                shaping = (self.gamma*potential- old_potential)/self.num_tiling
++                shaping = self.rho*potential - old_potential
+                 #print shaping
+                  
+                 #same indices, different weights

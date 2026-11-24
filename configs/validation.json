@@ -1,0 +1,29 @@
+{
+  "driver": "validation",
+  "phase": "confirm",
+  "seeds": 20,
+  "start": 40000,
+  "scenarios": [
+    "u_detour",
+    "four_rooms",
+    "slippery_rooms"
+  ],
+  "methods": [
+    "plain",
+    "raw_static",
+    "raw_dynamic",
+    "state_raw_static",
+    "state_raw_matched",
+    "return_static",
+    "return_gate_unbounded",
+    "mc_dynamic_all_unbounded",
+    "gate_scale003",
+    "gate_scale030"
+  ],
+  "description": "最新补充验证：20新种子×3地图×10方法，共600运行",
+  "parameters": {
+    "scale": 0.1,
+    "beta": 0.5,
+    "limit": 1.0
+  }
+}

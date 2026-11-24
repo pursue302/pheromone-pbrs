@@ -1,0 +1,30 @@
+{
+  "driver": "study",
+  "phase": "confirm",
+  "seeds": 30,
+  "start": 31000,
+  "scenarios": [
+    "u_detour",
+    "four_rooms",
+    "slippery_rooms"
+  ],
+  "methods": [
+    "plain",
+    "raw_static",
+    "raw_dynamic",
+    "raw_mix",
+    "return_static",
+    "return_dynamic",
+    "return_mix",
+    "return_gate",
+    "return_gate_unbounded",
+    "mc_dynamic",
+    "manhattan"
+  ],
+  "description": "三类网格主确认：各30种子、11方法、30000交互",
+  "parameters": {
+    "scale": 0.1,
+    "beta": 0.5,
+    "limit": 1.0
+  }
+}

@@ -1,0 +1,128 @@
+蚁群启发的 PBRS 奖励塑形：代码与实验整合包
+===========================================
+
+先打开 paper/report.pdf：这是最新英文报告，7页正文、1页参考文献，作者栏留空。
+本包将分散的主线代码、实验配置、数据、模型、图表与来源说明合到同一目录。
+
+一、包含什么
+------------
+1. 作者完整学习函数的论文近似复现：920条学生训练记录、4个教师运行。
+2. 实现修正、静态/动态/混合、MC与强基线研究：3660条训练记录。
+3. 最新独立种子补充验证：600条训练记录，含状态势、尺度匹配与强度对照。
+共5180条学生训练记录，保留各自模型、种子、预算、协议和统计，不跨队列混算。
+另有精确的诱惑奖励/PBRS目标保持诊断，以及完整的论文绘图数据快照。
+
+范围是“当前论文的证据链”。早期方向8、其他未用于当前报告的探索实验仍在原工作区归档。
+author_direct_comparison目录在本包中仅提供复现核对所需源码，不包含其另一个旧1000次实验数据集。
+
+二、目录
+--------
+run.py              统一入口；从这里列配置、测试、重算统计、画图和启动训练
+requirements.txt    参考环境的依赖版本
+configs/            11组明确的训练配置，包含种子、方法、场景与脚本版本
+paper/              最新PDF、LaTeX主文件、绘图脚本、数据快照、图表和表格
+tools/              统计输出重定向适配器、作者trace-reset参数化入口
+docs/               代码导航、方法名称说明、来源、数据清单及适配器diff
+workspace/          原相对目录结构的冻结实现、全部主线结果和模型
+runs/               新训练、功能验证、重新生成的图表/报告；运行时自动创建
+analysis_results/   重新计算的统计结果；运行时自动创建
+checks/             本包交付前的验证摘要
+MANIFEST.json       每个交付文件的SHA256和大小
+
+workspace保留原目录名，是为了保存已验证的导入关系与源码校验值。
+阅读和使用从run.py、configs、paper及docs开始，不需要先翻遍所有历史脚本。
+统一入口把新输出写到独立目录。再次运行时使用新的--out名称。
+
+三、环境与最快验证
+------------------
+参考环境：Python 3.13；NumPy 2.1.3、SciPy 1.15.3、Numba 0.61.0、
+Matplotlib 3.10.0、six 1.17.0。原Gym的必要接口已随包提供兼容层。
+代码、数据和模型已经随包提供，训练与统计不需要联网账户或外部数据下载。
+
+解压后，在包含run.py的目录打开终端：
+  python -m pip install -r requirements.txt
+  python run.py list
+  python run.py verify
+  python run.py test
+  python run.py smoke
+
+verify默认核对所有文件的完整SHA256及实验记录数量；--fast检查文件大小和源码/配置哈希。
+test运行5项数值机制检查和6项作者实现/历史环境检查。
+smoke实际运行6种方法、共6000步，检查导入、文件输出、数值有限性和相同预训练前缀。
+smoke只验证功能，不用于宣称算法性能。
+
+四、直接重建结果
+----------------
+  python run.py diagnostic
+  python run.py figures
+  python run.py analyze fresh
+  python run.py analyze controlled
+  python run.py analyze source
+
+也可以：
+  python run.py analyze all
+
+diagnostic重做完全已知小网格上的精确目标保持对照；不是RL训练效率实验。
+figures用已保存数据生成4幅论文图（PDF+PNG）、LaTeX表格和CSV，并输出可编译论文副本。
+analyze分别重算600次新验证、3660次受控研究、920次作者近似复现的统计。
+新的统计与图表写入独立的analysis_results或runs目录；输出路径会打印在终端。
+
+例如为输出指定名称：
+  python run.py figures --out my_figures
+  python run.py analyze fresh --out my_fresh_statistics
+
+五、重新训练
+------------
+先查看准备执行的命令：
+  python run.py train validation --dry-run
+
+用一个种子验证完整的30000步训练流程：
+  python run.py train validation --seeds 1 --scenarios u_detour --workers 2 --out validation_one_seed
+
+完整重复最新600次验证：
+  python run.py train validation --workers 8 --out validation_repeat
+
+其他主线：
+  python run.py train main-mc --out mc_repeat
+  python run.py train main-navigation --out navigation_repeat
+  python run.py train history-mc --out retained_history_repeat
+  python run.py train unbounded-mc --out amplitude_control_repeat
+  python run.py train repair --out repair_repeat
+  python run.py train trace-reset --out direct_author_repeat
+  python run.py train author-replication --out author_repeat
+
+author-replication默认会重跑920学生运行及4教师；其快速功能队列为：
+  python run.py train author-replication --quick --out author_smoke
+
+--seeds和--start可覆盖普通配置的种子数与起点；作者近似复现使用固定队列。
+--scenarios只接受该配置声明的任务子集；validation的状态势对照仅适用于网格。
+完整训练默认仍使用原预算（网格30000、MountainCar60000）；--seeds 1不会缩短每次预算。
+所有新输出限制在本包的runs或analysis_results下，并且已有输出目录会被拒绝覆盖。
+analyze命令默认重算随包的冻结记录。最新验证的自命名新训练可直接分析：
+  python run.py analyze fresh --input runs/validation_repeat --out statistics_repeat
+source也支持--input指定新的完整作者复现实验目录。
+部分种子的重跑仍可计算统计，但不能将一个种子的功能检查当作性能证据。
+
+六、编译报告
+------------
+已有的paper/report.pdf可直接查看。需要重编译时：
+  python run.py report
+
+该命令在新目录中重新生成图表，再检测Tectonic、latexmk或pdflatex进行编译。
+若只需要在自己的LaTeX环境编辑，使用paper/main.tex及相邻figures、tables即可。
+参考文献写在main.tex中，不需要BibTeX。Tectonic首次使用可能需要缓存标准宏包。
+
+七、结果解释
+------------
+阅读最新paper/report.pdf与workspace/paper_report_20261120/validation_summary.json。
+最新验证在U形绕行和四房间支持相对原始信息素的改善；随机滑移优势未复现。
+简单状态势已能达到相近效果，复杂混合及蚁群权重尚无稳定的额外收益证据。
+作者学习循环的trace-reset收益单独验证，不作为新塑形机制的性能贡献。
+workspace中保留的早期报告对应各自当时的实验队列，不替代最新补充验证。
+
+八、代码与模型来源
+------------------
+作者公开代码、Python3兼容实现、我们的数值核心和新增塑形方法已在docs/CODE_MAP.txt分别标明。
+公开代码来源固定到2019年的提交；原作者LICENSE、历史Gym与tilecoding来源均保留。
+本包的教师信息素与训练模型由我们生成，不是原作者发布的实验产物。
+论文和代码工具使用说明见报告及docs/SOURCES.txt。

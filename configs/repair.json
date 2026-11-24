@@ -1,0 +1,18 @@
+{
+  "driver": "study_v1",
+  "phase": "repair",
+  "seeds": 100,
+  "start": 20000,
+  "methods": [
+    "reset",
+    "canonical",
+    "static_reset",
+    "static_canonical"
+  ],
+  "description": "四种修正消融，100种子，每次200完整回合",
+  "parameters": {
+    "scale": 0.1,
+    "beta": 0.5,
+    "limit": 1.0
+  }
+}

@@ -1,0 +1,64 @@
+Protocol frozen before the new outcomes, 2026-11-20.
+
+The prior studies remain unchanged, including their failed held-out mixtures.
+This study does not assume that a positive innovation result must exist.
+
+A. Repair ablation: 200 complete old-Gym MountainCar episodes per run, cap
+1000, goal x >= .5, environmental reward -1 at every step. Author tile coding,
+alpha .5/10, gamma 1, lambda .9, epsilon .025 times .99 EVERY STEP, same seeds
+and random generators as paper_static_replication_20261120. Reuse its actual
+author runs as the source control. New arms: reset traces only; standard Dutch
+trace plus reset; raw static PA with boundary fixes plus reset; the same with
+standard Dutch trace. The static prior is the same mature historical_A bank.
+The teacher costs 111259 interactions, and is held fixed, not 100 independent
+teachers. All student Q values start at zero. Report author ABS and zero-based
+AIBS plus independently evaluated final environmental returns. Paper Table 7
+contains best-training-episode statistics, NOT these final-policy returns.
+
+B. Equal-total-budget study: MountainCar 60000, U-detour / four-rooms /
+slippery-rooms 30000 environmental interactions, caps 1000 / 200. The latter
+three reuse the actual course environment; slipperiness .15. Epsilon .025
+constant; corrected True Online SARSA, author action-specific features, alpha
+.5/10 or .1/10, gamma 1 / .99, lambda .9, identical for ALL new-method arms.
+The first 25 percent of interactions (rounded to a complete episode) use no
+shaping. All methods have exactly the same warm-up actions and observations.
+No external teacher or extra oracle samples are used. Q is retained after
+warm-up. Original released global and local pheromone rules are raw controls.
+
+New proposal: trajectory-quality-weighted state potential. Each successful
+completed trajectory contributes once per state bin, with weight 1/length,
+target its actual discounted remaining environmental return at the last visit.
+Evaporate numerator and denominator together by .99; their ratio corrects
+visitation frequency. Unseen target is -200. Use .1 times the estimate.
+The offline memory freezes after warm-up. A separate online memory receives
+only new real successful trajectories, never repeated elite paths. Static,
+dynamic, fixed 50/50 mix, local count-gated mix beta(s)=.5*n(s)/(n(s)+5), and
+unbounded-gate ablation are compared. Publish once per 10 completed episodes,
+limit per-state potential change to 1 environmental reward unit, except the
+explicit unbounded ablation. Freeze published state potential within episodes;
+initial potential is actually evaluated, endpoint potential is zero. The
+telescoping identity is checked on every completed trajectory. Failed or
+incomplete trajectories do not become successful pheromone evidence.
+An unweighted Monte Carlo control tests whether ant quality weighting helps.
+
+Related-work transferred baselines: normalized absolute velocity, and +1
+shifted velocity (MountainCar); negative Manhattan potential on grids. These
+transfer heuristics into our SARSA backbone; they do not reproduce the 2025
+paper's DQN, exponential potential, hyperparameters, or published task budget.
+
+Discovery seeds 30000-30007 only. Final selection is written to SELECTION.txt
+before confirmation seeds 31000+ are run. Confirm 40 MountainCar seeds and
+at least 20 per grid if a discovery candidate merits it. If discovery is
+negative, report it and still confirm a bounded representative candidate, not
+silently abandon difficult environments. No changes after seeing holdout.
+Report full methods, failures, means, success, learning-curve AUC, paired
+bootstrap 95% intervals (20000 resamples, deterministic), and paired two-sided
+permutation p-values with Holm correction for the declared primary comparisons.
+Primary final comparisons: proposal versus static, dynamic, fixed mixture,
+plain, and unweighted MC, jointly across the four scenarios. A gain over a poor
+baseline alone is not a gain over ordinary SARSA. Evaluation trajectories are
+never used for potential updates or hyperparameter selection.
+
+All costs, raw per-seed results, models, source hashes and failed discovery
+variants are retained. CPU wall seconds are reported separately from samples;
+parallel timings on this machine cannot be ranked against paper seconds.

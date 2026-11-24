@@ -1,0 +1,31 @@
+来源与归属
+==========
+1. 2019年论文
+   Stefano Bromuri. Dynamic heuristic acceleration of linearly approximated SARSA(lambda):
+   using ant colony optimization to learn heuristics dynamically.
+   https://doi.org/10.1007/s10732-019-09408-x
+   作者仓库：https://github.com/SB-BISS/RLACOSarsaLambda
+   固定提交：95786b39b9ee8c5e004e71ccfa790304cbb3f684
+   选定源文件快照在workspace/project_2_8_research/author_code/RLACOSarsaLambda_95786b39。
+   它不是完整checkout；可运行的兼容副本另在paper_author和author_port。
+
+2. 历史环境和tilecoding
+   Gym v0.10.5：https://github.com/openai/gym/tree/v0.10.5
+   Tilecoding：https://github.com/gehring/tilecoding
+   上游文件、许可证与兼容改动见workspace/paper_static_replication_20261120/upstream。
+
+3. PBRS与相关工作
+   Ng et al. 1999：https://people.eecs.berkeley.edu/~russell/papers/icml99-shaping.pdf
+   Wiewiora 2003：https://arxiv.org/abs/1106.5267
+   Devlin and Kudenko 2012：https://eprints.whiterose.ac.uk/id/eprint/75121/2/p433_devlin.pdf
+   van Seijen and Sutton 2014：https://proceedings.mlr.press/v32/seijen14.html
+   Grzes 2017：https://www.ifaamas.org/Proceedings/aamas2017/pdfs/p565.pdf
+   Muller and Kudenko 2025：https://arxiv.org/abs/2502.01307
+   已存论文位于workspace/research_story_20261120/references，完整书目信息在论文中。
+
+4. 我们实现与测试的内容
+   源码兼容、资格迹修正、势函数边界处理、轨迹回报校准、静动态混合、
+   新状态势控制、统计与绘图工具，是在引用前人思想/代码基础上的实现与研究。
+   本包不把经典PBRS公式或MC估计称为我们的首次理论贡献。
+   代码和写作使用过AI辅助，数值对应可执行脚本、已冻结协议与保存记录。
+   作者身份与成员分工没有虚构，论文作者栏保持空白。

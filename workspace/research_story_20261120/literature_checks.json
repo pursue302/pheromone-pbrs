@@ -1,0 +1,24 @@
+{
+  "grzes2017_terminal_counterexample": {
+    "gamma": 0.99,
+    "original_action_values": [
+      0.0,
+      100.0
+    ],
+    "nonzero_terminal_shaped_values": [
+      990.0,
+      109.9
+    ],
+    "zero_terminal_shaped_values": [
+      0.0,
+      100.0
+    ],
+    "correct_preference_preserved": true
+  },
+  "wiewiora2003_tabular_identity": {
+    "transitions": 5000,
+    "identical_decisions": true,
+    "max_coordinate_error": 5.329070518200751e-15
+  },
+  "scope": "Exact small theoretical checks; not the full experiments or original author implementations."
+}

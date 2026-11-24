@@ -1,0 +1,50 @@
+Frozen before any fresh validation outcomes, 2026-11-20.
+
+Purpose: independently validate the previously post-hoc navigation finding;
+test whether removing action dependence or matching first two moments is
+sufficient; check a small prespecified shaping-strength range. The selected
+method and all old results remain unchanged. This is a follow-up study informed
+by the earlier study, not a retroactive re-registration of its hypotheses.
+
+Fresh training seeds 40000-40019 (20), U-detour/four-rooms/slippery-rooms.
+Each method gets 30000 real interactions, including the common 25% warm-up;
+cap 200, gamma .99, epsilon .025, alpha .1/10, lambda .9; identical features,
+action selection, RNG, checkpoints and original-reward evaluation as the
+frozen research_story_20261120/study_unbounded_controls.py engine.
+
+Ten methods: plain; raw_static; raw_dynamic; state_raw_static;
+state_raw_matched; return_static; return_gate_unbounded;
+mc_dynamic_all_unbounded; gate_scale003; gate_scale030.
+
+State-raw-static averages the released raw pheromone score over actions and
+then freezes this scalar state potential. State-raw-matched applies an affine
+transformation using mean and SD of the state-raw scores and calibrated static
+potentials ONLY on successfully observed warm-up states. No per-state target
+fitting or environment model is used; unseen states receive the same affine
+map. If fewer than two observed states or a zero SD occurs, publish a constant
+matching the observed calibrated mean (zero if none). Match first two moments,
+not the complete potential distribution. These controls do NOT isolate every
+normalization or memory component.
+
+The original selected gate uses scale .1. Two new arms use .03 and .3 with
+all other parameters unchanged. No best-scale selection after outcomes.
+Every original method retains its frozen implementation; do not fix or tune
+methods on these data.
+
+Primary family: selected gate vs raw_static and raw_dynamic in all three
+scenarios, six paired two-sided sign-flip tests, 20000 simulations, Holm .05.
+Also report paired bootstrap 95% mean-difference intervals. Seed is the unit.
+Secondary representation/strong-baseline family: gate vs state_raw_static,
+state_raw_matched, return_static, MC-all-unbounded and plain, 15 tests jointly.
+Sensitivity family: scale .03/.3 vs .1, six tests jointly. Report all means,
+SDs, successes, original discounted return and original-return learning AUC.
+Intervals are descriptive; use adjusted p-values for rejection decisions.
+
+The goal-preservation diagnostic is separate and uses exact finite-horizon
+dynamic programming on a deliberately small, fully known 5x7 grid, cap40,
+gamma .99, sparse +1 goal reward, and a distracting positive feature at (4,2).
+Compare no shaping, naive beta*h(next), and beta*(gamma*h(next)-h(current)),
+with actual terminal/truncation potential zero, at beta in
+[0,.01,.03,.05,.1,.3,1,3,10]. This verifies objective manipulation versus the
+PBRS wrapper; it is not a training-performance experiment, does not charge
+model backups as real samples, and is not evidence of our potential's accuracy.

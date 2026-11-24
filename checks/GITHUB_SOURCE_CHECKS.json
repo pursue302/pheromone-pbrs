@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "artifact_type": "source_repository",
+  "date": "2026-11-24",
+  "unit_checks": 11,
+  "smoke_steps": 6000,
+  "figure_pdfs": 4,
+  "frozen_source_sha256_matches": 88,
+  "original_learning_and_statistical_formulas_unchanged": true,
+  "offline_5180_training_records_and_models_not_in_git": true
+}

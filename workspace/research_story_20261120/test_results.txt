@@ -1,0 +1,10 @@
+test_canonical_dense_reference (test_study.Mechanics.test_canonical_dense_reference) ... ok
+test_dutch_implementations_differ (test_study.Mechanics.test_dutch_implementations_differ) ... ok
+test_one_trajectory_one_count (test_study.Mechanics.test_one_trajectory_one_count) ... ok
+test_source_dense_reference (test_study.Mechanics.test_source_dense_reference) ... ok
+test_state_layouts (test_study.Mechanics.test_state_layouts) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.358s
+
+OK

@@ -1,0 +1,50 @@
+from pathlib import Path
+import json,sys,collections,hashlib
+import numpy as np
+BASE=Path(__file__).resolve().parents[1]
+HERE=BASE/'workspace/paper_report_20261120';ROOT=BASE/'workspace'
+REPORT_OUT=Path(sys.argv[1]).resolve();REPORT_OUT.mkdir(parents=True,exist_ok=True)
+
+sys.path.insert(0,str(ROOT/'research_story_20261120'))
+from analyze import stats,paired,holm
+
+def main():
+    folder=Path(sys.argv[2]).resolve() if len(sys.argv)>2 else HERE/'experiments/fresh_nav'
+    manifest=json.loads((folder/'manifest.json').read_text())
+    assert manifest['status']=='complete'
+    assert manifest['source_sha256']==hashlib.sha256((HERE/'experiments/engine.py').read_bytes()).hexdigest()
+    rows=[json.loads(p.read_text()) for p in sorted((folder/'runs').glob('*.json'))]
+    seed_count=manifest['args']['seeds']
+    expected=seed_count*len(manifest['args']['scenarios'].split(','))*len(manifest['args']['methods'].split(','))
+    assert len(rows)==expected
+    groups=collections.defaultdict(list);prefix=collections.defaultdict(set);max_error=0.
+    for r in rows:
+        assert r['steps']==30000 and r['finite']
+        r['auc']=float(np.trapezoid([z['original_return'] for z in r['records']],[z['step'] for z in r['records']])/r['steps'])
+        groups[r['scenario'],r['method']].append(r);prefix[r['scenario'],r['seed']].add(r['prefix_hash'])
+        max_error=max(max_error,r['max_telescoping_error'])
+    assert all(len(x)==1 for x in prefix.values()) and max_error<1e-7
+    summary={}
+    for (k,m),rr in groups.items():
+        assert len(rr)==seed_count
+        summary.setdefault(k,{})[m]={z:stats([r['final'][z] for r in rr]) for z in ['original_return','original_discounted_return','success_rate']}
+        summary[k][m]['auc']=stats([r['auc'] for r in rr])
+    families={}
+    for name,controls in [('primary',['raw_static','raw_dynamic']),
+        ('representation',['state_raw_static','state_raw_matched','return_static','mc_dynamic_all_unbounded','plain']),
+        ('strength',['gate_scale003','gate_scale030'])]:
+        tests=[]
+        for k in sorted(summary):
+            x={r['seed']:r['final']['original_return'] for r in groups[k,'return_gate_unbounded']}
+            for b in controls:
+                tests.append(dict(scenario=k,a='return_gate_unbounded',b=b,**paired(x,{r['seed']:r['final']['original_return'] for r in groups[k,b]})))
+        families[name]=holm(tests)
+    out=dict(summary=summary,tests=families,runs=len(rows),steps=sum(r['steps'] for r in rows),warmup_identical=True,max_telescoping_error=max_error,
+        interpretation='New validation family fixed before these outcomes; old primary failures remain unchanged.')
+    if folder.resolve()!=(HERE/'experiments/fresh_nav').resolve():
+        out['interpretation']='User-selected rerun; statistical interpretation depends on its protocol and independent seed count.'
+    (REPORT_OUT/'validation_summary.json').write_text(json.dumps(out,indent=2),encoding='utf8')
+    print(json.dumps(dict(means={k:{m:round(v['original_return']['mean'],3) for m,v in z.items()} for k,z in summary.items()},
+        tests={f:[(t['scenario'],t['b'],round(t['difference'],3),round(t['p_holm'],4)) for t in z] for f,z in families.items()}),indent=2))
+
+if __name__=='__main__':main()

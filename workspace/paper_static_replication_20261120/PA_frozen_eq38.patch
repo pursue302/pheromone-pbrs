@@ -1,0 +1,20 @@
+--- author_PA.py
++++ pa_frozen_eq38.py
+@@ -268,7 +268,7 @@
+                 index_future = self.tile_coder[ap].__call__(sp)
+              
+                 #if the concentration of pheromone is bigger ?
+-                shaping = (self.gamma*potential- old_potential)/self.num_tiling
++                shaping = self.rho*potential - old_potential
+                 #print shaping
+                  
+                 #same indices, different weights
+@@ -301,7 +301,7 @@
+                 
+                 #print np.sum((1-self.rho)*self.pheromone_trace[ap,index_future])#/self.num_tiling
+                 
+-                if self.heuristic_activate:
++                if self.heuristic_activate and self.heuristic_dynamic:
+                     #Reasoning at the transition level, we have to take present, past and future
+                     pher_past_value= np.sum(self.pheromone_trace[aold,index_past])
+                     pher_present_value=np.sum(self.pheromone_trace[a,index_present])#

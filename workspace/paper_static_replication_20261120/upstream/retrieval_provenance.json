@@ -1,0 +1,42 @@
+[
+  {
+    "path": "upstream\\PlotResults.py",
+    "sha": "1865baca663293e5e89758ce4a98f17a708d5003",
+    "url": "https://github.com/SB-BISS/RLACOSarsaLambda/blob/95786b39b9ee8c5e004e71ccfa790304cbb3f684/PlotResults.py"
+  },
+  {
+    "path": "upstream\\PlotResultsM3D.py",
+    "sha": "c95b6e97231c5ba4ffe476c058655e86a62e2249",
+    "url": "https://github.com/SB-BISS/RLACOSarsaLambda/blob/95786b39b9ee8c5e004e71ccfa790304cbb3f684/PlotResultsM3D.py"
+  },
+  {
+    "path": "upstream\\mc_model.py",
+    "sha": "53a8027051bd0a7bab5b4b1a0c1fda6ca5b5bdb9",
+    "url": "https://github.com/SB-BISS/RLACOSarsaLambda/blob/95786b39b9ee8c5e004e71ccfa790304cbb3f684/model/mc_model.py"
+  },
+  {
+    "path": "upstream\\gym_v0105_mountain_car.py",
+    "sha": "cdf89d50c71314b322ed359b465e9b6527d4f944",
+    "url": "https://github.com/openai/gym/blob/v0.10.5/gym/envs/classic_control/mountain_car.py"
+  },
+  {
+    "path": "upstream\\gym_v0105_seeding.py",
+    "sha": "39fe34227177594b9d7e0bac729d59176b8ab09e",
+    "url": "https://github.com/openai/gym/blob/v0.10.5/gym/utils/seeding.py"
+  },
+  {
+    "path": "upstream\\gym_v0105_box.py",
+    "sha": "f3ff2c73fa61509097c6242b2a514946ce26a41c",
+    "url": "https://github.com/openai/gym/blob/v0.10.5/gym/spaces/box.py"
+  },
+  {
+    "path": "upstream\\gym_v0105_discrete.py",
+    "sha": "85d9b3b37c55755921c6d47eb11a1445c4108b6c",
+    "url": "https://github.com/openai/gym/blob/v0.10.5/gym/spaces/discrete.py"
+  },
+  {
+    "path": "upstream\\gym_v0105_prng.py",
+    "sha": "ffca6805622c888ee93ba5b0e912b50f5f7b505e",
+    "url": "https://github.com/openai/gym/blob/v0.10.5/gym/spaces/prng.py"
+  }
+]

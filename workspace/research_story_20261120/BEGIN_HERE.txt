@@ -1,0 +1,29 @@
+先看“完整研究总结.html”。这是本次研究叙事、全部结果表、论文对照和解释边界。
+
+核心证据分为三层：
+1. 作者完整learn()只加每回合资格迹清空，即明显改善最终原始回报。这项已做100种子直接验证。
+2. 新的回报校准状态势＋局部计数混合，在三类网格中优于直接使用原始信息素浓度的静态／动态控制；该组是探索性比较。
+3. 混合门控是否优于经过同样校准的单独方法，主要检验尚未确认；不能把第1层或第2层收益写成第3层已被证明。
+
+“完整研究总结.txt”为可复制文字版。
+analysis.json 为完整统计，AUDIT.json 核验3660次新增训练、预算、源码和模型。
+evidence_tables.csv 为最终结果导出，UTF-8 with BOM。
+references/内有4篇已存论文；2019论文及全部其他文献的官方链接见literature.json及报告。
+
+在Windows上将交付zip解压到同一目录，保留各顶层目录的相对位置。
+Python需要numpy、scipy、numba、matplotlib、six；新算法用历史Gym兼容层，原课程GridWorld也已附带。
+从解压根目录执行：
+python -m unittest discover -s research_story_20261120 -p test_study.py -v
+python research_story_20261120/literature_checks.py
+python research_story_20261120/audit.py
+python research_story_20261120/analyze.py
+python research_story_20261120/build_report.py
+
+训练重跑示例（--out必须换新名字，旧结果禁止覆盖）：
+python research_story_20261120/study.py repair --seeds 100 --start 20000 --out repair_repeat
+python research_story_20261120/study.py confirm --seeds 80 --start 31000 --scenarios mountain_car --out confirm_mc_repeat
+
+作者原始代码和许可证：project_2_8_research/author_code/RLACOSarsaLambda_95786b39。
+可运行兼容层：paper_static_replication_20261120/paper_author与gym_legacy。
+本交付包带上本报告所需的作者对照300次结果、静态先验及源码依赖；之前920次完整论文复现尝试仍在另一个paper_static_replication_20261120.zip。
+我们的信息素文件与实验模型均为本机重新生成，不是原作者发布的模型或官方实验产物。

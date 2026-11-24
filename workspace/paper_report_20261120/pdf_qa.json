@@ -1,0 +1,14 @@
+{
+  "pages": 8,
+  "main_text_pages": 7,
+  "references_pages": 1,
+  "abstract_words": 185,
+  "figure_captions": 4,
+  "references": 10,
+  "unresolved_reference_markers": false,
+  "out_of_page_characters": [],
+  "author_field_blank": true,
+  "final_path": "E:\\homework\\462\\output\\pdf\\pheromone_shaping_report.pdf",
+  "pdf_sha256": "567603890cd20839bbc5d707ed2c6e5248de5f0a7bd75f8eef62ec7405ca0fc3",
+  "note": "All eight pages were also rendered and visually inspected; checks alone do not establish content validity."
+}

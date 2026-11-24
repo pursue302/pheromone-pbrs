@@ -1,0 +1,59 @@
+--- research_story_20261120\study_unbounded_controls.py
++++ paper_report_20261120/experiments/engine.py
+@@ -9,11 +9,11 @@
+ for k in ('OMP_NUM_THREADS','MKL_NUM_THREADS','OPENBLAS_NUM_THREADS'):os.environ.setdefault(k,'1')
+ import sys, json, time, hashlib, argparse, copy
+ from concurrent.futures import ProcessPoolExecutor, as_completed
+-from dataclasses import dataclass, asdict
++from dataclasses import dataclass, asdict, replace
+ import numpy as np
+ from numba import njit
+ 
+-HERE=Path(__file__).resolve().parent;ROOT=HERE.parent
++HERE=Path(__file__).resolve().parent;ROOT=HERE.parents[1]
+ sys.path.insert(0,str(ROOT/'paper_static_replication_20261120'))
+ import run_replication as paper
+ old=paper.numeric
+@@ -147,7 +147,10 @@
+ def run_group(args):
+     out,key,seed,methods,cfg=args;began=time.perf_counter()
+     results=[]
+-    for method in methods:
++    initial_cfg=cfg
++    for tag in methods:
++        method='return_gate_unbounded' if tag.startswith('gate_scale') else tag
++        cfg=replace(initial_cfg,scale={'gate_scale003':.03,'gate_scale030':.3}.get(tag,initial_cfg.scale))
+         env=environment(key,seed+451,cfg)
+         agent=old.create_agent(env,seed,cfg);features=old.Features(agent,env)
+         agent.tile_coder={a:old.FastCoder(features,a) for a in range(env.actions.n)}
+@@ -209,6 +212,15 @@
+                     if anchor is None and step>=warmup:
+                         anchor=copy.deepcopy(memory);anchor_tau=agent.pheromone_trace.copy()
+                         anchor_phi=cfg.scale*anchor.mean(default);phi=anchor_phi.copy()
++                        if method in ('state_raw_static','state_raw_matched'):
++                            profile=np.array([old.values(anchor_tau,features(x)).mean()/10 for x in env.observations])
++                            if method=='state_raw_matched':
++                                seen=anchor.count>0
++                                if seen.sum()>=2 and profile[seen].std()>1e-12:
++                                    profile=anchor_phi[seen].mean()+(profile-profile[seen].mean())*anchor_phi[seen].std()/profile[seen].std()
++                                else:profile=np.full_like(profile,anchor_phi[seen].mean() if seen.any() else 0.)
++                            phi=profile.copy()
++
+                         # Pure dynamic starts without an offline memory.
+                         if method in ('return_dynamic','mc_dynamic'):phi=cfg.scale*online.mean(default)
+                         lastpub=ep
+@@ -229,11 +241,11 @@
+                 if step%5000==0 or step==budget:check()
+                 if done or step==budget:break
+         assert error<1e-7 and np.isfinite(w).all()
+-        result=dict(method=method,scenario=key,seed=seed,config=asdict(cfg),steps=step,warmup_steps=episodes[next(i for i,x in enumerate(episodes) if x['end']>=warmup)]['end'],
++        result=dict(method=tag,scenario=key,seed=seed,config=asdict(cfg),steps=step,warmup_steps=episodes[next(i for i,x in enumerate(episodes) if x['end']>=warmup)]['end'],
+             prefix_hash=prefix.hexdigest(),episodes=episodes,records=records,final=records[-1],finite=True,
+             max_telescoping_error=error,potential_drift=phi_drift,publications=publications,rms_shaping=float(np.sqrt(shaping2/budget)))
+-        save(out,key+'__'+method,seed,result,dict(weights=w,phi=phi,anchor_phi=anchor_phi,online_count=online.count))
+-        results.append(dict(method=method,steps=step,final=result['final']))
++        save(out,key+'__'+tag,seed,result,dict(weights=w,phi=phi,anchor_phi=anchor_phi,online_count=online.count))
++        results.append(dict(method=tag,steps=step,final=result['final']))
+     return dict(scenario=key,seed=seed,results=results,seconds=time.perf_counter()-began)
+ 
+ def save(out,method,seed,result,arrays):

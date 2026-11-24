@@ -1,0 +1,10 @@
+{
+  "proposal": "return_gate_unbounded",
+  "secondary_candidate": "raw_mix",
+  "selected_using": "Only discovery seeds 30000-30007, never confirmation seeds",
+  "rationale": "Unbounded count-gated return calibration averaged -164.15 on discovery MountainCar, versus static -206.39, dynamic -181.58, fixed return mixture -213.33 and plain -222.87. It also avoided the conspicuous raw-pheromone failures in grids. Limiting potential changes to 1 performed worse (-272.01), so the bounded alternative remains a negative ablation, not the selected proposal. Raw 50/50 mixing is a simpler secondary hypothesis (-163.87 on discovery MC), but performed badly in obstacle grids.",
+  "confirmation": {"mountain_car_seeds": 80, "grid_seeds_each": 30, "seed_start": 31000},
+  "primary_family": "20 comparisons: selected proposal against return_static, return_dynamic, return_mix, plain and mc_dynamic, in each of four scenarios. Holm-adjust all 20 together.",
+  "secondary_family": "8 comparisons: raw_mix against raw_static and raw_dynamic in four scenarios. Mark secondary, adjust all 8, report alongside primary failures.",
+  "code_change_after_discovery": "study_v1.py preserves exact discovery source. study.py explicitly sets dtype=float in Memory.mean output buffer. All experimental defaults passed a floating-point default already, so no learning behavior changes; integer helper inputs now work. Five mechanics tests pass. No algorithm or hyperparameter changed."
+}

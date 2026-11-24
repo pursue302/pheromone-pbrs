@@ -1,0 +1,38 @@
+--- experiment.py
++++ experiment_state.py
+@@ -369,7 +369,7 @@
+         traces.fill(0.0)  # Common fix: upstream TrueOnline carries traces across episodes.
+         old_q = 0.0
+         action, indices, q, pher, bonus = decision(obs)
+-        old_potential = pher[action] / agent.num_tiling
++        old_potential = pher.mean() / agent.num_tiling
+         initial_potential = old_potential
+         trajectory = {}
+         past_indices = indices[action].copy()
+@@ -384,7 +384,7 @@
+                 'state': obs.copy(), 'action': action, 'time': t}
+             next_obs, reward, done, _ = env.step(action)
+             ap, next_indices, next_q, next_pher, next_bonus = decision(next_obs)
+-            potential = 0.0 if done else next_pher[ap] / agent.num_tiling
++            potential = 0.0 if done else next_pher.mean() / agent.num_tiling
+             shaping = env.gamma * potential - old_potential
+             future_value = 0.0 if done else next_q[ap]
+             present_value = q[action]
+@@ -448,7 +448,7 @@
+ 
+ 
+ def source_hashes():
+-    sources = [HERE / 'experiment.py', HERE / 'build_port.py']
++    sources = [HERE / 'experiment_state.py', HERE / 'make_state_variant.py', HERE / 'build_port.py']
+     sources += sorted((HERE / 'author_port').glob('*.py'))
+     return {str(p.relative_to(HERE)): hashlib.sha256(p.read_bytes()).hexdigest() for p in sources}
+ 
+@@ -485,7 +485,7 @@
+     manifest = dict(config=asdict(cfg), methods=args.methods, scenarios=args.scenarios,
+                     python=platform.python_version(), numpy=np.__version__, source_hashes=source_hashes(),
+                     author_repository='https://github.com/SB-BISS/RLACOSarsaLambda',
+-                    author_commit='95786b39b9ee8c5e004e71ccfa790304cbb3f684',
++                    potential_variant='state_mean', author_commit='95786b39b9ee8c5e004e71ccfa790304cbb3f684',
+                     tilecoding_commit='3fd90d31539e92d229996f48c4227ef5ea4663f6',
+                     status='running')
+     manifest_path = out / 'manifest.json'

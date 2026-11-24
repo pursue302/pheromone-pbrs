@@ -1,0 +1,27 @@
+--- offline-package/run.py
++++ source-repository/run.py
+@@ -82,6 +82,13 @@
+             if hashlib.sha256(path.read_bytes()).hexdigest() != record['sha256']:
+                 errors.append('Hash changed: ' + relative)
+         checked += 1
++    if manifest.get('artifact_type') == 'source_repository':
++        if errors:
++            raise RuntimeError('\n'.join(errors[:30]))
++        print(json.dumps(dict(status='verified',files=checked,
++            mode='fast' if args.fast else 'full_sha256',artifact_type='source_repository',
++            note='Frozen raw training records and models are distributed separately.'),indent=2))
++        return
+     inventory = read_json(ROOT / 'docs/INVENTORY.json')
+     counts = {
+         'author_replication_students': len(list((WORKSPACE / 'paper_static_replication_20261120/results/runs').glob('*.json'))),
+@@ -235,6 +242,10 @@
+         input_folder = input_folder.resolve()
+         if not (input_folder / 'manifest.json').is_file():
+             raise ValueError('Input must contain a completed experiment manifest.json')
++    if input_folder is None and read_json(ROOT / 'MANIFEST.json').get('artifact_type') == 'source_repository':
++        raise RuntimeError('Frozen raw records are distributed in the offline evidence archive. '
++            'For new runs use analyze fresh/source --input runs/<name>; '
++            'or restore the offline evidence before recomputing its statistics.')
+     if args.dataset == 'all':
+         for dataset in ['fresh','controlled','source']:
+             run_logged([sys.executable,ROOT / 'run.py','analyze',dataset,'--out',out / dataset],out / ('log_' + dataset))

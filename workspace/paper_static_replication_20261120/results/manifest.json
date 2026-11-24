@@ -1,0 +1,62 @@
+{
+  "status": "complete",
+  "smoke": false,
+  "source_hashes": {
+    "author_metrics.py": "a7348258291b9da13bd4ccdfe89d386406823fc7ea6cd95a6046dbd8af6868aa",
+    "gym_legacy\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gym_legacy\\compat.py": "73f36cd978b4f6b8853f33a5584d4ec8292bbd6b05c2877b2243e5ce43a6db35",
+    "gym_legacy\\error.py": "db61223cb6a4df27064bf69c1bc289e2e7f8a57a9d787f416f0766a69f22009a",
+    "gym_legacy\\mountain_car.py": "4b9cc4baf6e7c055023d799e2f5ebb5d23c7a0a3653958e03cf32629d74865c4",
+    "gym_legacy\\seeding.py": "39d7bc27fe29ad6580f10a764599a49a512e20ad92ef993c1ff98cfce2a85b40",
+    "paper_author\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "paper_author\\ApproximatedSarsaLambdaAgent.py": "e6e80f8e1b588efd2f3ef7f4c6f9e8be80e96144fc1ae3cb981f0a086b120fb5",
+    "paper_author\\HAApproximatedSarsaLambdaAgent.py": "0cc4c3df7ed99c8d962b85563f74d445bf753b10230b21e91f498e8d2c320965",
+    "paper_author\\pa_frozen.py": "6fefe49f04a406b9b0ffabb4c218ecea13f8013992b294495d90a757a8ab7df2",
+    "paper_author\\pa_frozen_eq38.py": "9ec5efd6819734c201e27ed716de5bca8cbe3c44fbf75e8fbabb3dc0dac8b62e",
+    "paper_author\\pa_source.py": "6dc2a2d556b2f61077be673c080c2647231c10eaac2fe094cde8c6d5ef897262",
+    "paper_author\\pa_source_eq38.py": "39db4c97b774e0f597454be0c328926b53ba4195f3782a9bc4a2273a6ebcd931",
+    "paper_author\\representation.py": "053075c9d3785102022f8d5fb55b4a60cc4293dac7ec7cdba2944c768fdff170",
+    "PROTOCOL.txt": "a6aef2f8b56e06ea4e60ff77b15c2acbc202d31019877d9286444c1e3945f008",
+    "run_replication.py": "faa8ccd7fdad074532be19afc794f745f0c002c3576920cb23fbf8f2c6790e1d",
+    "..\\pheromone_feedback_2019\\experiment.py": "d14e83317edb329692d57d25a92299f04fd40386dc1dde3e35f170091e471d19"
+  },
+  "workers": 8,
+  "author_commit": "95786b39b9ee8c5e004e71ccfa790304cbb3f684",
+  "episodes": 200,
+  "student_runs": 920,
+  "seed_counts": {
+    "main": 100,
+    "prior": 30,
+    "sensitivity": 20
+  },
+  "teacher_results": [
+    {
+      "bank": "historical_A",
+      "episodes": 1000,
+      "steps": 111259,
+      "stable": true
+    },
+    {
+      "bank": "historical_B",
+      "episodes": 1000,
+      "steps": 114426,
+      "stable": true
+    },
+    {
+      "bank": "historical_C",
+      "episodes": 1000,
+      "steps": 115362,
+      "stable": true
+    },
+    {
+      "bank": "paper_text_A",
+      "episodes": 1000,
+      "steps": 116190,
+      "stable": true
+    }
+  ],
+  "physical_teacher_steps": 457237,
+  "physical_student_steps": 32776302,
+  "all_finite": true,
+  "elapsed_seconds": 1721.1562260999344
+}

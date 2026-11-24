@@ -1,0 +1,1115 @@
+{
+  "summary": {
+    "four_rooms": {
+      "gate_scale003": {
+        "original_return": {
+          "mean": -16.1,
+          "sd": 1.651155894963793,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -14.928720459720651,
+          "sd": 1.39405780989929,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "auc": {
+          "mean": -33.16666666666666,
+          "sd": 6.764090772351313,
+          "n": 20
+        }
+      },
+      "gate_scale030": {
+        "original_return": {
+          "mean": -16.3,
+          "sd": 1.7501879598308414,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -15.098169113749162,
+          "sd": 1.4779263254702868,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "auc": {
+          "mean": -36.3,
+          "sd": 11.08079050107234,
+          "n": 20
+        }
+      },
+      "mc_dynamic_all_unbounded": {
+        "original_return": {
+          "mean": -15.9,
+          "sd": 1.2096106376585989,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -14.76264383390731,
+          "sd": 1.0305578982486447,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "auc": {
+          "mean": -33.25,
+          "sd": 6.748619092015995,
+          "n": 20
+        }
+      },
+      "plain": {
+        "original_return": {
+          "mean": -15.9,
+          "sd": 1.2096106376585989,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -14.76264383390731,
+          "sd": 1.0305578982486447,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "auc": {
+          "mean": -34.74166666666667,
+          "sd": 9.678527961873744,
+          "n": 20
+        }
+      },
+      "raw_dynamic": {
+        "original_return": {
+          "mean": -80.75,
+          "sd": 89.79560122856799,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -40.25259352099657,
+          "sd": 34.92468547993453,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 0.65,
+          "sd": 0.4893604849295929,
+          "n": 20
+        },
+        "auc": {
+          "mean": -70.72916666666667,
+          "sd": 35.31366213219941,
+          "n": 20
+        }
+      },
+      "raw_static": {
+        "original_return": {
+          "mean": -71.6,
+          "sd": 86.25384812163149,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -36.71108085322044,
+          "sd": 33.53289167419324,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 0.7,
+          "sd": 0.4701623459816272,
+          "n": 20
+        },
+        "auc": {
+          "mean": -68.55833333333334,
+          "sd": 36.82793581949912,
+          "n": 20
+        }
+      },
+      "return_gate_unbounded": {
+        "original_return": {
+          "mean": -15.8,
+          "sd": 1.1964860832322375,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -14.677068027620502,
+          "sd": 1.0191255191504434,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "auc": {
+          "mean": -33.20833333333333,
+          "sd": 6.74902527075304,
+          "n": 20
+        }
+      },
+      "return_static": {
+        "original_return": {
+          "mean": -25.05,
+          "sd": 41.19590551958953,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -18.30746142653713,
+          "sd": 16.106345193336164,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 0.95,
+          "sd": 0.22360679774997896,
+          "n": 20
+        },
+        "auc": {
+          "mean": -35.50416666666667,
+          "sd": 9.771717266342357,
+          "n": 20
+        }
+      },
+      "state_raw_matched": {
+        "original_return": {
+          "mean": -15.4,
+          "sd": 0.8207826816681233,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -14.336467761018378,
+          "sd": 0.7023913976999822,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "auc": {
+          "mean": -32.975,
+          "sd": 6.772898133207602,
+          "n": 20
+        }
+      },
+      "state_raw_static": {
+        "original_return": {
+          "mean": -15.6,
+          "sd": 0.9403246919632545,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -14.507619373591993,
+          "sd": 0.8046904368615,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "auc": {
+          "mean": -33.141666666666666,
+          "sd": 6.752576939334896,
+          "n": 20
+        }
+      }
+    },
+    "slippery_rooms": {
+      "gate_scale003": {
+        "original_return": {
+          "mean": -29.355,
+          "sd": 40.18463276585112,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -21.858334021530744,
+          "sd": 15.271613162071397,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 0.95,
+          "sd": 0.22360679774997902,
+          "n": 20
+        },
+        "auc": {
+          "mean": -42.82208333333334,
+          "sd": 11.804836509750139,
+          "n": 20
+        }
+      },
+      "gate_scale030": {
+        "original_return": {
+          "mean": -21.785000000000004,
+          "sd": 5.056108863751379,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -19.454414758287932,
+          "sd": 3.58853343406005,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "auc": {
+          "mean": -41.43875,
+          "sd": 9.704085933692031,
+          "n": 20
+        }
+      },
+      "mc_dynamic_all_unbounded": {
+        "original_return": {
+          "mean": -27.285000000000004,
+          "sd": 30.33154125224833,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -21.302645142854924,
+          "sd": 12.62150233072329,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 0.9724999999999999,
+          "sd": 0.12298373876248846,
+          "n": 20
+        },
+        "auc": {
+          "mean": -41.67666666666666,
+          "sd": 9.40979997270483,
+          "n": 20
+        }
+      },
+      "plain": {
+        "original_return": {
+          "mean": -22.490000000000002,
+          "sd": 6.127539215876571,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -19.97080413516513,
+          "sd": 4.257143320509495,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "auc": {
+          "mean": -41.795833333333334,
+          "sd": 9.349208968320973,
+          "n": 20
+        }
+      },
+      "raw_dynamic": {
+        "original_return": {
+          "mean": -44.067499999999995,
+          "sd": 54.499336729426055,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -28.938943401078927,
+          "sd": 20.807975673617268,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 0.8949999999999999,
+          "sd": 0.3064654183290163,
+          "n": 20
+        },
+        "auc": {
+          "mean": -49.712708333333325,
+          "sd": 14.021059145166822,
+          "n": 20
+        }
+      },
+      "raw_static": {
+        "original_return": {
+          "mean": -27.2725,
+          "sd": 13.36194985574218,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -22.881495445349397,
+          "sd": 6.731706608262376,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 0.9925,
+          "sd": 0.033541019662496854,
+          "n": 20
+        },
+        "auc": {
+          "mean": -44.546041666666675,
+          "sd": 11.434984222645394,
+          "n": 20
+        }
+      },
+      "return_gate_unbounded": {
+        "original_return": {
+          "mean": -27.4475,
+          "sd": 30.338331126255376,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -21.245113851986726,
+          "sd": 11.64548142176053,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 0.9625,
+          "sd": 0.16770509831248426,
+          "n": 20
+        },
+        "auc": {
+          "mean": -41.84145833333334,
+          "sd": 9.46169113778129,
+          "n": 20
+        }
+      },
+      "return_static": {
+        "original_return": {
+          "mean": -27.132500000000004,
+          "sd": 30.39695827493964,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -21.029097874894962,
+          "sd": 11.674614790225458,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 0.9625,
+          "sd": 0.16770509831248426,
+          "n": 20
+        },
+        "auc": {
+          "mean": -41.551875,
+          "sd": 9.355266900383562,
+          "n": 20
+        }
+      },
+      "state_raw_matched": {
+        "original_return": {
+          "mean": -20.68,
+          "sd": 1.8253622567646821,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -18.590038688804803,
+          "sd": 1.2270013768471728,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "auc": {
+          "mean": -41.78791666666666,
+          "sd": 9.250751994484032,
+          "n": 20
+        }
+      },
+      "state_raw_static": {
+        "original_return": {
+          "mean": -20.580000000000002,
+          "sd": 1.637102703912584,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -18.6023786516368,
+          "sd": 1.2947187798365178,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "auc": {
+          "mean": -41.120000000000005,
+          "sd": 9.677641758197087,
+          "n": 20
+        }
+      }
+    },
+    "u_detour": {
+      "gate_scale003": {
+        "original_return": {
+          "mean": -17.2,
+          "sd": 2.3305748105067177,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -15.853193513411094,
+          "sd": 1.9479558091977074,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "auc": {
+          "mean": -33.333333333333336,
+          "sd": 2.472361846375891,
+          "n": 20
+        }
+      },
+      "gate_scale030": {
+        "original_return": {
+          "mean": -17.5,
+          "sd": 2.328315406378386,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -16.106515015181305,
+          "sd": 1.946878450615997,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "auc": {
+          "mean": -33.40833333333333,
+          "sd": 2.56065312848977,
+          "n": 20
+        }
+      },
+      "mc_dynamic_all_unbounded": {
+        "original_return": {
+          "mean": -17.1,
+          "sd": 2.1980852911951394,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -15.770989735339452,
+          "sd": 1.8385818871958532,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "auc": {
+          "mean": -33.34166666666667,
+          "sd": 2.4664266123114484,
+          "n": 20
+        }
+      },
+      "plain": {
+        "original_return": {
+          "mean": -17.0,
+          "sd": 2.051956704170308,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -15.688785957267811,
+          "sd": 1.71814104290245,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "auc": {
+          "mean": -33.25,
+          "sd": 2.3370897081827144,
+          "n": 20
+        }
+      },
+      "raw_dynamic": {
+        "original_return": {
+          "mean": -63.85,
+          "sd": 80.68344576833982,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -34.33230587622214,
+          "sd": 31.025134411542265,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 0.75,
+          "sd": 0.4442616583193193,
+          "n": 20
+        },
+        "auc": {
+          "mean": -64.85416666666666,
+          "sd": 33.33492183714983,
+          "n": 20
+        }
+      },
+      "raw_static": {
+        "original_return": {
+          "mean": -46.45,
+          "sd": 66.22487607029791,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -27.990982913323627,
+          "sd": 25.34201609044075,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 0.85,
+          "sd": 0.36634754853252327,
+          "n": 20
+        },
+        "auc": {
+          "mean": -66.57083333333334,
+          "sd": 29.946727493552604,
+          "n": 20
+        }
+      },
+      "return_gate_unbounded": {
+        "original_return": {
+          "mean": -17.1,
+          "sd": 2.1980852911951394,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -15.770989735339452,
+          "sd": 1.8385818871958532,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "auc": {
+          "mean": -33.30833333333334,
+          "sd": 2.420837296551395,
+          "n": 20
+        }
+      },
+      "return_static": {
+        "original_return": {
+          "mean": -17.2,
+          "sd": 2.3305748105067177,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -15.853193513411094,
+          "sd": 1.9479558091977074,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "auc": {
+          "mean": -33.333333333333336,
+          "sd": 2.394254819427305,
+          "n": 20
+        }
+      },
+      "state_raw_matched": {
+        "original_return": {
+          "mean": -16.8,
+          "sd": 1.9358120830939742,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -15.520973158422928,
+          "sd": 1.6294145306062497,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "auc": {
+          "mean": -32.93333333333333,
+          "sd": 2.1930912253727657,
+          "n": 20
+        }
+      },
+      "state_raw_static": {
+        "original_return": {
+          "mean": -16.9,
+          "sd": 2.1001253095445223,
+          "n": 20
+        },
+        "original_discounted_return": {
+          "mean": -15.603210150981004,
+          "sd": 1.7593832080291125,
+          "n": 20
+        },
+        "success_rate": {
+          "mean": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "auc": {
+          "mean": -33.108333333333334,
+          "sd": 2.2486350635714114,
+          "n": 20
+        }
+      }
+    }
+  },
+  "tests": {
+    "primary": [
+      {
+        "scenario": "four_rooms",
+        "a": "return_gate_unbounded",
+        "b": "raw_static",
+        "n": 20,
+        "difference": 55.8,
+        "ci95": [
+          19.1,
+          92.8
+        ],
+        "p": 0.008199590020498975,
+        "wins": 11,
+        "ties": 6,
+        "losses": 3,
+        "p_holm": 0.04099795010249488
+      },
+      {
+        "scenario": "four_rooms",
+        "a": "return_gate_unbounded",
+        "b": "raw_dynamic",
+        "n": 20,
+        "difference": 64.95,
+        "ci95": [
+          28.05,
+          102.05
+        ],
+        "p": 0.0038498075096245186,
+        "wins": 12,
+        "ties": 6,
+        "losses": 2,
+        "p_holm": 0.023098845057747112
+      },
+      {
+        "scenario": "slippery_rooms",
+        "a": "return_gate_unbounded",
+        "b": "raw_static",
+        "n": 20,
+        "difference": -0.17499999999999946,
+        "ci95": [
+          -16.700062499999998,
+          11.677562499999997
+        ],
+        "p": 0.999850007499625,
+        "wins": 14,
+        "ties": 0,
+        "losses": 6,
+        "p_holm": 0.999850007499625
+      },
+      {
+        "scenario": "slippery_rooms",
+        "a": "return_gate_unbounded",
+        "b": "raw_dynamic",
+        "n": 20,
+        "difference": 16.619999999999997,
+        "ci95": [
+          -6.235062500000001,
+          45.6711249999999
+        ],
+        "p": 0.2550872456377181,
+        "wins": 12,
+        "ties": 1,
+        "losses": 7,
+        "p_holm": 0.5101744912754362
+      },
+      {
+        "scenario": "u_detour",
+        "a": "return_gate_unbounded",
+        "b": "raw_static",
+        "n": 20,
+        "difference": 29.35,
+        "ci95": [
+          2.4,
+          57.8
+        ],
+        "p": 0.008699565021748913,
+        "wins": 13,
+        "ties": 4,
+        "losses": 3,
+        "p_holm": 0.04099795010249488
+      },
+      {
+        "scenario": "u_detour",
+        "a": "return_gate_unbounded",
+        "b": "raw_dynamic",
+        "n": 20,
+        "difference": 46.75,
+        "ci95": [
+          17.8,
+          83.35
+        ],
+        "p": 0.00919954002299885,
+        "wins": 13,
+        "ties": 5,
+        "losses": 2,
+        "p_holm": 0.04099795010249488
+      }
+    ],
+    "representation": [
+      {
+        "scenario": "four_rooms",
+        "a": "return_gate_unbounded",
+        "b": "state_raw_static",
+        "n": 20,
+        "difference": -0.2,
+        "ci95": [
+          -0.8,
+          0.3
+        ],
+        "p": 0.7468126593670317,
+        "wins": 2,
+        "ties": 15,
+        "losses": 3,
+        "p_holm": 1.0
+      },
+      {
+        "scenario": "four_rooms",
+        "a": "return_gate_unbounded",
+        "b": "state_raw_matched",
+        "n": 20,
+        "difference": -0.4,
+        "ci95": [
+          -1.0,
+          0.1
+        ],
+        "p": 0.3142342882855857,
+        "wins": 1,
+        "ties": 15,
+        "losses": 4,
+        "p_holm": 1.0
+      },
+      {
+        "scenario": "four_rooms",
+        "a": "return_gate_unbounded",
+        "b": "return_static",
+        "n": 20,
+        "difference": 9.25,
+        "ci95": [
+          0.0,
+          27.75
+        ],
+        "p": 1.0,
+        "wins": 1,
+        "ties": 19,
+        "losses": 0,
+        "p_holm": 1.0
+      },
+      {
+        "scenario": "four_rooms",
+        "a": "return_gate_unbounded",
+        "b": "mc_dynamic_all_unbounded",
+        "n": 20,
+        "difference": 0.1,
+        "ci95": [
+          0.0,
+          0.3
+        ],
+        "p": 1.0,
+        "wins": 1,
+        "ties": 19,
+        "losses": 0,
+        "p_holm": 1.0
+      },
+      {
+        "scenario": "four_rooms",
+        "a": "return_gate_unbounded",
+        "b": "plain",
+        "n": 20,
+        "difference": 0.1,
+        "ci95": [
+          -0.2,
+          0.4
+        ],
+        "p": 1.0,
+        "wins": 2,
+        "ties": 17,
+        "losses": 1,
+        "p_holm": 1.0
+      },
+      {
+        "scenario": "slippery_rooms",
+        "a": "return_gate_unbounded",
+        "b": "state_raw_static",
+        "n": 20,
+        "difference": -6.867500000000002,
+        "ci95": [
+          -20.7275,
+          0.31500000000000006
+        ],
+        "p": 0.4006299685015749,
+        "wins": 7,
+        "ties": 5,
+        "losses": 8,
+        "p_holm": 1.0
+      },
+      {
+        "scenario": "slippery_rooms",
+        "a": "return_gate_unbounded",
+        "b": "state_raw_matched",
+        "n": 20,
+        "difference": -6.767499999999998,
+        "ci95": [
+          -20.782625000000007,
+          0.6575624999999949
+        ],
+        "p": 0.5383730813459328,
+        "wins": 4,
+        "ties": 4,
+        "losses": 12,
+        "p_holm": 1.0
+      },
+      {
+        "scenario": "slippery_rooms",
+        "a": "return_gate_unbounded",
+        "b": "return_static",
+        "n": 20,
+        "difference": -0.3150000000000004,
+        "ci95": [
+          -0.8025000000000008,
+          0.07999999999999971
+        ],
+        "p": 0.22043897805109744,
+        "wins": 3,
+        "ties": 13,
+        "losses": 4,
+        "p_holm": 1.0
+      },
+      {
+        "scenario": "slippery_rooms",
+        "a": "return_gate_unbounded",
+        "b": "mc_dynamic_all_unbounded",
+        "n": 20,
+        "difference": -0.16250000000000125,
+        "ci95": [
+          -0.5025000000000011,
+          0.18749999999999947
+        ],
+        "p": 0.39163041847907604,
+        "wins": 4,
+        "ties": 6,
+        "losses": 10,
+        "p_holm": 1.0
+      },
+      {
+        "scenario": "slippery_rooms",
+        "a": "return_gate_unbounded",
+        "b": "plain",
+        "n": 20,
+        "difference": -4.9575000000000005,
+        "ci95": [
+          -19.902499999999996,
+          4.1049999999999995
+        ],
+        "p": 0.8158092095395231,
+        "wins": 4,
+        "ties": 10,
+        "losses": 6,
+        "p_holm": 1.0
+      },
+      {
+        "scenario": "u_detour",
+        "a": "return_gate_unbounded",
+        "b": "state_raw_static",
+        "n": 20,
+        "difference": -0.2,
+        "ci95": [
+          -0.5,
+          0.0
+        ],
+        "p": 0.5014749262536873,
+        "wins": 0,
+        "ties": 18,
+        "losses": 2,
+        "p_holm": 1.0
+      },
+      {
+        "scenario": "u_detour",
+        "a": "return_gate_unbounded",
+        "b": "state_raw_matched",
+        "n": 20,
+        "difference": -0.3,
+        "ci95": [
+          -0.8,
+          0.2
+        ],
+        "p": 0.44907754612269385,
+        "wins": 2,
+        "ties": 13,
+        "losses": 5,
+        "p_holm": 1.0
+      },
+      {
+        "scenario": "u_detour",
+        "a": "return_gate_unbounded",
+        "b": "return_static",
+        "n": 20,
+        "difference": 0.1,
+        "ci95": [
+          0.0,
+          0.3
+        ],
+        "p": 1.0,
+        "wins": 1,
+        "ties": 19,
+        "losses": 0,
+        "p_holm": 1.0
+      },
+      {
+        "scenario": "u_detour",
+        "a": "return_gate_unbounded",
+        "b": "mc_dynamic_all_unbounded",
+        "n": 20,
+        "difference": 0.0,
+        "ci95": [
+          -0.3,
+          0.3
+        ],
+        "p": 1.0,
+        "wins": 1,
+        "ties": 18,
+        "losses": 1,
+        "p_holm": 1.0
+      },
+      {
+        "scenario": "u_detour",
+        "a": "return_gate_unbounded",
+        "b": "plain",
+        "n": 20,
+        "difference": -0.1,
+        "ci95": [
+          -0.3,
+          0.0
+        ],
+        "p": 1.0,
+        "wins": 0,
+        "ties": 19,
+        "losses": 1,
+        "p_holm": 1.0
+      }
+    ],
+    "strength": [
+      {
+        "scenario": "four_rooms",
+        "a": "return_gate_unbounded",
+        "b": "gate_scale003",
+        "n": 20,
+        "difference": 0.3,
+        "ci95": [
+          -0.1,
+          0.8
+        ],
+        "p": 0.5000749962501875,
+        "wins": 3,
+        "ties": 16,
+        "losses": 1,
+        "p_holm": 1.0
+      },
+      {
+        "scenario": "four_rooms",
+        "a": "return_gate_unbounded",
+        "b": "gate_scale030",
+        "n": 20,
+        "difference": 0.5,
+        "ci95": [
+          -0.1,
+          1.2
+        ],
+        "p": 0.2505874706264687,
+        "wins": 4,
+        "ties": 15,
+        "losses": 1,
+        "p_holm": 1.0
+      },
+      {
+        "scenario": "slippery_rooms",
+        "a": "return_gate_unbounded",
+        "b": "gate_scale003",
+        "n": 20,
+        "difference": 1.9075000000000006,
+        "ci95": [
+          -20.3525,
+          26.310000000000002
+        ],
+        "p": 0.8849557522123894,
+        "wins": 5,
+        "ties": 8,
+        "losses": 7,
+        "p_holm": 1.0
+      },
+      {
+        "scenario": "slippery_rooms",
+        "a": "return_gate_unbounded",
+        "b": "gate_scale030",
+        "n": 20,
+        "difference": -5.662500000000001,
+        "ci95": [
+          -17.39,
+          0.48249999999999993
+        ],
+        "p": 0.5575221238938053,
+        "wins": 5,
+        "ties": 7,
+        "losses": 8,
+        "p_holm": 1.0
+      },
+      {
+        "scenario": "u_detour",
+        "a": "return_gate_unbounded",
+        "b": "gate_scale003",
+        "n": 20,
+        "difference": 0.1,
+        "ci95": [
+          0.0,
+          0.3
+        ],
+        "p": 1.0,
+        "wins": 1,
+        "ties": 19,
+        "losses": 0,
+        "p_holm": 1.0
+      },
+      {
+        "scenario": "u_detour",
+        "a": "return_gate_unbounded",
+        "b": "gate_scale030",
+        "n": 20,
+        "difference": 0.4,
+        "ci95": [
+          0.1,
+          0.8
+        ],
+        "p": 0.12169391530423479,
+        "wins": 4,
+        "ties": 16,
+        "losses": 0,
+        "p_holm": 0.7301634918254087
+      }
+    ]
+  },
+  "runs": 600,
+  "steps": 18000000,
+  "warmup_identical": true,
+  "max_telescoping_error": 1.1013412404281553e-13,
+  "interpretation": "New validation family fixed before these outcomes; old primary failures remain unchanged."
+}

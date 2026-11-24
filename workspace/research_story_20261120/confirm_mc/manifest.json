@@ -1,0 +1,34 @@
+{
+  "status": "complete",
+  "args": {
+    "phase": "confirm",
+    "seeds": 80,
+    "start": 31000,
+    "workers": 6,
+    "out": "confirm_mc",
+    "methods": "plain,raw_static,raw_dynamic,raw_mix,return_static,return_dynamic,return_mix,return_gate,return_gate_unbounded,mc_dynamic,velocity,velocity_shift",
+    "scenarios": "mountain_car",
+    "scale": 0.1,
+    "beta": 0.5,
+    "limit": 1.0
+  },
+  "config": {
+    "mc_steps": 60000,
+    "grid_steps": 30000,
+    "mc_cap": 1000,
+    "grid_cap": 200,
+    "evaluation_episodes": 20,
+    "epsilon": 0.025,
+    "rho": 0.99,
+    "warmup": 0.25,
+    "publish": 10,
+    "scale": 0.1,
+    "beta": 0.5,
+    "limit": 1.0,
+    "kappa": 5.0
+  },
+  "source_sha256": "80e1b50d06146dd7b264286db7d97339c025323110b53e189bb5baa36ab72313",
+  "jobs": 80,
+  "physical_steps": 57600000,
+  "elapsed_seconds": 588.5142965000123
+}

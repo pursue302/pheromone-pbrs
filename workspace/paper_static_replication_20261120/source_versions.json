@@ -1,0 +1,15 @@
+{
+  "author_commit": "95786b39b9ee8c5e004e71ccfa790304cbb3f684",
+  "hashes": {
+    "paper_author\\ApproximatedSarsaLambdaAgent.py": "e6e80f8e1b588efd2f3ef7f4c6f9e8be80e96144fc1ae3cb981f0a086b120fb5",
+    "paper_author\\HAApproximatedSarsaLambdaAgent.py": "0cc4c3df7ed99c8d962b85563f74d445bf753b10230b21e91f498e8d2c320965",
+    "paper_author\\LICENSE": "ede5215c9f19629266d5b2d1147ccf0f347f8a7618fc7c5a88ac9099748f28fa",
+    "paper_author\\pa_frozen.py": "6fefe49f04a406b9b0ffabb4c218ecea13f8013992b294495d90a757a8ab7df2",
+    "paper_author\\pa_frozen_eq38.py": "9ec5efd6819734c201e27ed716de5bca8cbe3c44fbf75e8fbabb3dc0dac8b62e",
+    "paper_author\\pa_source.py": "6dc2a2d556b2f61077be673c080c2647231c10eaac2fe094cde8c6d5ef897262",
+    "paper_author\\pa_source_eq38.py": "39db4c97b774e0f597454be0c328926b53ba4195f3782a9bc4a2273a6ebcd931",
+    "paper_author\\representation.py": "053075c9d3785102022f8d5fb55b4a60cc4293dac7ec7cdba2944c768fdff170",
+    "paper_author\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "changes": "Only Python3/import/tile-seed compatibility in original classes. Frozen adds one local dynamic guard. eq38 changes only the TrueOnline shaping expression. No trace, initial/terminal potential or success-invariant fixes."
+}

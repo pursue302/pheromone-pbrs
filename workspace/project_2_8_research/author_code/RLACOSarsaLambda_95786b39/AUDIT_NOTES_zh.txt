@@ -1,0 +1,51 @@
+2019 年蚁群信息素与 PBRS：源码核对记录
+核对日期：2026-11-18
+论文：Dynamic heuristic acceleration of linearly approximated SARSA(lambda): using ant colony optimization to learn heuristics dynamically
+DOI：https://doi.org/10.1007/s10732-019-09408-x
+作者仓库：https://github.com/SB-BISS/RLACOSarsaLambda
+固定版本：95786b39b9ee8c5e004e71ccfa790304cbb3f684
+
+范围与状态
+本目录保存 10 个核心源码/说明文件的选定快照，不是完整可运行的仓库。仅统一换行；未修改算法。SOURCE_PROVENANCE.json 记录来源。
+完成论文及源码静态核对，尚未移植 Python 2、安装旧 Gym/子模块或复现论文学习曲线。
+代码为该 2019 年论文作者公开的配套实现；不属于我们此前的独立 PBRS 复现，也不是 1999 年 PBRS 原论文的官方代码。
+
+源码事实（行号对应本目录快照）
+1. agents/PAApproximatedSarsaLambdaAgent.py：
+   79–80：backward 势评分为当前状态、动作对应的活跃 tile 信息素权重之和，不是仅依赖状态的 Phi(s)。
+   175：每回合 old_potential 初始化为 0。
+   205：Replacing 分支使用 rho * potential - old_potential。
+   273：TrueOnline 分支使用 (gamma * potential - old_potential)/num_tiling。
+   219、286：塑形量进入 SARSA 的 TD 误差。
+   229：Replacing 局部更新要求 heuristic_activate 与 heuristic_dynamic 同时为真。
+   306：TrueOnline 局部更新只判断 heuristic_activate，未判断 heuristic_dynamic。激活后仅关闭 dynamic 开关不能确保局部信息素冻结。
+   332：缓存 old_potential。不能忽略这一缓存而断言作者每步重新计算减项、必然破坏动态势的抵消。
+   340–348：回合结束后，动态启用时处理轨迹并强化信息素。
+   376–382：轨迹质量用 1/t，保留最好成功轨迹；并非一般任务的折扣剩余回报估计。
+   394：全局蒸发；416、441：给当前成功轨迹（相应条件下）和历史最佳轨迹增加信息素。
+   187、256：轨迹以状态动作字符串为字典键；同一键再次出现会覆盖之前记录。因此单轨迹内的精确重复已经部分去重，不能声称作者完全没有处理重复访问。tile 共享和跨轨迹频率仍是不同的问题。
+   216–217、280–281：done 时清零 future_value，未同时显式清零潜势。应用标准状态 PBRS 时需单独核对真正终止状态边界。
+2. Mountain_Car_Simulation.py：
+   7、78：引用/实例化 APHARSSarsaLambdaAgent，但该模块不在检索到的此版本递归文件树中。
+   85、87：读取 MountainCarPher.pkl 和 MountainCarTrace.pkl；这两个文件也不在此版本树中。
+   因而不能把找到作者代码说成已经可以直接运行并复现其表格。
+3. README.md：声明 Python 2.72、NumPy/SciPy/Gym/Pygame；完整复现还须处理旧依赖及子模块。
+
+论文实验结论的范围
+第 5.2 节比较动态信息素塑形和预先学好后固定的信息素塑形。表 7 中平均取得最佳解的迭代位置分别约 89 和 75，普通 SARSA 约 96.8；这不是“达到预设性能门槛”的时间，也不是普遍收敛速度定理。动态版本并非完全不能学习，不能把该实验解释为所有动态 PBRS 均无效。
+作者提出价值更新间接吸收信息素、跟进较慢的解释。这是作者对结果的解释，不足以单独认定因果。上述代码差异也只是复现检查点，未通过控制实验确定其对论文曲线的影响。
+
+我们对访问次数问题的分析
+PBRS 不会根据 tau 数值自动区分“高回报带来的高浓度”和“重复访问带来的高浓度”。固定势的差分抵消是一条轨迹回报的代数性质，不是访问次数归一化。
+数值核对：gamma=0.9，起点/终点势为 0；中间节点势为 100 时两步 F 为 90、-100，折扣和 0；势为 10 时为 9、-10，折扣和同样 0。两个节点仍向有限训练提供不同的局部 TD 信号。
+
+动态更新的正确区分
+训练期间随着新轨迹、逐步局部调整及蒸发而改变的是信息素/势函数；不要求地图或环境发生变化。
+动态 PBRS 的时间一致形式为 F_t = gamma * Phi(s_{t+1}, t+1) - Phi(s_t, t)，需让上一步加项使用的数值与下一步减项一致。用同一张新表重新计算两项不一定满足跨步抵消。
+依据：Devlin & Kudenko (2012), Dynamic Potential-Based Reward Shaping
+https://eprints.whiterose.ac.uk/id/eprint/75121/2/p433_devlin.pdf
+采用同一 gamma、有界势与适当终止边界；不能由回报恒等式直接保证有限样本算法更快收敛。
+
+建议的受控研究
+先保持任务、数据预算和原始奖励评价一致，对比真正冻结、每回合更新、每批轨迹更新、逐步更新。另做原始浓度与按回报/访问统计校正的势函数对比。动态强度和频率的效果应在多个场景、多种子下测量；暂不预断最优方案。
+

@@ -1,0 +1,1239 @@
+{
+  "summary": {
+    "main": {
+      "dynamic": {
+        "n": 100,
+        "ABS": {
+          "mean": 103.98,
+          "sd": 9.107639151234029,
+          "author_print_SEM": 0.9061986537178258
+        },
+        "AIBS": {
+          "mean": 81.57,
+          "sd": 46.28572985142168,
+          "author_print_SEM": 4.605371971947543
+        },
+        "ATBS": {
+          "mean": 7.216841727943392,
+          "sd": 3.2232809461838876,
+          "author_print_SEM": 0.32071240477181073
+        },
+        "ATST": {
+          "mean": 15.302451535926666,
+          "sd": 1.795840190427574,
+          "author_print_SEM": 0.17868384285265962
+        },
+        "actual_best_steps": 104.98,
+        "final_original_return": -920.0479999999999,
+        "final_success": 0.094,
+        "student_steps": 34029.28,
+        "donor_steps": 0.0,
+        "last20_training_return": -121.72149999999998
+      },
+      "dynamic_same_tiles": {
+        "n": 100,
+        "ABS": {
+          "mean": 100.78,
+          "sd": 9.384685569177222,
+          "author_print_SEM": 0.9337644242527127
+        },
+        "AIBS": {
+          "mean": 101.48,
+          "sd": 50.71080214851126,
+          "author_print_SEM": 5.04566110633681
+        },
+        "ATBS": {
+          "mean": 8.747043609974208,
+          "sd": 3.523678225392871,
+          "author_print_SEM": 0.3506015566672055
+        },
+        "ATST": {
+          "mean": 15.58836423298926,
+          "sd": 1.5076415278360011,
+          "author_print_SEM": 0.15000843798570515
+        },
+        "actual_best_steps": 101.78,
+        "final_original_return": -792.325,
+        "final_success": 0.24600000000000002,
+        "student_steps": 34284.87,
+        "donor_steps": 0.0,
+        "last20_training_return": -118.83500000000002
+      },
+      "sarsa": {
+        "n": 100,
+        "ABS": {
+          "mean": 101.87,
+          "sd": 7.376806404350919,
+          "author_print_SEM": 0.7339829698296821
+        },
+        "AIBS": {
+          "mean": 86.99,
+          "sd": 52.36227630458763,
+          "author_print_SEM": 5.2099807101370335
+        },
+        "ATBS": {
+          "mean": 3.660257069976069,
+          "sd": 2.033666503340119,
+          "author_print_SEM": 0.20234726220879665
+        },
+        "ATST": {
+          "mean": 8.053659132982139,
+          "sd": 0.8520992936541434,
+          "author_print_SEM": 0.08478280923532973
+        },
+        "actual_best_steps": 102.87,
+        "final_original_return": -885.8629999999998,
+        "final_success": 0.138,
+        "student_steps": 33116.4,
+        "donor_steps": 0.0,
+        "last20_training_return": -115.5165
+      },
+      "sarsa_same_tiles": {
+        "n": 100,
+        "ABS": {
+          "mean": 101.9,
+          "sd": 8.38167794970227,
+          "author_print_SEM": 0.8339664261827332
+        },
+        "AIBS": {
+          "mean": 99.3,
+          "sd": 49.601543638410405,
+          "author_print_SEM": 4.935291278131414
+        },
+        "ATBS": {
+          "mean": 4.123262608025689,
+          "sd": 2.022398513222431,
+          "author_print_SEM": 0.20122611134794255
+        },
+        "ATST": {
+          "mean": 8.280235283089569,
+          "sd": 0.8461149078347683,
+          "author_print_SEM": 0.084187370364422
+        },
+        "actual_best_steps": 102.9,
+        "final_original_return": -844.1820000000001,
+        "final_success": 0.19,
+        "student_steps": 34185.03,
+        "donor_steps": 0.0,
+        "last20_training_return": -120.3565
+      },
+      "static_200": {
+        "n": 100,
+        "ABS": {
+          "mean": 104.77,
+          "sd": 10.329769668978173,
+          "author_print_SEM": 1.027799104883829
+        },
+        "AIBS": {
+          "mean": 98.99,
+          "sd": 48.99628825356327,
+          "author_print_SEM": 4.87506912771501
+        },
+        "ATBS": {
+          "mean": 7.4945171389670575,
+          "sd": 3.040353677265109,
+          "author_print_SEM": 0.3025113713239699
+        },
+        "ATST": {
+          "mean": 13.972965362970717,
+          "sd": 1.3996777723163467,
+          "author_print_SEM": 0.13926617994521448
+        },
+        "actual_best_steps": 105.77,
+        "final_original_return": -787.6390000000001,
+        "final_success": 0.256,
+        "student_steps": 35533.86,
+        "donor_steps": 28280.0,
+        "last20_training_return": -125.26150000000001
+      },
+      "static_flag": {
+        "n": 100,
+        "ABS": {
+          "mean": 101.49,
+          "sd": 11.221817674476446,
+          "author_print_SEM": 1.1165567607605087
+        },
+        "AIBS": {
+          "mean": 104.93,
+          "sd": 55.335935499237365,
+          "author_print_SEM": 5.505856064228341
+        },
+        "ATBS": {
+          "mean": 8.685466319969855,
+          "sd": 3.644407158203691,
+          "author_print_SEM": 0.36261393381141105
+        },
+        "ATST": {
+          "mean": 15.317339828981785,
+          "sd": 1.6506775666913587,
+          "author_print_SEM": 0.16424034415716265
+        },
+        "actual_best_steps": 102.49,
+        "final_original_return": -819.2159999999999,
+        "final_success": 0.215,
+        "student_steps": 34300.51,
+        "donor_steps": 111259.0,
+        "last20_training_return": -121.31999999999998
+      },
+      "static_frozen": {
+        "n": 100,
+        "ABS": {
+          "mean": 103.04,
+          "sd": 8.687527341719926,
+          "author_print_SEM": 0.8643980564531597
+        },
+        "AIBS": {
+          "mean": 90.95,
+          "sd": 48.15953601407419,
+          "author_print_SEM": 4.791813331088765
+        },
+        "ATBS": {
+          "mean": 7.04183075905079,
+          "sd": 2.990626792454865,
+          "author_print_SEM": 0.2975636087567058
+        },
+        "ATST": {
+          "mean": 13.952946475982898,
+          "sd": 1.308949558418548,
+          "author_print_SEM": 0.1302388366432713
+        },
+        "actual_best_steps": 104.04,
+        "final_original_return": -758.7239999999999,
+        "final_success": 0.28600000000000003,
+        "student_steps": 35260.52,
+        "donor_steps": 111259.0,
+        "last20_training_return": -124.60600000000001
+      }
+    },
+    "prior": {
+      "historical_B": {
+        "n": 30,
+        "ABS": {
+          "mean": 104.06666666666666,
+          "sd": 8.127999004434729,
+          "author_print_SEM": 1.4590204730368732
+        },
+        "AIBS": {
+          "mean": 95.26666666666667,
+          "sd": 52.63598699024064,
+          "author_print_SEM": 9.448448824287782
+        },
+        "ATBS": {
+          "mean": 6.9306949299876575,
+          "sd": 3.2405171768025856,
+          "author_print_SEM": 0.5816906352477381
+        },
+        "ATST": {
+          "mean": 13.094565730076283,
+          "sd": 1.512802498390941,
+          "author_print_SEM": 0.2715563591493349
+        },
+        "actual_best_steps": 105.06666666666666,
+        "final_original_return": -966.3266666666667,
+        "final_success": 0.05,
+        "student_steps": 32794.86666666667,
+        "donor_steps": 114426.0,
+        "last20_training_return": -114.71666666666665
+      },
+      "historical_C": {
+        "n": 30,
+        "ABS": {
+          "mean": 107.96666666666667,
+          "sd": 5.327115628512321,
+          "author_print_SEM": 0.956246520206692
+        },
+        "AIBS": {
+          "mean": 98.46666666666667,
+          "sd": 51.04341176937011,
+          "author_print_SEM": 9.162572823216236
+        },
+        "ATBS": {
+          "mean": 7.6027499366823275,
+          "sd": 3.3096703080836143,
+          "author_print_SEM": 0.5941040022103297
+        },
+        "ATST": {
+          "mean": 14.536950566685602,
+          "sd": 1.2094959541407997,
+          "author_print_SEM": 0.21711116822035342
+        },
+        "actual_best_steps": 108.96666666666667,
+        "final_original_return": -936.7266666666668,
+        "final_success": 0.07666666666666666,
+        "student_steps": 36869.63333333333,
+        "donor_steps": 115362.0,
+        "last20_training_return": -137.23666666666665
+      }
+    },
+    "sensitivity": {
+      "historical__dynamic_eq38": {
+        "n": 20,
+        "ABS": {
+          "mean": 108.7,
+          "sd": 14.733063425327973,
+          "author_print_SEM": 3.2109967299889917
+        },
+        "AIBS": {
+          "mean": 68.8,
+          "sd": 55.50210996463391,
+          "author_print_SEM": 12.096404424456052
+        },
+        "ATBS": {
+          "mean": 7.276691799983382,
+          "sd": 4.507843421833042,
+          "author_print_SEM": 0.982461696453741
+        },
+        "ATST": {
+          "mean": 18.972421365068293,
+          "sd": 2.37891691714684,
+          "author_print_SEM": 0.5184729218461198
+        },
+        "actual_best_steps": 109.7,
+        "final_original_return": -965.0049999999999,
+        "final_success": 0.045,
+        "student_steps": 41321.05,
+        "donor_steps": 0.0,
+        "last20_training_return": -154.55749999999998
+      },
+      "historical__sarsa": {
+        "n": 20,
+        "ABS": {
+          "mean": 104.1,
+          "sd": 9.941407292097454,
+          "author_print_SEM": 2.166679487141557
+        },
+        "AIBS": {
+          "mean": 89.95,
+          "sd": 45.841230579606304,
+          "author_print_SEM": 9.990864577202515
+        },
+        "ATBS": {
+          "mean": 3.735274114989443,
+          "sd": 1.7375988970961456,
+          "author_print_SEM": 0.3787008998424914
+        },
+        "ATST": {
+          "mean": 8.233246199961286,
+          "sd": 0.9838491630978897,
+          "author_print_SEM": 0.21442495388153837
+        },
+        "actual_best_steps": 105.1,
+        "final_original_return": -917.975,
+        "final_success": 0.095,
+        "student_steps": 33767.7,
+        "donor_steps": 0.0,
+        "last20_training_return": -119.33499999999997
+      },
+      "historical__static_eq38": {
+        "n": 20,
+        "ABS": {
+          "mean": 124.65,
+          "sd": 21.55354409738442,
+          "author_print_SEM": 4.697486029782313
+        },
+        "AIBS": {
+          "mean": 89.3,
+          "sd": 51.96061261338144,
+          "author_print_SEM": 11.324552971309728
+        },
+        "ATBS": {
+          "mean": 10.775214764964767,
+          "sd": 5.303251621595802,
+          "author_print_SEM": 1.155816894535215
+        },
+        "ATST": {
+          "mean": 20.500117244938156,
+          "sd": 3.933059213991797,
+          "author_print_SEM": 0.8571903826375877
+        },
+        "actual_best_steps": 125.65,
+        "final_original_return": -716.23,
+        "final_success": 0.345,
+        "student_steps": 51630.05,
+        "donor_steps": 111259.0,
+        "last20_training_return": -185.6925
+      },
+      "paper_text__dynamic_eq38": {
+        "n": 20,
+        "ABS": {
+          "mean": 109.45,
+          "sd": 7.930454291095681,
+          "author_print_SEM": 1.7284024415627282
+        },
+        "AIBS": {
+          "mean": 87.45,
+          "sd": 61.46327529937137,
+          "author_print_SEM": 13.395610288448971
+        },
+        "ATBS": {
+          "mean": 8.51494307499379,
+          "sd": 4.9916530644252015,
+          "author_print_SEM": 1.0879055634522288
+        },
+        "ATST": {
+          "mean": 18.33507654008572,
+          "sd": 2.035798468165571,
+          "author_print_SEM": 0.4436919896074314
+        },
+        "actual_best_steps": 110.45,
+        "final_original_return": -948.4599999999998,
+        "final_success": 0.06,
+        "student_steps": 40698.8,
+        "donor_steps": 0.0,
+        "last20_training_return": -146.59000000000003
+      },
+      "paper_text__dynamic_source": {
+        "n": 20,
+        "ABS": {
+          "mean": 106.5,
+          "sd": 5.175854874724612,
+          "author_print_SEM": 1.1280514172678475
+        },
+        "AIBS": {
+          "mean": 68.35,
+          "sd": 43.97879273611675,
+          "author_print_SEM": 9.584955659782679
+        },
+        "ATBS": {
+          "mean": 6.694210729975021,
+          "sd": 3.3536574171374682,
+          "author_print_SEM": 0.7309126886278927
+        },
+        "ATST": {
+          "mean": 15.90577475988539,
+          "sd": 1.54519001586088,
+          "author_print_SEM": 0.33676635638527935
+        },
+        "actual_best_steps": 107.5,
+        "final_original_return": -944.24,
+        "final_success": 0.065,
+        "student_steps": 34190.7,
+        "donor_steps": 0.0,
+        "last20_training_return": -124.4725
+      },
+      "paper_text__sarsa": {
+        "n": 20,
+        "ABS": {
+          "mean": 105.55,
+          "sd": 6.832391890646234,
+          "author_print_SEM": 1.4890852896996867
+        },
+        "AIBS": {
+          "mean": 77.9,
+          "sd": 41.22582226047931,
+          "author_print_SEM": 8.984959654889943
+        },
+        "ATBS": {
+          "mean": 3.372916024940787,
+          "sd": 1.7648147678749293,
+          "author_print_SEM": 0.38463246136175044
+        },
+        "ATST": {
+          "mean": 8.503192559955641,
+          "sd": 0.7486900002588583,
+          "author_print_SEM": 0.1631732025583902
+        },
+        "actual_best_steps": 106.55,
+        "final_original_return": -1000.0,
+        "final_success": 0.0,
+        "student_steps": 33933.55,
+        "donor_steps": 0.0,
+        "last20_training_return": -120.32749999999999
+      },
+      "paper_text__static_eq38": {
+        "n": 20,
+        "ABS": {
+          "mean": 150.85,
+          "sd": 21.919169692303583,
+          "author_print_SEM": 4.777172280753542
+        },
+        "AIBS": {
+          "mean": 85.0,
+          "sd": 54.27512757870045,
+          "author_print_SEM": 11.828989813166633
+        },
+        "ATBS": {
+          "mean": 11.26008564492804,
+          "sd": 5.9162822665567445,
+          "author_print_SEM": 1.2894238260691309
+        },
+        "ATST": {
+          "mean": 22.720944499934557,
+          "sd": 4.470181773694692,
+          "author_print_SEM": 0.9742535305396283
+        },
+        "actual_best_steps": 151.85,
+        "final_original_return": -609.365,
+        "final_success": 0.47000000000000003,
+        "student_steps": 56904.65,
+        "donor_steps": 116190.0,
+        "last20_training_return": -195.9875
+      },
+      "paper_text__static_source": {
+        "n": 20,
+        "ABS": {
+          "mean": 116.1,
+          "sd": 11.68399715310151,
+          "author_print_SEM": 2.5464681423493203
+        },
+        "AIBS": {
+          "mean": 91.6,
+          "sd": 39.61711485549755,
+          "author_print_SEM": 8.634350004487889
+        },
+        "ATBS": {
+          "mean": 7.391776314954041,
+          "sd": 2.5720690467484886,
+          "author_print_SEM": 0.5605694525292827
+        },
+        "ATST": {
+          "mean": 14.76826828501071,
+          "sd": 1.3193305470993881,
+          "author_print_SEM": 0.28754142639662306
+        },
+        "actual_best_steps": 117.1,
+        "final_original_return": -799.68,
+        "final_success": 0.25,
+        "student_steps": 38319.5,
+        "donor_steps": 116190.0,
+        "last20_training_return": -135.515
+      }
+    }
+  },
+  "primary": {
+    "static_frozen__minus__sarsa": {
+      "ABS": {
+        "mean": 1.17,
+        "ci95": [
+          -1.15,
+          3.48
+        ],
+        "p_sign_flip": 0.33535329293414134,
+        "n": 100,
+        "wins": 51,
+        "losses": 42,
+        "ties": 7,
+        "p_holm4": 1.0
+      },
+      "AIBS": {
+        "mean": 3.96,
+        "ci95": [
+          -8.90025,
+          16.76
+        ],
+        "p_sign_flip": 0.5500889982200357,
+        "n": 100,
+        "wins": 55,
+        "losses": 44,
+        "ties": 1,
+        "p_holm4": 1.0
+      },
+      "ATBS": {
+        "mean": 3.3815736890747212,
+        "ci95": [
+          2.754037958357047,
+          4.034648250702099
+        ],
+        "p_sign_flip": 1.999960000799984e-05,
+        "n": 100,
+        "wins": 85,
+        "losses": 15,
+        "ties": 0
+      },
+      "ATST": {
+        "mean": 5.89928734300076,
+        "ci95": [
+          5.609427754262753,
+          6.191739052343938
+        ],
+        "p_sign_flip": 1.999960000799984e-05,
+        "n": 100,
+        "wins": 100,
+        "losses": 0,
+        "ties": 0
+      }
+    },
+    "static_frozen__minus__dynamic": {
+      "ABS": {
+        "mean": -0.94,
+        "ci95": [
+          -3.48,
+          1.53
+        ],
+        "p_sign_flip": 0.4679306413871723,
+        "n": 100,
+        "wins": 50,
+        "losses": 47,
+        "ties": 3,
+        "p_holm4": 1.0
+      },
+      "AIBS": {
+        "mean": 9.38,
+        "ci95": [
+          -3.41,
+          22.03
+        ],
+        "p_sign_flip": 0.15307693846123077,
+        "n": 100,
+        "wins": 53,
+        "losses": 46,
+        "ties": 1,
+        "p_holm4": 0.6123077538449231
+      },
+      "ATBS": {
+        "mean": -0.17501096889260226,
+        "ci95": [
+          -1.022096247969137,
+          0.6755070770635211
+        ],
+        "p_sign_flip": 0.6906661866762664,
+        "n": 100,
+        "wins": 49,
+        "losses": 51,
+        "ties": 0
+      },
+      "ATST": {
+        "mean": -1.3495050599437672,
+        "ci95": [
+          -1.7817794614649027,
+          -0.9350615983920878
+        ],
+        "p_sign_flip": 1.999960000799984e-05,
+        "n": 100,
+        "wins": 26,
+        "losses": 74,
+        "ties": 0
+      }
+    }
+  },
+  "same_tile": {
+    "sarsa_same_tiles": {
+      "ABS": {
+        "mean": 1.14,
+        "ci95": [
+          -1.12,
+          3.39
+        ],
+        "p_sign_flip": 0.33405331893362133,
+        "n": 100,
+        "wins": 55,
+        "losses": 43,
+        "ties": 2
+      },
+      "AIBS": {
+        "mean": -8.35,
+        "ci95": [
+          -21.85,
+          5.140249999999978
+        ],
+        "p_sign_flip": 0.23303533929321413,
+        "n": 100,
+        "wins": 41,
+        "losses": 57,
+        "ties": 2
+      },
+      "ATBS": {
+        "mean": 2.9185681510251014,
+        "ci95": [
+          2.2229759417909665,
+          3.629122122712694
+        ],
+        "p_sign_flip": 1.999960000799984e-05,
+        "n": 100,
+        "wins": 80,
+        "losses": 20,
+        "ties": 0
+      },
+      "ATST": {
+        "mean": 5.67271119289333,
+        "ci95": [
+          5.3792958135750375,
+          5.974505804661865
+        ],
+        "p_sign_flip": 1.999960000799984e-05,
+        "n": 100,
+        "wins": 100,
+        "losses": 0,
+        "ties": 0
+      }
+    },
+    "dynamic_same_tiles": {
+      "ABS": {
+        "mean": 2.26,
+        "ci95": [
+          -0.24,
+          4.74
+        ],
+        "p_sign_flip": 0.08273834523309534,
+        "n": 100,
+        "wins": 57,
+        "losses": 41,
+        "ties": 2
+      },
+      "AIBS": {
+        "mean": -10.53,
+        "ci95": [
+          -24.03,
+          3.23
+        ],
+        "p_sign_flip": 0.13473730525389493,
+        "n": 100,
+        "wins": 45,
+        "losses": 53,
+        "ties": 2
+      },
+      "ATBS": {
+        "mean": -1.7052128509234172,
+        "ci95": [
+          -2.590926284473535,
+          -0.8432188601355303
+        ],
+        "p_sign_flip": 0.0002799944001119978,
+        "n": 100,
+        "wins": 36,
+        "losses": 64,
+        "ties": 0
+      },
+      "ATST": {
+        "mean": -1.6354177570063622,
+        "ci95": [
+          -2.0105618503048026,
+          -1.2561010279177576
+        ],
+        "p_sign_flip": 1.999960000799984e-05,
+        "n": 100,
+        "wins": 19,
+        "losses": 81,
+        "ties": 0
+      }
+    }
+  },
+  "prior_summary": {
+    "historical_A": {
+      "n": 100,
+      "ABS": {
+        "mean": 103.04,
+        "sd": 8.687527341719926,
+        "author_print_SEM": 0.8643980564531597
+      },
+      "AIBS": {
+        "mean": 90.95,
+        "sd": 48.15953601407419,
+        "author_print_SEM": 4.791813331088765
+      },
+      "ATBS": {
+        "mean": 7.04183075905079,
+        "sd": 2.990626792454865,
+        "author_print_SEM": 0.2975636087567058
+      },
+      "ATST": {
+        "mean": 13.952946475982898,
+        "sd": 1.308949558418548,
+        "author_print_SEM": 0.1302388366432713
+      },
+      "actual_best_steps": 104.04,
+      "final_original_return": -758.7239999999999,
+      "final_success": 0.28600000000000003,
+      "student_steps": 35260.52,
+      "donor_steps": 111259.0,
+      "last20_training_return": -124.60600000000001
+    },
+    "historical_B": {
+      "n": 30,
+      "ABS": {
+        "mean": 104.06666666666666,
+        "sd": 8.127999004434729,
+        "author_print_SEM": 1.4590204730368732
+      },
+      "AIBS": {
+        "mean": 95.26666666666667,
+        "sd": 52.63598699024064,
+        "author_print_SEM": 9.448448824287782
+      },
+      "ATBS": {
+        "mean": 6.9306949299876575,
+        "sd": 3.2405171768025856,
+        "author_print_SEM": 0.5816906352477381
+      },
+      "ATST": {
+        "mean": 13.094565730076283,
+        "sd": 1.512802498390941,
+        "author_print_SEM": 0.2715563591493349
+      },
+      "actual_best_steps": 105.06666666666666,
+      "final_original_return": -966.3266666666667,
+      "final_success": 0.05,
+      "student_steps": 32794.86666666667,
+      "donor_steps": 114426.0,
+      "last20_training_return": -114.71666666666665
+    },
+    "historical_C": {
+      "n": 30,
+      "ABS": {
+        "mean": 107.96666666666667,
+        "sd": 5.327115628512321,
+        "author_print_SEM": 0.956246520206692
+      },
+      "AIBS": {
+        "mean": 98.46666666666667,
+        "sd": 51.04341176937011,
+        "author_print_SEM": 9.162572823216236
+      },
+      "ATBS": {
+        "mean": 7.6027499366823275,
+        "sd": 3.3096703080836143,
+        "author_print_SEM": 0.5941040022103297
+      },
+      "ATST": {
+        "mean": 14.536950566685602,
+        "sd": 1.2094959541407997,
+        "author_print_SEM": 0.21711116822035342
+      },
+      "actual_best_steps": 108.96666666666667,
+      "final_original_return": -936.7266666666668,
+      "final_success": 0.07666666666666666,
+      "student_steps": 36869.63333333333,
+      "donor_steps": 115362.0,
+      "last20_training_return": -137.23666666666665
+    }
+  },
+  "sensitivity_cells": {
+    "historical__eq38": {
+      "sarsa": {
+        "n": 20,
+        "ABS": {
+          "mean": 104.1,
+          "sd": 9.941407292097454,
+          "author_print_SEM": 2.166679487141557
+        },
+        "AIBS": {
+          "mean": 89.95,
+          "sd": 45.841230579606304,
+          "author_print_SEM": 9.990864577202515
+        },
+        "ATBS": {
+          "mean": 3.735274114989443,
+          "sd": 1.7375988970961456,
+          "author_print_SEM": 0.3787008998424914
+        },
+        "ATST": {
+          "mean": 8.233246199961286,
+          "sd": 0.9838491630978897,
+          "author_print_SEM": 0.21442495388153837
+        },
+        "actual_best_steps": 105.1,
+        "final_original_return": -917.975,
+        "final_success": 0.095,
+        "student_steps": 33767.7,
+        "donor_steps": 0.0,
+        "last20_training_return": -119.33499999999997
+      },
+      "dynamic": {
+        "n": 20,
+        "ABS": {
+          "mean": 108.7,
+          "sd": 14.733063425327973,
+          "author_print_SEM": 3.2109967299889917
+        },
+        "AIBS": {
+          "mean": 68.8,
+          "sd": 55.50210996463391,
+          "author_print_SEM": 12.096404424456052
+        },
+        "ATBS": {
+          "mean": 7.276691799983382,
+          "sd": 4.507843421833042,
+          "author_print_SEM": 0.982461696453741
+        },
+        "ATST": {
+          "mean": 18.972421365068293,
+          "sd": 2.37891691714684,
+          "author_print_SEM": 0.5184729218461198
+        },
+        "actual_best_steps": 109.7,
+        "final_original_return": -965.0049999999999,
+        "final_success": 0.045,
+        "student_steps": 41321.05,
+        "donor_steps": 0.0,
+        "last20_training_return": -154.55749999999998
+      },
+      "static": {
+        "n": 20,
+        "ABS": {
+          "mean": 124.65,
+          "sd": 21.55354409738442,
+          "author_print_SEM": 4.697486029782313
+        },
+        "AIBS": {
+          "mean": 89.3,
+          "sd": 51.96061261338144,
+          "author_print_SEM": 11.324552971309728
+        },
+        "ATBS": {
+          "mean": 10.775214764964767,
+          "sd": 5.303251621595802,
+          "author_print_SEM": 1.155816894535215
+        },
+        "ATST": {
+          "mean": 20.500117244938156,
+          "sd": 3.933059213991797,
+          "author_print_SEM": 0.8571903826375877
+        },
+        "actual_best_steps": 125.65,
+        "final_original_return": -716.23,
+        "final_success": 0.345,
+        "student_steps": 51630.05,
+        "donor_steps": 111259.0,
+        "last20_training_return": -185.6925
+      }
+    },
+    "paper_text__source": {
+      "sarsa": {
+        "n": 20,
+        "ABS": {
+          "mean": 105.55,
+          "sd": 6.832391890646234,
+          "author_print_SEM": 1.4890852896996867
+        },
+        "AIBS": {
+          "mean": 77.9,
+          "sd": 41.22582226047931,
+          "author_print_SEM": 8.984959654889943
+        },
+        "ATBS": {
+          "mean": 3.372916024940787,
+          "sd": 1.7648147678749293,
+          "author_print_SEM": 0.38463246136175044
+        },
+        "ATST": {
+          "mean": 8.503192559955641,
+          "sd": 0.7486900002588583,
+          "author_print_SEM": 0.1631732025583902
+        },
+        "actual_best_steps": 106.55,
+        "final_original_return": -1000.0,
+        "final_success": 0.0,
+        "student_steps": 33933.55,
+        "donor_steps": 0.0,
+        "last20_training_return": -120.32749999999999
+      },
+      "dynamic": {
+        "n": 20,
+        "ABS": {
+          "mean": 106.5,
+          "sd": 5.175854874724612,
+          "author_print_SEM": 1.1280514172678475
+        },
+        "AIBS": {
+          "mean": 68.35,
+          "sd": 43.97879273611675,
+          "author_print_SEM": 9.584955659782679
+        },
+        "ATBS": {
+          "mean": 6.694210729975021,
+          "sd": 3.3536574171374682,
+          "author_print_SEM": 0.7309126886278927
+        },
+        "ATST": {
+          "mean": 15.90577475988539,
+          "sd": 1.54519001586088,
+          "author_print_SEM": 0.33676635638527935
+        },
+        "actual_best_steps": 107.5,
+        "final_original_return": -944.24,
+        "final_success": 0.065,
+        "student_steps": 34190.7,
+        "donor_steps": 0.0,
+        "last20_training_return": -124.4725
+      },
+      "static": {
+        "n": 20,
+        "ABS": {
+          "mean": 116.1,
+          "sd": 11.68399715310151,
+          "author_print_SEM": 2.5464681423493203
+        },
+        "AIBS": {
+          "mean": 91.6,
+          "sd": 39.61711485549755,
+          "author_print_SEM": 8.634350004487889
+        },
+        "ATBS": {
+          "mean": 7.391776314954041,
+          "sd": 2.5720690467484886,
+          "author_print_SEM": 0.5605694525292827
+        },
+        "ATST": {
+          "mean": 14.76826828501071,
+          "sd": 1.3193305470993881,
+          "author_print_SEM": 0.28754142639662306
+        },
+        "actual_best_steps": 117.1,
+        "final_original_return": -799.68,
+        "final_success": 0.25,
+        "student_steps": 38319.5,
+        "donor_steps": 116190.0,
+        "last20_training_return": -135.515
+      }
+    },
+    "paper_text__eq38": {
+      "sarsa": {
+        "n": 20,
+        "ABS": {
+          "mean": 105.55,
+          "sd": 6.832391890646234,
+          "author_print_SEM": 1.4890852896996867
+        },
+        "AIBS": {
+          "mean": 77.9,
+          "sd": 41.22582226047931,
+          "author_print_SEM": 8.984959654889943
+        },
+        "ATBS": {
+          "mean": 3.372916024940787,
+          "sd": 1.7648147678749293,
+          "author_print_SEM": 0.38463246136175044
+        },
+        "ATST": {
+          "mean": 8.503192559955641,
+          "sd": 0.7486900002588583,
+          "author_print_SEM": 0.1631732025583902
+        },
+        "actual_best_steps": 106.55,
+        "final_original_return": -1000.0,
+        "final_success": 0.0,
+        "student_steps": 33933.55,
+        "donor_steps": 0.0,
+        "last20_training_return": -120.32749999999999
+      },
+      "dynamic": {
+        "n": 20,
+        "ABS": {
+          "mean": 109.45,
+          "sd": 7.930454291095681,
+          "author_print_SEM": 1.7284024415627282
+        },
+        "AIBS": {
+          "mean": 87.45,
+          "sd": 61.46327529937137,
+          "author_print_SEM": 13.395610288448971
+        },
+        "ATBS": {
+          "mean": 8.51494307499379,
+          "sd": 4.9916530644252015,
+          "author_print_SEM": 1.0879055634522288
+        },
+        "ATST": {
+          "mean": 18.33507654008572,
+          "sd": 2.035798468165571,
+          "author_print_SEM": 0.4436919896074314
+        },
+        "actual_best_steps": 110.45,
+        "final_original_return": -948.4599999999998,
+        "final_success": 0.06,
+        "student_steps": 40698.8,
+        "donor_steps": 0.0,
+        "last20_training_return": -146.59000000000003
+      },
+      "static": {
+        "n": 20,
+        "ABS": {
+          "mean": 150.85,
+          "sd": 21.919169692303583,
+          "author_print_SEM": 4.777172280753542
+        },
+        "AIBS": {
+          "mean": 85.0,
+          "sd": 54.27512757870045,
+          "author_print_SEM": 11.828989813166633
+        },
+        "ATBS": {
+          "mean": 11.26008564492804,
+          "sd": 5.9162822665567445,
+          "author_print_SEM": 1.2894238260691309
+        },
+        "ATST": {
+          "mean": 22.720944499934557,
+          "sd": 4.470181773694692,
+          "author_print_SEM": 0.9742535305396283
+        },
+        "actual_best_steps": 151.85,
+        "final_original_return": -609.365,
+        "final_success": 0.47000000000000003,
+        "student_steps": 56904.65,
+        "donor_steps": 116190.0,
+        "last20_training_return": -195.9875
+      }
+    }
+  },
+  "effect_assessment": {
+    "conditional_prior": "historical_A",
+    "lower_mean_AIBS_than_both": false,
+    "no_worse_mean_ABS_than_both": false,
+    "AIBS_both_Holm_p_below05": false,
+    "numeric_reproduction_of_original_static_file": false
+  },
+  "teachers": {
+    "historical_A": {
+      "bank": "historical_A",
+      "stage": "mature",
+      "episodes": 1000,
+      "steps": 111259,
+      "training_seconds": 76.76153559889644,
+      "stable": true,
+      "tau_sha256": "0900f99610e81011335e947c9fe3b67a8c136d31005563e619931d28a3b6ff14",
+      "coder_sha256": "637ac99449a23cc2abab923885a07b1d0534a87d1679dd1e14b981d7e8f55bd4",
+      "best_actual_length": 92,
+      "last100_success": 1.0,
+      "last100_mean_length": 104.01,
+      "stability_checks": [
+        {
+          "episodes": 1000,
+          "stable": true,
+          "previous_best": 92,
+          "recent_best": 93,
+          "previous100_mean": 104.15,
+          "recent100_mean": 104.01
+        }
+      ],
+      "kind": "historical",
+      "seed": 120001
+    },
+    "historical_B": {
+      "bank": "historical_B",
+      "stage": "mature",
+      "episodes": 1000,
+      "steps": 114426,
+      "training_seconds": 80.03510470164474,
+      "stable": true,
+      "tau_sha256": "85234e84898278349c63583abb6b8154ae4a89d103054f1558f01d018fb212af",
+      "coder_sha256": "b8e16d0093b8e7be05cd7a12fb44083c5c593762c200913804f9b006db4c587c",
+      "best_actual_length": 97,
+      "last100_success": 1.0,
+      "last100_mean_length": 108.79,
+      "stability_checks": [
+        {
+          "episodes": 1000,
+          "stable": true,
+          "previous_best": 97,
+          "recent_best": 97,
+          "previous100_mean": 110.11,
+          "recent100_mean": 108.79
+        }
+      ],
+      "kind": "historical",
+      "seed": 120002
+    },
+    "historical_C": {
+      "bank": "historical_C",
+      "stage": "mature",
+      "episodes": 1000,
+      "steps": 115362,
+      "training_seconds": 77.20815940073226,
+      "stable": true,
+      "tau_sha256": "7b5ac33596db7956ba661ac7ba70738596434635ab19e6c998af75f708d54fbb",
+      "coder_sha256": "a0f023e8fbcd3ee444120df2ae7cd185ba793e90f4133eafd3abdd7071de8ce8",
+      "best_actual_length": 90,
+      "last100_success": 1.0,
+      "last100_mean_length": 109.11,
+      "stability_checks": [
+        {
+          "episodes": 1000,
+          "stable": true,
+          "previous_best": 90,
+          "recent_best": 91,
+          "previous100_mean": 108.44,
+          "recent100_mean": 109.11
+        }
+      ],
+      "kind": "historical",
+      "seed": 120003
+    },
+    "paper_text_A": {
+      "bank": "paper_text_A",
+      "stage": "mature",
+      "episodes": 1000,
+      "steps": 116190,
+      "training_seconds": 79.72702209989075,
+      "stable": true,
+      "tau_sha256": "1f3ac7f61825ed091247205c8962582c0ae3806fd5a2adaabb1f815b489ccd4d",
+      "coder_sha256": "6c5d352ec416258b43aded2bcb23cc39687c3c06d303999748a4c04f7419d3b3",
+      "best_actual_length": 95,
+      "last100_success": 1.0,
+      "last100_mean_length": 107.59,
+      "stability_checks": [
+        {
+          "episodes": 1000,
+          "stable": true,
+          "previous_best": 95,
+          "recent_best": 96,
+          "previous100_mean": 108.03,
+          "recent100_mean": 107.59
+        }
+      ],
+      "kind": "paper_text",
+      "seed": 120004
+    }
+  },
+  "audit": {
+    "source_hashes_match": true,
+    "all_200_complete": true,
+    "all_finite": true,
+    "author_metrics_exactly_recalculated": true,
+    "loaded_prior_and_coders_verified": true,
+    "deserialized_coder_hashes": {
+      "historical_A__e200": "735aa8f7a32f07d5661a01c01885a77a0947aed621eb4fdd531776907a6205b3",
+      "historical_A__mature": "735aa8f7a32f07d5661a01c01885a77a0947aed621eb4fdd531776907a6205b3",
+      "historical_B__e200": "afd88d97ad871cf5656b45893363f752298cf8625a7a9001bcb5c52f1c3741f6",
+      "historical_B__mature": "afd88d97ad871cf5656b45893363f752298cf8625a7a9001bcb5c52f1c3741f6",
+      "historical_C__e200": "f435e56743ce8c5c34199e4e6789e4075183e0047ac4939e7c19bf8142ddad6d",
+      "historical_C__mature": "f435e56743ce8c5c34199e4e6789e4075183e0047ac4939e7c19bf8142ddad6d",
+      "paper_text_A__e200": "e309bff092d3fdf60c12a6d671319dd5c9e415383d6e820ee7e0d657d6d9bd59",
+      "paper_text_A__mature": "e309bff092d3fdf60c12a6d671319dd5c9e415383d6e820ee7e0d657d6d9bd59"
+    },
+    "pickle_reencoding_byte_changes": [
+      "historical_A__e200",
+      "historical_A__mature",
+      "historical_B__e200",
+      "historical_B__mature",
+      "historical_C__e200",
+      "historical_C__mature",
+      "paper_text_A__e200",
+      "paper_text_A__mature"
+    ],
+    "coder_geometry_reconstructed_from_teacher_seed": true,
+    "frozen_versions_unchanged": true,
+    "all_rewards_verified": true,
+    "physical_student_steps": 32776302,
+    "physical_teacher_steps": 457237
+  },
+  "paper_table7": {
+    "sarsa": {
+      "ABS": 103.2,
+      "AIBS": 96.8,
+      "ATBS": 10.0,
+      "ATST": 17.6
+    },
+    "dynamic": {
+      "ABS": 102.2,
+      "AIBS": 89.0,
+      "ATBS": 15.0,
+      "ATST": 27.0
+    },
+    "static_frozen": {
+      "ABS": 101.4,
+      "AIBS": 75.0,
+      "ATBS": 14.0,
+      "ATST": 27.0
+    }
+  },
+  "labels": {
+    "sarsa": "作者SARSA",
+    "dynamic": "作者动态PA",
+    "static_flag": "作者原静态开关",
+    "static_frozen": "真正冻结／成熟先验",
+    "static_200": "真正冻结／200回合先验",
+    "sarsa_same_tiles": "SARSA／同一tile编码",
+    "dynamic_same_tiles": "动态PA／同一tile编码"
+  }
+}

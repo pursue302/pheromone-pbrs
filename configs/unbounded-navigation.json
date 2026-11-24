@@ -1,0 +1,22 @@
+{
+  "driver": "unbounded",
+  "phase": "confirm",
+  "seeds": 30,
+  "start": 31000,
+  "scenarios": [
+    "u_detour",
+    "four_rooms",
+    "slippery_rooms"
+  ],
+  "methods": [
+    "return_dynamic_all_unbounded",
+    "mc_dynamic_all_unbounded",
+    "return_mix_unbounded"
+  ],
+  "description": "网格更新幅度对齐的补充对照",
+  "parameters": {
+    "scale": 0.1,
+    "beta": 0.5,
+    "limit": 1.0
+  }
+}

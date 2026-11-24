@@ -1,0 +1,15 @@
+{
+  "author_replication_students": 920,
+  "author_replication_teachers": 4,
+  "controlled_training_runs": 3660,
+  "fresh_validation_runs": 600,
+  "total_student_training_records": 5180,
+  "included_prior_controlled_steps": 154694199,
+  "fresh_validation_steps": 18000000,
+  "scope": "Current paper evidence chain. Author-direct reference source is included, not its separate older 1000-run dataset. Unrelated early exploratory studies remain outside this bundle.",
+  "copy_counts": {
+    "paper_static_replication_20261120": 1922,
+    "research_story_20261120": 7372,
+    "paper_report_20261120": 1241
+  }
+}

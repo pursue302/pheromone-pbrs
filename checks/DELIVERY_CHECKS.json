@@ -1,0 +1,71 @@
+{
+  "status": "passed",
+  "python": "3.13.5",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "scope": "Packaging regression checks; no new algorithm performance claims.",
+  "statistics_exact_match": [
+    "fresh",
+    "controlled",
+    "source"
+  ],
+  "unit_checks": {
+    "numerics": 5,
+    "source_and_environment": 6
+  },
+  "unchanged_frozen_source_files": 88,
+  "full_budget_seed_rerun": {
+    "scenario": "u_detour",
+    "seed": 40000,
+    "methods": 10,
+    "steps_per_method": 30000,
+    "all_saved_arrays_exactly_equal": true
+  },
+  "direct_author_trace_reset_seed": {
+    "seed": 20000,
+    "all_saved_arrays_exactly_equal": true
+  },
+  "author_replication_quick": {
+    "student_runs": 24,
+    "teacher_runs": 4,
+    "finite": true
+  },
+  "execution_smoke": {
+    "status": "passed",
+    "scenario": "u_detour",
+    "methods": [
+      "plain",
+      "raw_static",
+      "state_raw_static",
+      "state_raw_matched",
+      "return_gate_unbounded",
+      "mc_dynamic_all_unbounded"
+    ],
+    "training_steps": 6000,
+    "warmup_identical": true,
+    "purpose": "Execution and numerical checks, not a performance experiment."
+  },
+  "goal_diagnostic_exact_match": true,
+  "new_training_analysis_input": {
+    "runs": 10,
+    "steps": 300000
+  },
+  "paper_assets": {
+    "figure_pdfs": 4,
+    "export_csv_exact_match": true,
+    "report_pdf_original_unchanged": true
+  },
+  "training_presets_dry_run": [
+    "author-replication",
+    "discovery",
+    "history-mc",
+    "history-navigation",
+    "main-mc",
+    "main-navigation",
+    "repair",
+    "trace-reset",
+    "unbounded-mc",
+    "unbounded-navigation",
+    "validation"
+  ],
+  "invalid_output_or_parameters_rejected": 5
+}

@@ -1,0 +1,33 @@
+{
+  "driver": "study_v1",
+  "phase": "discover",
+  "seeds": 8,
+  "start": 30000,
+  "scenarios": [
+    "mountain_car",
+    "u_detour",
+    "four_rooms",
+    "slippery_rooms"
+  ],
+  "methods": [
+    "plain",
+    "raw_static",
+    "raw_dynamic",
+    "raw_mix",
+    "return_static",
+    "return_dynamic",
+    "return_mix",
+    "return_gate",
+    "return_gate_unbounded",
+    "mc_dynamic",
+    "velocity",
+    "velocity_shift",
+    "manhattan"
+  ],
+  "description": "8种子初筛；完整保留成功及失败变体",
+  "parameters": {
+    "scale": 0.1,
+    "beta": 0.5,
+    "limit": 1.0
+  }
+}

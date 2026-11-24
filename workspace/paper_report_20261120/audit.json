@@ -1,0 +1,16 @@
+{
+  "fresh_training_runs": 600,
+  "training_steps": 18000000,
+  "all_models_finite": true,
+  "distinct_seed_condition_pairs": 60,
+  "warmup_identical": true,
+  "max_telescoping_error": 1.1013412404281553e-13,
+  "new_primary_comparisons": 6,
+  "positive_after_holm": 4,
+  "method_retuned_after_validation": false,
+  "diagnostic_value_shift_error": 1.2212453270876722e-15,
+  "compiler_exit_code": 0,
+  "figure_count": 4,
+  "overfull_box_warnings": 0,
+  "author_field_intentionally_blank": true
+}
