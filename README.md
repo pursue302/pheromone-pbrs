@@ -2,6 +2,19 @@
 
 CS4620J Reinforcement Learning — Final Research Project
 
+## Workspace layout
+
+| Directory under `workspace/` | Contents |
+| --- | --- |
+| `01_goal_preservation/` | Exact planning diagnostic and its expected results. |
+| `02_source_audit/` | Upstream source, MountainCar replication and eligibility-trace repair experiments. |
+| `03_controlled_study/` | Return-Gate development, four-task comparisons and memory controls. |
+| `04_navigation_validation/` | Independent navigation validation, analysis and paper production. |
+| `environments/` | Course GridWorld, navigation wrappers and historical MountainCar dynamics. |
+| `policies/` | Shared SARSA updates, action selection, evaluation and compatible author policies. |
+
+Use `python run.py list` for experiment configurations. The released report is in `paper/report.pdf`. Original provenance records refer to the layout in the offline evidence archive.
+
 ## Abstract
 
 We study how trajectory experience should be converted into potential-based reward shaping while evaluating the original task objective. Inspired by pheromone-based heuristics, we construct state potentials from quality-weighted trajectory returns, normalize their accumulation, and combine frozen early experience with online memory through a local evidence gate. A source-code control first identifies cross-episode eligibility traces as a major cause of unreliable final policies: resetting traces alone raises MountainCar evaluation success from 13.8% to 99.8% across 100 seeds. We then separate this implementation repair from the shaping contribution. In a fresh, prespecified validation with 20 training seeds per navigation task, the proposed mechanism improves original returns over raw pheromone baselines in U-detour and four-room navigation; all four comparisons survive Holm correction. The advantage does not replicate in stochastic navigation. Simple state-only pheromone controls achieve comparable performance, while stronger dynamic and Monte Carlo controls provide no evidence of an additional mixing benefit. An exact tempting-reward diagnostic separately verifies the role of the potential-difference safeguard. Our contribution is a reproducible shaping construction and a controlled account of when representation, experience retention, and implementation details can dominate apparent algorithmic gains.

@@ -91,18 +91,19 @@ def verify(args):
         return
     inventory = read_json(ROOT / 'docs/INVENTORY.json')
     counts = {
-        'author_replication_students': len(list((WORKSPACE / 'paper_static_replication_20261120/results/runs').glob('*.json'))),
-        'author_replication_teachers': len(list((WORKSPACE / 'paper_static_replication_20261120/results/teachers').glob('*.json'))),
-        'controlled_training_runs': sum(len(list((WORKSPACE / 'research_story_20261120' / name / 'runs').glob('*.json')))
+        'author_replication_students': len(list((WORKSPACE / '02_source_audit/results/runs').glob('*.json'))),
+        'author_replication_teachers': len(list((WORKSPACE / '02_source_audit/results/teachers').glob('*.json'))),
+        'controlled_training_runs': sum(len(list((WORKSPACE / ('02_source_audit' if name in ('repair','direct_reset') else '03_controlled_study') / name / 'runs').glob('*.json')))
             for name in ['repair','direct_reset','discovery','confirm_mc','confirm_grids','strong_mc','strong_grids','unbounded_mc','unbounded_grids']),
-        'fresh_validation_runs': len(list((WORKSPACE / 'paper_report_20261120/experiments/fresh_nav/runs').glob('*.json'))),
+        'fresh_validation_runs': len(list((WORKSPACE / '04_navigation_validation/experiments/fresh_nav/runs').glob('*.json'))),
     }
     for name, count in counts.items():
         if count != inventory[name]:
             errors.append('Unexpected record count: ' + name + ' = ' + str(count))
-    for folder in [WORKSPACE / 'paper_static_replication_20261120/results',
-                   WORKSPACE / 'research_story_20261120',
-                   WORKSPACE / 'paper_report_20261120/experiments/fresh_nav']:
+    for folder in [WORKSPACE / '02_source_audit/results',
+                   WORKSPACE / '02_source_audit/repair', WORKSPACE / '02_source_audit/direct_reset',
+                   WORKSPACE / '03_controlled_study',
+                   WORKSPACE / '04_navigation_validation/experiments/fresh_nav']:
         for subfolder in folder.rglob('*'):
             if subfolder.is_dir() and subfolder.name in {'runs', 'teachers', 'models', 'priors', 'trajectories'}:
                 for path in subfolder.iterdir():
@@ -131,7 +132,7 @@ def train(args):
     if driver == 'source':
         if args.seeds is not None or args.start is not None or args.scenarios:
             raise ValueError('The author-replication preset has fixed seed cohorts; use --quick for its smoke cohort.')
-        command += [WORKSPACE / 'paper_static_replication_20261120/run_replication.py', '--out', out,
+        command += [WORKSPACE / '02_source_audit/run_replication.py', '--out', out,
                     '--workers', str(args.workers)]
         if args.quick:
             command.append('--smoke')
@@ -142,11 +143,11 @@ def train(args):
                     '--workers', str(args.workers)]
     else:
         scripts = {
-            'study': WORKSPACE / 'research_story_20261120/study.py',
-            'study_v1': WORKSPACE / 'research_story_20261120/study_v1.py',
-            'strong': WORKSPACE / 'research_story_20261120/study_strong_controls.py',
-            'unbounded': WORKSPACE / 'research_story_20261120/study_unbounded_controls.py',
-            'validation': WORKSPACE / 'paper_report_20261120/experiments/engine.py',
+            'study': WORKSPACE / '03_controlled_study/study.py',
+            'study_v1': WORKSPACE / '03_controlled_study/study_v1.py',
+            'strong': WORKSPACE / '03_controlled_study/study_strong_controls.py',
+            'unbounded': WORKSPACE / '03_controlled_study/study_unbounded_controls.py',
+            'validation': WORKSPACE / '04_navigation_validation/experiments/engine.py',
         }
         command += [scripts[driver], config['phase'], '--out', out,
                     '--seeds', str(args.seeds if args.seeds is not None else config['seeds']),
@@ -167,7 +168,7 @@ def train(args):
 def smoke(args):
     import numpy as np
     out = fresh_output(args.out, label='smoke')
-    engine_dir = WORKSPACE / 'paper_report_20261120/experiments'
+    engine_dir = WORKSPACE / '04_navigation_validation/experiments'
     sys.path.insert(0, str(engine_dir))
     engine = importlib.import_module('engine')
     config = engine.Config(grid_steps=1000, evaluation_episodes=2)
@@ -188,47 +189,21 @@ def smoke(args):
 
 def diagnostic(args):
     out = fresh_output(args.out, label='goal_diagnostic');out.mkdir(parents=True)
-    sys.path.insert(0, str(WORKSPACE / 'paper_report_20261120/experiments'))
+    sys.path.insert(0, str(WORKSPACE / '01_goal_preservation'))
     module = importlib.import_module('goal_diagnostic');module.HERE = out;module.main()
-    expected = read_json(WORKSPACE / 'paper_report_20261120/experiments/goal_diagnostic.json')
+    expected = read_json(WORKSPACE / '01_goal_preservation/goal_diagnostic.json')
     assert read_json(out / 'goal_diagnostic.json') == expected
     print('Exact diagnostic reproduced:', out)
 
 
-def prepare_paper(out):
-    out.mkdir(parents=True)
-    for name in ['main.tex','make_figures.py','paper_data.json']:
-        shutil.copy2(ROOT / 'paper' / name, out / name)
-
-
 def figures(args):
-    out = fresh_output(args.out, label='figures');prepare_paper(out)
-    run_logged([sys.executable,out / 'make_figures.py'], out)
+    from paper import build
+    build.figures(fresh_output(args.out, label='figures'), run_logged)
 
 
 def report(args):
-    out = fresh_output(args.out, label='report')
-    candidate = os.environ.get('CODEX_TECTONIC_PATH')
-    tectonic = candidate if candidate and Path(candidate).is_file() else shutil.which('tectonic')
-    latexmk = shutil.which('latexmk')
-    pdflatex = shutil.which('pdflatex')
-    if tectonic:
-        command = [tectonic,'-X','compile','--untrusted','--outdir',str(out / 'build'),'main.tex']
-    elif latexmk:
-        command = [latexmk,'-norc','-pdf','-interaction=nonstopmode','-halt-on-error','-outdir=build','main.tex']
-    elif pdflatex:
-        command = [pdflatex,'-interaction=nonstopmode','-halt-on-error','-output-directory=build','main.tex']
-    else:
-        raise RuntimeError('No LaTeX compiler found. The ready-made report is paper/report.pdf. Rebuilding needs Tectonic, latexmk, or pdflatex.')
-    if args.dry_run:
-        print(json.dumps(dict(command=command,output=str(out)),indent=2));return
-    prepare_paper(out);(out / 'build').mkdir()
-    run_logged([sys.executable,out / 'make_figures.py'],out)
-    run_logged(command,out,cwd=out)
-    if not tectonic and not latexmk:
-        run_logged(command,out,cwd=out)
-    if not (out / 'build/main.pdf').is_file():raise RuntimeError('Compiler produced no PDF')
-    print('PDF:',out / 'build/main.pdf')
+    from paper import build
+    build.report(fresh_output(args.out, label='report'), args.dry_run, run_logged)
 
 
 def analyze(args):
@@ -251,7 +226,7 @@ def analyze(args):
             run_logged([sys.executable,ROOT / 'run.py','analyze',dataset,'--out',out / dataset],out / ('log_' + dataset))
         return
     if args.dataset == 'source':
-        script = WORKSPACE / 'paper_static_replication_20261120/analyze_replication.py'
+        script = WORKSPACE / '02_source_audit/analyze_replication.py'
         command = [sys.executable,script,'--out',input_folder or 'results','--report',out]
     else:
         command = [sys.executable,ROOT / 'tools' / ('recompute_' + args.dataset + '.py'),out]
@@ -262,8 +237,8 @@ def analyze(args):
 def test(args):
     out = fresh_output(args.out,label='tests')
     for name,folder,pattern in [
-        ('numerics','research_story_20261120','test_study.py'),
-        ('source','paper_static_replication_20261120','test_replication.py')]:
+        ('numerics','03_controlled_study','test_study.py'),
+        ('source','02_source_audit','test_replication.py')]:
         run_logged([sys.executable,'-m','unittest','discover','-s',WORKSPACE / folder,'-p',pattern,'-v'],out / name)
     print('Both verification suites passed:',out)
 

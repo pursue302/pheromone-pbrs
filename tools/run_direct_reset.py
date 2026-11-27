@@ -3,7 +3,7 @@ from pathlib import Path
 import sys,json,time,argparse,hashlib
 from concurrent.futures import ProcessPoolExecutor
 ROOT=Path(__file__).resolve().parents[1]
-sys.path.insert(0,str(ROOT/'workspace/research_story_20261120'))
+sys.path.insert(0,str(ROOT/'workspace/02_source_audit'))
 import direct_reset as frozen
 
 def main():

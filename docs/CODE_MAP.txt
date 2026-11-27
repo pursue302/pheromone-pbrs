@@ -1,87 +1,35 @@
-主线代码导航
-============
+Workspace code map
+==================
 
-对外入口
-  run.py                                      统一命令、参数校验、独立输出目录
-  configs/*.json                              11组复现实验配置
-  paper/main.tex                              最新论文主文件
-  paper/make_figures.py                        从paper_data.json生成全部论文图表
+run.py dispatches the configurations in configs/. Generated training outputs
+go under runs/. Rebuilt statistics go under analysis_results/.
 
-一、作者近似复现与历史环境
-  workspace/paper_static_replication_20261120/run_replication.py
-    Environment：历史MountainCar与论文文字条件
-    setup：原作者完整类、固定tile编码、静态先验的设置
-    train_episodes：直接调用作者完整learn()
-    teacher_job/student_job：教师和学生实验
-  workspace/paper_static_replication_20261120/paper_author/
-    作者类的可运行兼容版本；source/frozen/eq38差异有patch文件记录
-  workspace/paper_static_replication_20261120/gym_legacy/
-    历史Gym的状态转移、随机数与必要接口
-  workspace/paper_static_replication_20261120/upstream/
-    历史环境、tilecoding、作者统计函数的上游快照与来源记录
-  workspace/paper_static_replication_20261120/analyze_replication.py
-    DATA控制输入；REPORT控制统计与图表输出
-  workspace/author_direct_comparison_20261120/author_agents/
-    源码等价检查与兼容来源；此处不包含其旧的独立1000次实验数据
+01_goal_preservation/goal_diagnostic.py performs exact finite-horizon planning
+and checks goal preservation against goal_diagnostic.json.
 
-二、我们修正后的学习器与经验势函数
-  workspace/research_story_20261120/study.py
-    update：源公式与标准Dutch trace两种数值更新
-    Memory：成功轨迹、最后访问回报、轨迹级计数、归一化
-    run_group：共同预训练、状态势、静态/动态/混合、检查点评估
-    repair_job：实现修正的消融
-  workspace/research_story_20261120/study_v1.py
-    初筛和早期修正实验的冻结版本，用于对应原manifest
-  workspace/research_story_20261120/study_strong_controls.py
-    保留所有早期经验的动态与MC强基线
-  workspace/research_story_20261120/study_unbounded_controls.py
-    加入更新幅度对齐的动态/MC/固定混合对照
-  workspace/research_story_20261120/direct_reset.py
-    one：直接调用作者learn()，只在每回合前清空资格迹
-  tools/run_direct_reset.py
-    给上述one提供可配置的种子数、进程数和新输出目录
+02_source_audit/run_replication.py reproduces the historical MountainCar runs.
+upstream_author/, comparison_agents/ and upstream/ retain the reference sources.
+feedback/ contains the earlier pheromone experiments and feature utilities.
+trace_repair.py implements the repair arms; direct_reset.py calls the original
+learn() after clearing the eligibility trace. repair/ and direct_reset/ hold
+the corresponding run manifests.
 
-三、最新独立验证
-  workspace/paper_report_20261120/experiments/engine.py
-    在冻结学习循环上添加State-S、Matched-S和两种强度对照
-  workspace/paper_report_20261120/experiments/engine.diff
-    相对前一冻结学习循环的明确改动
-  workspace/paper_report_20261120/experiments/PROTOCOL.txt
-    新数据运行前固定的任务、20种子、方法和比较族
-  workspace/paper_report_20261120/experiments/goal_diagnostic.py
-    solve：精确有限时域规划；验证朴素奖励与PBRS的目标差异
+03_controlled_study/study.py implements trajectory memory and Return-Gate.
+study_v1.py is the early experiment variant. The strong and unbounded variants
+control for retained history and update size. discovery/, confirm_*, strong_*
+and unbounded_* contain the experiment manifests; analyze.py computes the
+paired comparisons.
 
-四、复用的基础部件
-  workspace/pheromone_feedback_2019/experiment.py
-    Features/FastCoder、课程GridWorld包装、tile投影及原信息素局部更新
-  workspace/pheromone_feedback_2019/author_port/
-    复用的作者PA类、全局沉积规则与编码器
-  workspace/cs4620j_nb1/cs4620j_nb1/cs4620j/envs.py
-    实际课程GridWorld环境
+04_navigation_validation/experiments/engine.py runs the independent navigation
+tests, including the state-only and strength controls. analyze_validation.py
+computes paired statistics. Each experiment owns its plot_*.py modules.
+paper/snapshot_data.py assembles the paper inputs; paper/build.py handles publication.
 
-五、分析与结果路径
-  workspace/research_story_20261120/analyze.py
-    原始冻结统计函数paired/stats/holm及分组比较；旧脚本默认输出原目录
-  tools/recompute_controlled.py
-    完全相同的统计，输入原冻结记录，输出统一的新目录
-  tools/recompute_fresh.py
-    完全相同的新验证统计，输入原冻结记录，输出统一的新目录
-  docs/*_adapter.diff
-    两个适配器的路径改动；没有改变学习或统计公式
-  workspace/paper_static_replication_20261120/results/
-    920学生模型和记录、4教师记录、静态先验、审计轨迹
-  workspace/research_story_20261120/{repair,direct_reset,discovery,confirm_*,strong_*,unbounded_*}/
-    3660次受控研究的记录和模型
-  workspace/paper_report_20261120/experiments/fresh_nav/
-    最新600条验证记录和模型
+environments/gridworld.py and navigation.py provide grid dynamics and wrappers.
+environments/historical.py and gym_legacy/ provide historical MountainCar.
+policies/sarsa.py supplies action selection, value evaluation and trace updates.
+policies/author_port/ and paper_author/ preserve compatible author policies.
 
-自命名新训练的分析
-  run.py analyze 默认针对随包的冻结证据。
-  最新验证重跑可用：run.py analyze fresh --input runs/新训练名。
-  作者完整近似复现也支持source --input；其他自定义队列应明确设置输入分组和比较族。
-  新训练的manifest、bundle_config和每个run JSON已保存参数和步骤。
-  每个run的final是冻结策略评价；episodes是训练过程，不要混用。
-  success_rate先在一个训练种子内汇总评估，再跨训练种子统计。
-
-以上代码可从本包运行。原始工作区的日期目录名在workspace内保留，
-用于源码与历史结果一一对应；对外统一使用根目录run.py。
+The public paper source, figures, tables and final PDF are in paper/.
+Historical hashes and archive inventories refer to the original sources.
+Raw per-seed records, models and teacher priors are in the offline archive.

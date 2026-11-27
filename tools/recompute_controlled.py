@@ -1,14 +1,16 @@
 from pathlib import Path
 import json, collections, math
 import numpy as np
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
 import sys
 BASE=Path(__file__).resolve().parents[1]
-HERE=BASE/'workspace/research_story_20261120';ROOT=BASE/'workspace'
+HERE=BASE/'workspace/03_controlled_study';ROOT=BASE/'workspace'
 REPORT_OUT=Path(sys.argv[1]).resolve();REPORT_OUT.mkdir(parents=True,exist_ok=True)
 
+
+sys.path.insert(0, str(ROOT/'02_source_audit'))
+sys.path.insert(0, str(ROOT/'03_controlled_study'))
+from plot_repair import plot_repair
+from plot_learning import plot_learning
 
 def read(folder):
     return [json.loads(p.read_text(encoding='utf8')) for p in sorted((folder/'runs').glob('*.json'))]
@@ -35,7 +37,7 @@ def holm(rows):
     return rows
 
 def ownrepair():
-    rows=read(HERE/'repair')+read(HERE/'direct_reset');source=read(ROOT/'paper_static_replication_20261120/results')
+    rows=read(HERE.parent/'02_source_audit/repair')+read(HERE.parent/'02_source_audit/direct_reset');source=read(ROOT/'02_source_audit/results')
     for r in source:
         if r.get('cohort')=='main' and r['method'] in ('sarsa','static_frozen','dynamic'):
             r['method']='source_'+r['method'];r['final']=r['final_greedy'];r['final']['success_rate']=r['final']['success'];rows.append(r)
@@ -52,20 +54,7 @@ def ownrepair():
             tests.append(dict(a=a,b=b,**paired({r['seed']:r['final']['original_return'] for r in groups[a]},
                 {r['seed']:r['final']['original_return'] for r in groups[b]})))
     holm(tests)
-    fig,axes=plt.subplots(1,2,figsize=(12,4.7))
-    show=['source_sarsa','actual_source_reset_only','canonical','source_static_frozen','static_canonical']
-    colors=['#b73e3e','#238c70','#2876ad','#9f6a3a','#7451a8']
-    for m,c in zip(show,colors):
-        if m not in groups:continue
-        rr=groups[m];v=np.array([[e['original_return'] for e in r['episodes']] for r in rr]);
-        # Rolling training return is distinct from frozen-policy evaluation.
-        smooth=np.array([np.convolve(x,np.ones(10)/10,'valid') for x in v])
-        axes[0].plot(np.arange(10,201),smooth.mean(axis=0),label=m,color=c)
-        ys=[r['final']['original_return'] for r in rr];x=show.index(m)
-        axes[1].bar(x,np.mean(ys),color=c);axes[1].errorbar(x,np.mean(ys),yerr=1.96*np.std(ys,ddof=1)/np.sqrt(len(ys)),color='black',capsize=4)
-    axes[0].set(xlabel='Completed training episodes',ylabel='Original training return (rolling 10)');axes[0].legend(fontsize=7)
-    axes[1].set_xticks(range(len(show)),show,rotation=25,ha='right',fontsize=7);axes[1].set_ylabel('Final greedy policy: original return')
-    fig.tight_layout();fig.savefig(REPORT_OUT/'repair_evidence.png',dpi=180);plt.close(fig)
+    plot_repair(groups, REPORT_OUT/'repair_evidence.png')
     return dict(summary=summary,tests=tests)
 
 def phase(folder):
@@ -97,17 +86,10 @@ def phase(folder):
                 tests.append(dict(scenario=k,a=proposal,b=b,**paired({r['seed']:r['final']['original_return'] for r in groups[k,proposal]},
                     {r['seed']:r['final']['original_return'] for r in groups[k,b]})))
     holm(tests)
-    if len(summary)==1:fig,axes=plt.subplots(1,1,figsize=(11,5.8));panels=[axes]
-    else:fig,axes=plt.subplots(2,2,figsize=(12,8));panels=list(axes.ravel())
     show=['plain','raw_static','raw_dynamic','raw_mix','return_static','return_dynamic','return_mix','return_gate','return_gate_unbounded','mc_dynamic','velocity_shift','manhattan','return_dynamic_all','mc_dynamic_all','return_dynamic_all_unbounded','mc_dynamic_all_unbounded','return_mix_unbounded']
-    for ax,k in zip(panels,sorted(summary)):
-        for m in show:
-            if (k,m) not in groups:continue
-            rr=groups[k,m];x=np.array([z['step'] for z in rr[0]['records']]);v=np.array([[z['original_return'] for z in r['records']] for r in rr]);ax.plot(x,v.mean(axis=0),label=m,linewidth=2.8 if m==proposal else 1.25)
-        ax.set(title=k,xlabel='Total training interactions (warm-up included)',ylabel='Original evaluation return')
-    for ax in panels[len(summary):]:ax.set_visible(False)
-    handles,labels=panels[0].get_legend_handles_labels();fig.legend(handles,labels,loc='lower center',ncol=4,fontsize=8)
-    fig.tight_layout(rect=(0,.14 if len(summary)==1 else .10,1,1));(REPORT_OUT/folder.name).mkdir(exist_ok=True);fig.savefig(REPORT_OUT/folder.name/'learning_curves.png',dpi=180);plt.close(fig)
+    destination = REPORT_OUT / folder.name
+    destination.mkdir(exist_ok=True)
+    plot_learning(groups, summary, proposal, show, destination/'learning_curves.png')
     secondary=[]
     for k in sorted(summary):
         for b in ('raw_static','raw_dynamic'):

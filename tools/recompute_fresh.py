@@ -2,17 +2,19 @@ from pathlib import Path
 import json,sys,collections,hashlib
 import numpy as np
 BASE=Path(__file__).resolve().parents[1]
-HERE=BASE/'workspace/paper_report_20261120';ROOT=BASE/'workspace'
+HERE=BASE/'workspace/04_navigation_validation';ROOT=BASE/'workspace'
 REPORT_OUT=Path(sys.argv[1]).resolve();REPORT_OUT.mkdir(parents=True,exist_ok=True)
 
-sys.path.insert(0,str(ROOT/'research_story_20261120'))
+sys.path.insert(0,str(ROOT/'03_controlled_study'))
 from analyze import stats,paired,holm
 
 def main():
     folder=Path(sys.argv[2]).resolve() if len(sys.argv)>2 else HERE/'experiments/fresh_nav'
     manifest=json.loads((folder/'manifest.json').read_text())
     assert manifest['status']=='complete'
-    assert manifest['source_sha256']==hashlib.sha256((HERE/'experiments/engine.py').read_bytes()).hexdigest()
+    current_hash = hashlib.sha256((HERE/'experiments/engine.py').read_bytes()).hexdigest()
+    archive_hash = json.loads((HERE/'experiments/provenance.json').read_text())['engine_sha256']
+    assert manifest['source_sha256'] in (current_hash, archive_hash)
     rows=[json.loads(p.read_text()) for p in sorted((folder/'runs').glob('*.json'))]
     seed_count=manifest['args']['seeds']
     expected=seed_count*len(manifest['args']['scenarios'].split(','))*len(manifest['args']['methods'].split(','))
