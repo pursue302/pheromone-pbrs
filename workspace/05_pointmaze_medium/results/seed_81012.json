@@ -1,0 +1,710 @@
+[
+  {
+    "method": "sarsa",
+    "seed": 81012,
+    "records": [
+      {
+        "step": 0,
+        "success_rate": 0.0,
+        "steps_on_success": null,
+        "steps_by_start": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 10000,
+        "success_rate": 0.25,
+        "steps_on_success": 85.5,
+        "steps_by_start": [
+          35,
+          136,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 20000,
+        "success_rate": 0.25,
+        "steps_on_success": 130.0,
+        "steps_by_start": [
+          34,
+          226,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 30000,
+        "success_rate": 0.25,
+        "steps_on_success": 103.0,
+        "steps_by_start": [
+          34,
+          172,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 40000,
+        "success_rate": 0.25,
+        "steps_on_success": 83.5,
+        "steps_by_start": [
+          34,
+          133,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 50000,
+        "success_rate": 0.25,
+        "steps_on_success": 80.0,
+        "steps_by_start": [
+          34,
+          126,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 60000,
+        "success_rate": 0.25,
+        "steps_on_success": 68.0,
+        "steps_by_start": [
+          34,
+          102,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 70000,
+        "success_rate": 0.25,
+        "steps_on_success": 78.5,
+        "steps_by_start": [
+          34,
+          123,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 80000,
+        "success_rate": 0.25,
+        "steps_on_success": 80.5,
+        "steps_by_start": [
+          34,
+          127,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 90000,
+        "success_rate": 0.25,
+        "steps_on_success": 68.0,
+        "steps_by_start": [
+          34,
+          102,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 100000,
+        "success_rate": 0.25,
+        "steps_on_success": 69.0,
+        "steps_by_start": [
+          35,
+          103,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    ],
+    "warmup_steps": 25100,
+    "warmup_successes": 27,
+    "warmup_hash": "19521ffe17d577f26fa85195028409ad301182b47d3361e7387a96b4b9911d9e",
+    "online_successes": 98,
+    "first_training_success": 2479,
+    "max_boundary_error": 0.0
+  },
+  {
+    "method": "return_all",
+    "seed": 81012,
+    "records": [
+      {
+        "step": 0,
+        "success_rate": 0.0,
+        "steps_on_success": null,
+        "steps_by_start": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 10000,
+        "success_rate": 0.25,
+        "steps_on_success": 85.5,
+        "steps_by_start": [
+          35,
+          136,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 20000,
+        "success_rate": 0.25,
+        "steps_on_success": 130.0,
+        "steps_by_start": [
+          34,
+          226,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 30000,
+        "success_rate": 0.25,
+        "steps_on_success": 88.0,
+        "steps_by_start": [
+          34,
+          142,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 40000,
+        "success_rate": 0.25,
+        "steps_on_success": 40.5,
+        "steps_by_start": [
+          34,
+          47,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 50000,
+        "success_rate": 0.25,
+        "steps_on_success": 41.0,
+        "steps_by_start": [
+          35,
+          47,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 60000,
+        "success_rate": 0.25,
+        "steps_on_success": 41.0,
+        "steps_by_start": [
+          35,
+          47,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 70000,
+        "success_rate": 0.25,
+        "steps_on_success": 41.0,
+        "steps_by_start": [
+          35,
+          47,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 80000,
+        "success_rate": 0.25,
+        "steps_on_success": 41.0,
+        "steps_by_start": [
+          35,
+          47,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 90000,
+        "success_rate": 0.25,
+        "steps_on_success": 41.0,
+        "steps_by_start": [
+          35,
+          47,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 100000,
+        "success_rate": 0.25,
+        "steps_on_success": 41.0,
+        "steps_by_start": [
+          35,
+          47,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    ],
+    "warmup_steps": 25100,
+    "warmup_successes": 27,
+    "warmup_hash": "19521ffe17d577f26fa85195028409ad301182b47d3361e7387a96b4b9911d9e",
+    "online_successes": 105,
+    "first_training_success": 2479,
+    "max_boundary_error": 1.8041124150158794e-16
+  },
+  {
+    "method": "fixed_mix",
+    "seed": 81012,
+    "records": [
+      {
+        "step": 0,
+        "success_rate": 0.0,
+        "steps_on_success": null,
+        "steps_by_start": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 10000,
+        "success_rate": 0.25,
+        "steps_on_success": 85.5,
+        "steps_by_start": [
+          35,
+          136,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 20000,
+        "success_rate": 0.25,
+        "steps_on_success": 130.0,
+        "steps_by_start": [
+          34,
+          226,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 30000,
+        "success_rate": 0.25,
+        "steps_on_success": 128.0,
+        "steps_by_start": [
+          34,
+          222,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 40000,
+        "success_rate": 0.25,
+        "steps_on_success": 46.5,
+        "steps_by_start": [
+          34,
+          59,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 50000,
+        "success_rate": 0.25,
+        "steps_on_success": 40.5,
+        "steps_by_start": [
+          34,
+          47,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 60000,
+        "success_rate": 0.25,
+        "steps_on_success": 40.5,
+        "steps_by_start": [
+          34,
+          47,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 70000,
+        "success_rate": 0.25,
+        "steps_on_success": 41.0,
+        "steps_by_start": [
+          35,
+          47,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 80000,
+        "success_rate": 0.25,
+        "steps_on_success": 41.0,
+        "steps_by_start": [
+          35,
+          47,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 90000,
+        "success_rate": 0.25,
+        "steps_on_success": 40.5,
+        "steps_by_start": [
+          34,
+          47,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 100000,
+        "success_rate": 0.25,
+        "steps_on_success": 41.0,
+        "steps_by_start": [
+          35,
+          47,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    ],
+    "warmup_steps": 25100,
+    "warmup_successes": 27,
+    "warmup_hash": "19521ffe17d577f26fa85195028409ad301182b47d3361e7387a96b4b9911d9e",
+    "online_successes": 104,
+    "first_training_success": 2479,
+    "max_boundary_error": 1.942890293094024e-16
+  },
+  {
+    "method": "return_gate",
+    "seed": 81012,
+    "records": [
+      {
+        "step": 0,
+        "success_rate": 0.0,
+        "steps_on_success": null,
+        "steps_by_start": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 10000,
+        "success_rate": 0.25,
+        "steps_on_success": 85.5,
+        "steps_by_start": [
+          35,
+          136,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 20000,
+        "success_rate": 0.25,
+        "steps_on_success": 130.0,
+        "steps_by_start": [
+          34,
+          226,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 30000,
+        "success_rate": 0.25,
+        "steps_on_success": 76.0,
+        "steps_by_start": [
+          34,
+          118,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 40000,
+        "success_rate": 0.25,
+        "steps_on_success": 69.0,
+        "steps_by_start": [
+          35,
+          103,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 50000,
+        "success_rate": 0.25,
+        "steps_on_success": 41.0,
+        "steps_by_start": [
+          35,
+          47,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 60000,
+        "success_rate": 0.25,
+        "steps_on_success": 41.0,
+        "steps_by_start": [
+          35,
+          47,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 70000,
+        "success_rate": 0.25,
+        "steps_on_success": 41.0,
+        "steps_by_start": [
+          35,
+          47,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 80000,
+        "success_rate": 0.25,
+        "steps_on_success": 41.5,
+        "steps_by_start": [
+          35,
+          48,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 90000,
+        "success_rate": 0.25,
+        "steps_on_success": 41.5,
+        "steps_by_start": [
+          35,
+          48,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "step": 100000,
+        "success_rate": 0.25,
+        "steps_on_success": 41.0,
+        "steps_by_start": [
+          35,
+          47,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    ],
+    "warmup_steps": 25100,
+    "warmup_successes": 27,
+    "warmup_hash": "19521ffe17d577f26fa85195028409ad301182b47d3361e7387a96b4b9911d9e",
+    "online_successes": 102,
+    "first_training_success": 2479,
+    "max_boundary_error": 1.8041124150158794e-16
+  }
+]

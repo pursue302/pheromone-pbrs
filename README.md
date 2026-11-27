@@ -10,6 +10,8 @@ CS4620J Reinforcement Learning — Final Research Project
 | `02_source_audit/` | Upstream source, MountainCar replication and eligibility-trace repair experiments. |
 | `03_controlled_study/` | Return-Gate development, four-task comparisons and memory controls. |
 | `04_navigation_validation/` | Independent navigation validation, analysis and paper production. |
+| [`05_pointmaze_medium/`](workspace/05_pointmaze_medium/README.md) | MuJoCo PointMaze Medium experiment, reproduction commands, and results. |
+| [`06_antmaze/`](workspace/06_antmaze/README.md) | Native continuous-action AntMaze experiment and paired SAC comparisons. |
 | `environments/` | Course GridWorld, navigation wrappers and historical MountainCar dynamics. |
 | `policies/` | Shared SARSA updates, action selection, evaluation and compatible author policies. |
 

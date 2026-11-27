@@ -1,0 +1,22 @@
+{
+  "seed_count": 2,
+  "warmup_evaluation_success": 0.25,
+  "warmup_success_by_start": {
+    "near": 0.75,
+    "middle": 0.0,
+    "far": 0.0
+  },
+  "warmup_successful_trajectories": [
+    339,
+    378
+  ],
+  "common_checkpoint": {
+    "mean_selection_success": 0.3333333333333333,
+    "min_successful_trajectories": 57,
+    "ready": true
+  },
+  "selected_checkpoint_steps": [
+    100000,
+    20000
+  ]
+}

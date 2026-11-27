@@ -1,0 +1,1045 @@
+{
+  "seed": 92003,
+  "warmup": {
+    "method": "warmup",
+    "records": [
+      {
+        "step": 0,
+        "success_rate": 0.0,
+        "discounted_return": 0.0,
+        "steps_by_start": {
+          "near": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "middle": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "far": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      {
+        "step": 20000,
+        "success_rate": 0.3333333333333333,
+        "discounted_return": 0.22856828518439348,
+        "steps_by_start": {
+          "near": [
+            26,
+            68,
+            17,
+            70,
+            38,
+            25
+          ],
+          "middle": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "far": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      {
+        "step": 40000,
+        "success_rate": 0.16666666666666666,
+        "discounted_return": 0.11608493479685872,
+        "steps_by_start": {
+          "near": [
+            null,
+            null,
+            17,
+            null,
+            66,
+            34
+          ],
+          "middle": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "far": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      {
+        "step": 60000,
+        "success_rate": 0.16666666666666666,
+        "discounted_return": 0.05982546914986326,
+        "steps_by_start": {
+          "near": [
+            null,
+            null,
+            32,
+            142,
+            228,
+            null
+          ],
+          "middle": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "far": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      {
+        "step": 80000,
+        "success_rate": 0.2777777777777778,
+        "discounted_return": 0.21435600022644644,
+        "steps_by_start": {
+          "near": [
+            25,
+            null,
+            13,
+            77,
+            18,
+            14
+          ],
+          "middle": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "far": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      {
+        "step": 100000,
+        "success_rate": 0.0,
+        "discounted_return": 0.0,
+        "steps_by_start": {
+          "near": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "middle": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "far": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      {
+        "step": 120000,
+        "success_rate": 0.3333333333333333,
+        "discounted_return": 0.29895861867970197,
+        "steps_by_start": {
+          "near": [
+            12,
+            10,
+            12,
+            12,
+            13,
+            12
+          ],
+          "middle": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "far": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      }
+    ],
+    "training_successes": 339,
+    "completed_episodes": 667,
+    "max_telescoping_error": 0.0
+  },
+  "selected_checkpoint": {
+    "training_step": 120000,
+    "training_successes": 339,
+    "selection_score": [
+      0.3333333333333333,
+      0.29071843791851726
+    ],
+    "evaluation": {
+      "step": 120000,
+      "success_rate": 0.3333333333333333,
+      "discounted_return": 0.29895861867970197,
+      "steps_by_start": {
+        "near": [
+          12,
+          10,
+          12,
+          12,
+          13,
+          12
+        ],
+        "middle": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "far": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    }
+  },
+  "methods": {
+    "fixed_mix": {
+      "method": "fixed_mix",
+      "records": [
+        {
+          "step": 120000,
+          "success_rate": 0.3333333333333333,
+          "discounted_return": 0.29895861867970197,
+          "steps_by_start": {
+            "near": [
+              12,
+              10,
+              12,
+              12,
+              13,
+              12
+            ],
+            "middle": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "far": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        },
+        {
+          "step": 140000,
+          "success_rate": 0.0,
+          "discounted_return": 0.0,
+          "steps_by_start": {
+            "near": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "middle": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "far": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        },
+        {
+          "step": 160000,
+          "success_rate": 0.0,
+          "discounted_return": 0.0,
+          "steps_by_start": {
+            "near": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "middle": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "far": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        },
+        {
+          "step": 180000,
+          "success_rate": 0.0,
+          "discounted_return": 0.0,
+          "steps_by_start": {
+            "near": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "middle": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "far": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        },
+        {
+          "step": 200000,
+          "success_rate": 0.0,
+          "discounted_return": 0.0,
+          "steps_by_start": {
+            "near": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "middle": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "far": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        },
+        {
+          "step": 220000,
+          "success_rate": 0.0,
+          "discounted_return": 0.0,
+          "steps_by_start": {
+            "near": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "middle": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "far": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        }
+      ],
+      "training_successes": 244,
+      "completed_episodes": 513,
+      "max_telescoping_error": 4.3958425521850586e-07
+    },
+    "return_all": {
+      "method": "return_all",
+      "records": [
+        {
+          "step": 120000,
+          "success_rate": 0.3333333333333333,
+          "discounted_return": 0.29895861867970197,
+          "steps_by_start": {
+            "near": [
+              12,
+              10,
+              12,
+              12,
+              13,
+              12
+            ],
+            "middle": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "far": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        },
+        {
+          "step": 140000,
+          "success_rate": 0.0,
+          "discounted_return": 0.0,
+          "steps_by_start": {
+            "near": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "middle": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "far": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        },
+        {
+          "step": 160000,
+          "success_rate": 0.0,
+          "discounted_return": 0.0,
+          "steps_by_start": {
+            "near": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "middle": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "far": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        },
+        {
+          "step": 180000,
+          "success_rate": 0.0,
+          "discounted_return": 0.0,
+          "steps_by_start": {
+            "near": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "middle": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "far": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        },
+        {
+          "step": 200000,
+          "success_rate": 0.0,
+          "discounted_return": 0.0,
+          "steps_by_start": {
+            "near": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "middle": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "far": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        },
+        {
+          "step": 220000,
+          "success_rate": 0.16666666666666666,
+          "discounted_return": 0.12639563501909834,
+          "steps_by_start": {
+            "near": [
+              null,
+              null,
+              36,
+              23,
+              27,
+              null
+            ],
+            "middle": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "far": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        }
+      ],
+      "training_successes": 213,
+      "completed_episodes": 478,
+      "max_telescoping_error": 4.172325134277344e-07
+    },
+    "return_gate": {
+      "method": "return_gate",
+      "records": [
+        {
+          "step": 120000,
+          "success_rate": 0.3333333333333333,
+          "discounted_return": 0.29895861867970197,
+          "steps_by_start": {
+            "near": [
+              12,
+              10,
+              12,
+              12,
+              13,
+              12
+            ],
+            "middle": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "far": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        },
+        {
+          "step": 140000,
+          "success_rate": 0.0,
+          "discounted_return": 0.0,
+          "steps_by_start": {
+            "near": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "middle": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "far": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        },
+        {
+          "step": 160000,
+          "success_rate": 0.2222222222222222,
+          "discounted_return": 0.04933866034984666,
+          "steps_by_start": {
+            "near": [
+              null,
+              129,
+              159,
+              null,
+              123,
+              217
+            ],
+            "middle": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "far": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        },
+        {
+          "step": 180000,
+          "success_rate": 0.0,
+          "discounted_return": 0.0,
+          "steps_by_start": {
+            "near": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "middle": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "far": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        },
+        {
+          "step": 200000,
+          "success_rate": 0.0,
+          "discounted_return": 0.0,
+          "steps_by_start": {
+            "near": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "middle": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "far": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        },
+        {
+          "step": 220000,
+          "success_rate": 0.0,
+          "discounted_return": 0.0,
+          "steps_by_start": {
+            "near": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "middle": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "far": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        }
+      ],
+      "training_successes": 231,
+      "completed_episodes": 501,
+      "max_telescoping_error": 3.948807716369629e-07
+    },
+    "sac": {
+      "method": "sac",
+      "records": [
+        {
+          "step": 120000,
+          "success_rate": 0.3333333333333333,
+          "discounted_return": 0.29895861867970197,
+          "steps_by_start": {
+            "near": [
+              12,
+              10,
+              12,
+              12,
+              13,
+              12
+            ],
+            "middle": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "far": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        },
+        {
+          "step": 140000,
+          "success_rate": 0.0,
+          "discounted_return": 0.0,
+          "steps_by_start": {
+            "near": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "middle": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "far": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        },
+        {
+          "step": 160000,
+          "success_rate": 0.0,
+          "discounted_return": 0.0,
+          "steps_by_start": {
+            "near": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "middle": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "far": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        },
+        {
+          "step": 180000,
+          "success_rate": 0.0,
+          "discounted_return": 0.0,
+          "steps_by_start": {
+            "near": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "middle": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "far": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        },
+        {
+          "step": 200000,
+          "success_rate": 0.0,
+          "discounted_return": 0.0,
+          "steps_by_start": {
+            "near": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "middle": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "far": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        },
+        {
+          "step": 220000,
+          "success_rate": 0.0,
+          "discounted_return": 0.0,
+          "steps_by_start": {
+            "near": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "middle": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "far": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        }
+      ],
+      "training_successes": 251,
+      "completed_episodes": 510,
+      "max_telescoping_error": 0.0
+    }
+  }
+}

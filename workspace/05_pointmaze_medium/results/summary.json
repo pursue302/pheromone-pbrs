@@ -1,0 +1,150 @@
+{
+  "seed_count": 20,
+  "per_method": {
+    "sarsa": {
+      "mean_success_rate_auc": 0.1746875,
+      "final_success_rate": 0.20625,
+      "final_successes": 33,
+      "final_evaluation_episodes": 160,
+      "mean_steps_on_success": 88.03030303030303,
+      "training_seeds_with_any_success": 20
+    },
+    "return_all": {
+      "mean_success_rate_auc": 0.1928125,
+      "final_success_rate": 0.23125,
+      "final_successes": 37,
+      "final_evaluation_episodes": 160,
+      "mean_steps_on_success": 83.29729729729729,
+      "training_seeds_with_any_success": 20
+    },
+    "fixed_mix": {
+      "mean_success_rate_auc": 0.19218749999999998,
+      "final_success_rate": 0.21875,
+      "final_successes": 35,
+      "final_evaluation_episodes": 160,
+      "mean_steps_on_success": 75.57142857142857,
+      "training_seeds_with_any_success": 20
+    },
+    "return_gate": {
+      "mean_success_rate_auc": 0.2,
+      "final_success_rate": 0.2375,
+      "final_successes": 38,
+      "final_evaluation_episodes": 160,
+      "mean_steps_on_success": 80.1842105263158,
+      "training_seeds_with_any_success": 20
+    }
+  },
+  "comparisons": {
+    "sarsa": {
+      "success_rate_auc": {
+        "mean_difference": 0.025312500000000005,
+        "ci95": [
+          0.009687499999999998,
+          0.04875
+        ],
+        "paired_randomization_p": 0.000599970001499925,
+        "wins_ties_losses": [
+          12,
+          8,
+          0
+        ]
+      },
+      "final_success_rate": {
+        "mean_difference": 0.03125,
+        "ci95": [
+          0.00625,
+          0.0625
+        ],
+        "paired_randomization_p": 0.11984400779961002,
+        "wins_ties_losses": [
+          4,
+          16,
+          0
+        ]
+      }
+    },
+    "return_all": {
+      "success_rate_auc": {
+        "mean_difference": 0.007187500000000002,
+        "ci95": [
+          -0.005937499999999997,
+          0.025625
+        ],
+        "paired_randomization_p": 0.5673716314184291,
+        "wins_ties_losses": [
+          6,
+          9,
+          5
+        ]
+      },
+      "final_success_rate": {
+        "mean_difference": 0.00625,
+        "ci95": [
+          -0.01875,
+          0.0375
+        ],
+        "paired_randomization_p": 1.0,
+        "wins_ties_losses": [
+          1,
+          18,
+          1
+        ]
+      }
+    },
+    "fixed_mix": {
+      "success_rate_auc": {
+        "mean_difference": 0.007812500000000003,
+        "ci95": [
+          -0.007812499999999991,
+          0.027187499999999996
+        ],
+        "paired_randomization_p": 0.46602669866506674,
+        "wins_ties_losses": [
+          7,
+          6,
+          7
+        ]
+      },
+      "final_success_rate": {
+        "mean_difference": 0.01875,
+        "ci95": [
+          -0.0125,
+          0.05625
+        ],
+        "paired_randomization_p": 0.5308234588270586,
+        "wins_ties_losses": [
+          4,
+          14,
+          2
+        ]
+      }
+    }
+  },
+  "warmup": {
+    "seeds_with_success": 20,
+    "successful_episodes_per_seed": [
+      17,
+      12,
+      24,
+      20,
+      9,
+      17,
+      30,
+      4,
+      35,
+      26,
+      19,
+      13,
+      27,
+      52,
+      14,
+      2,
+      25,
+      21,
+      13,
+      20
+    ],
+    "mean_steps": 25097.7
+  },
+  "max_boundary_error": 2.498001805406602e-16
+}

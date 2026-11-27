@@ -1,0 +1,71 @@
+{
+  "status": "complete",
+  "pilot": true,
+  "environment": "AntMaze_UMaze-v5",
+  "config": {
+    "warmup_steps": 120000,
+    "comparison_steps": 100000,
+    "checkpoint": 20000,
+    "evaluation_episodes": 6,
+    "episode_limit": 300,
+    "train_every": 4,
+    "comparison_train_every": 8,
+    "batch_size": 128,
+    "random_steps": 2000,
+    "gamma": 0.99,
+    "scale": 0.1,
+    "publish_every": 10
+  },
+  "seeds": [
+    91020,
+    91021
+  ],
+  "goal_cell": [
+    1,
+    1
+  ],
+  "start_cells": {
+    "near": [
+      1,
+      1
+    ],
+    "middle": [
+      1,
+      2
+    ],
+    "far": [
+      3,
+      1
+    ]
+  },
+  "near_goal_offset": [
+    -0.65,
+    0.0
+  ],
+  "start_probabilities": [
+    0.6,
+    0.25,
+    0.15
+  ],
+  "methods": [
+    "sac",
+    "return_all",
+    "fixed_mix",
+    "return_gate"
+  ],
+  "comparison_readiness": {
+    "mean_success": 0.25,
+    "min_successful_trajectories": 5
+  },
+  "versions": {
+    "gymnasium": "1.4.0",
+    "gymnasium-robotics": "1.4.1",
+    "mujoco": "3.3.7",
+    "torch": "2.6.0+cpu"
+  },
+  "common_checkpoint": {
+    "mean_success": 0.2222222222222222,
+    "min_successful_trajectories": 339,
+    "ready": false
+  }
+}
